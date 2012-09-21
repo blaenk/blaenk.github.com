@@ -1,0 +1,24 @@
+---
+layout: post
+title: "Recover Favicon from Google Chrome"
+date: 2012-09-19 02:49
+comments: true
+categories: Ruby
+---
+
+go to bookmarks manager then export as html
+
+    #!javascript
+    function hi(){
+        alert('hi!');
+    }
+
+look for bookmark
+
+retrieve `base64` component of data-uri
+
+use:
+
+{% gist 3759076 decode.rb %}
+
+convert to ico lol

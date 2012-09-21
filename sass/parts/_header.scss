@@ -5,7 +5,7 @@ $header-height: 30px;
 	padding: 30px 0;
 	border-bottom: 1px solid $color-gray04;
 	line-height: $header-height;
-	@media screen and (max-width: 1040px){
+	@media screen and (max-width: 950px){
 		height: auto;
 		position: relative;
 		padding-bottom: 10px;
@@ -17,19 +17,24 @@ $header-height: 30px;
 			color: $color-main;
 		}
 	}
-	h1{
-		float: left;
-		font-weight: 300;
-		font-size: 30px;
-		@media screen and (max-width: 1040px){
-			float: none;
-		}
-	}
+  #stamp {
+    float: left;
+    @media screen and (max-width: 950px){
+      float: none;
+    }
+    h1{
+      font-weight: 300;
+      font-size: 30px;
+    }
+    h4{
+      margin-left: 94px;
+    }
+  }
 }
 #main-nav{
 	float: left;
-	margin-left: 30px;
-	@media screen and (max-width: 1040px){
+	margin-left: 35px;
+	@media screen and (max-width: 950px){
 		float: none;
 		margin-left: 0;
 		margin-top: 15px;
@@ -39,9 +44,9 @@ $header-height: 30px;
 			display: none;
 		}
 		>li{
-			margin-left: 50px;
+			margin-left: 20px;
 			@include inline-block;
-			@media screen and (max-width: 1040px){
+			@media screen and (max-width: 950px){
 				margin-left: 0;
 				margin-right: 50px;
 				&:last-of-type{
@@ -67,7 +72,7 @@ $header-height: 30px;
 						content: "";
 					}
 				}
-				@media screen and (max-width: 1040px){
+				@media screen and (max-width: 950px){
 					padding: 18px 0;
 				}
 			}
@@ -82,7 +87,7 @@ $header-height: 30px;
 			border: 1px solid $color-gray03;
 			list-style: none;
 			display: none;
-			@media screen and (max-width: 1040px){
+			@media screen and (max-width: 950px){
 				top: 40px;
 			}
 			@include box-shadow(0 4px 8px rgba(0,0,0,0.1));
@@ -257,7 +262,8 @@ $header-height: 30px;
 	}
 }
 #sub-nav{
-	@media screen and (max-width: 1040px){
+	@media screen and (max-width: 950px){
+    display: none;
 		position: absolute;
 		top: 30px;
 		right: 0;
@@ -269,7 +275,7 @@ $header-height: 30px;
 		float: left;
 		margin-top: 1px;
 		position: relative;
-		@media screen and (max-width: 1040px){
+		@media screen and (max-width: 950px){
 			float: none;
 			margin-top: 15px;
 		}
@@ -302,7 +308,7 @@ $header-height: 30px;
 	.social{
 		float: left;
 		margin-right: 15px;
-		@media screen and (max-width: 1040px){
+		@media screen and (max-width: 950px){
 			float: none;
 			margin-right: 0;
 			a:last-of-type{
