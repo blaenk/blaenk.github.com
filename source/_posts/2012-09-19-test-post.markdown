@@ -6,6 +6,14 @@ comments: true
 categories: Ruby
 ---
 
+Yeesh. Is something that complex really necessary? If you actually check the Google query I linked above, people have been writing (or trying to write) RFC-compliant regular expressions to parse email addresses for years. They can get ridiculously convoluted as in the case above and, according to the specification, are often too strict anyway.
+
+Sections 3.2.4 and 3.4.1 of the RFC go into the requirements on how an email address needs to be formatted and, well, there’s not much you can’t do in your email address when quotes or backslashes are involved. The local string (the part of the email address that comes before the @) can contain the following characters:
+
+Simple, right? [Email](http://www.gmail.com) addresses have to have an @ symbol. This is often the most I do and, when paired with a confirmation field for the email address on your registration form, can alleviate most problems with user error. But what if I told you there were a way to determine whether or not an email is valid without resorting to regular expressions at all? It’s surprisingly easy, and you’re probably already doing it anyway.
+
+Think about it this way: I register for your website under the email address `qwiufaisjdbvaadsjghb@gmail.com`. C’mon. That shit’s probably going to bounce off of the illustrious mail daemon, but the formatting is fine; it’s a valid email address. To fix this problem, you implement an activation system where, after registering, I am sent an email with a link I must click. This is to verify that I actually own that email address before my account is activated. At this point, why keep parsing email addresses for their format? The result of sending an email to a badly formatted email address would be the same: it’ll get bounced. If your user enters a bad email address, they won’t get the activation email and they’ll try to register again if they really care about using your site. It’s that simple.
+
 go to bookmarks manager then export as html
 
     #!javascript

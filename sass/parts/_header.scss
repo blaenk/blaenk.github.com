@@ -11,7 +11,7 @@ $header-height: 30px;
 		padding-bottom: 10px;
 	}
 	a{
-		color: $color-gray01;
+		color: #666;
 		@include transition(color 0.3s);
 		&:hover{
 			color: $color-main;
@@ -24,10 +24,12 @@ $header-height: 30px;
     }
     h1{
       font-weight: 300;
+      font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,sans-serif;
       font-size: 30px;
     }
     h4{
-      margin-left: 94px;
+      color: #666;
+      margin-left: 93px;
     }
   }
 }

@@ -1,7 +1,17 @@
 .post{
+  h1.title {
+    a{
+      color: #666;
+      @include transition(color 0.3s);
+      &:hover{
+        color: $color-main;
+      }
+    }
+  }
+
 	h1.title, .entry-content{
 		margin-left: 280px;
-		@media screen and (max-width: 800px){
+		@media screen and (max-width: 950px){
 			margin-left: 0;
 		}
 	}
@@ -12,7 +22,7 @@
 		font-size: 0.9em;
 		color: $color-gray02;
 		width: 170px;
-		@media screen and (max-width: 800px){
+		@media screen and (max-width: 950px){
 			margin-top: 15px;
 			position: static;
 			width: auto;
@@ -31,7 +41,7 @@
 				position: absolute;
 				left: 0;
 			}
-			@media screen and (max-width: 800px){
+			@media screen and (max-width: 950px){
 				@include inline-block;
 				margin-right: 30px;
 			}

@@ -19,7 +19,7 @@ article{
 	}
 	.entry-content{
 		line-height: 2;
-		text-align: justify;
+		// text-align: justify;
 		a{
 			&:hover{
 				text-decoration: underline;
@@ -55,6 +55,8 @@ article{
 		}
 		p{
 			margin-top: 10px;	
+      font-size: 16px;
+      line-height: 1.5;
 		}
 		h2{
 			font-weight: 300;

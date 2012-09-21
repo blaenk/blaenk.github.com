@@ -1,6 +1,10 @@
 // This File is imported last, and will override other styles in the cascade
 // Add styles here to make changes without digging in too much
 
+.gist {
+  margin-top: 10px !important;
+}
+
 .entry-content .gist .gist-file .gist-meta a {
   background: none;
   font-family: "Helvetica Neue", sans-serif;
@@ -16,6 +20,7 @@
   border: 0;
   margin-left: -10px;
   margin-right: -10px;
+  margin-bottom: 0;
 }
 
 .entry-content .gist .gist-file .gist-data {
@@ -32,6 +37,7 @@
   background-color: #d0e9ff;
   color: #00427b;
   padding: 5px 10px !important;
+  // box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 .entry-content .gist .gist-file .gist-meta a,
@@ -49,14 +55,14 @@
   background-color: #f2f9ff;
   color: #00427b;
   padding-left: 10px;
+  margin-top: 10px;
+  margin-left: -10px;
+  margin-right: -10px;
 }
 
 .entry-content p > code {
-  background-color: #f2f9ff;
+  background-color: #EEE;
   padding: 1px 5px;
-  font-size: 12px;
+  font-size: 14px;
 }
 
-body {
-  background-color: white;
-}
