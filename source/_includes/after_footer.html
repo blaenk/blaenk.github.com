@@ -4,15 +4,22 @@
 {% include google_analytics.html %}
 {% include custom/after_footer.html %}
 
-<!-- twitter -->
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+{% unless index %}
+  <!-- twitter -->
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
-<!-- hn -->
-<script>
-  (function(d, t) {
-    var g = d.createElement(t),
-      s = d.getElementsByTagName(t)[0];
-    g.src = '//hnbutton.appspot.com/static/hn.js';
-    s.parentNode.insertBefore(g, s);
-  }(document, 'script'));
+  <!-- hn -->
+  <script>
+    (function(d, t) {
+      var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+      g.src = '//hnbutton.appspot.com/static/hn.js';
+      s.parentNode.insertBefore(g, s);
+    }(document, 'script'));
+  </script>
+{% endunless %}
+
+<!--MathJax CDN-->
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({messageStyle: "none"});
 </script>
