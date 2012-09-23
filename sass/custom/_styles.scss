@@ -1,6 +1,14 @@
 // This File is imported last, and will override other styles in the cascade
 // Add styles here to make changes without digging in too much
 
+.MathJax_Display {
+  //color: black;
+}
+
+.MathJax {
+  //color: black;
+}
+
 .gist {
   margin-top: 10px !important;
 }
