@@ -33,7 +33,7 @@
 
 .entry-content .gist .gist-file .gist-data {
   background-color: #f2f9ff;
-  border-bottom: 1px solid #8ccaff;
+  border-bottom: none;
 }
 
 .entry-content .gist .gist-file .gist-data pre {
@@ -42,6 +42,10 @@
 }
 
 .entry-content .gist .gist-file .gist-meta {
+  @media screen and (max-width: 600px){
+    display:none;
+  }
+  border-top: 1px solid #8ccaff;
   background-color: #d0e9ff;
   color: #00427b;
   padding: 5px 10px !important;
