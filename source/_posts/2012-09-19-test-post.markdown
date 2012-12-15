@@ -53,7 +53,7 @@ Aenean mauris augue, faucibus vel sagittis nec, viverra sit amet sapien. Etiam n
 * then do this other thing
 * then maybe, if you're not tired, do this last thing
 
-Here it is numbered for you:
+Here it is numbered for you (Also works on Windows :D):
 
 1. first do this
 2. then do this other thing
