@@ -1,0 +1,98 @@
+// This File is imported last, and will override other styles in the cascade
+// Add styles here to make changes without digging in too much
+
+.MathJax_Display {
+  //color: black;
+}
+
+.MathJax {
+  //color: black;
+}
+
+.left {
+  float: left;
+  margin-right: 1.5em;
+}
+
+.right {
+  float: right;
+  margin-left: 1.5em;
+}
+
+.gist {
+  margin-top: 10px !important;
+}
+
+.entry-content .gist .gist-file {
+  border: 0;
+  margin-left: -10px;
+  margin-right: -10px;
+  margin-bottom: 0;
+
+  .gist-data {
+    background-color: #f2f9ff;
+    border-bottom: none;
+
+    .data {
+      table {
+        background: none !important;
+        border: none !important;
+        margin-top: 0 !important;
+
+        td { text-align: left; }
+      }
+
+      pre {
+        padding: 0;
+        color: #00427b;
+      }
+    }
+  }
+
+  .gist-meta {
+    background: none;
+    font-family: $font-default;
+    text-shadow: none;
+    border: 0;
+    padding: 0;
+    -moz-transition: none;
+    -webkit-transition: none;
+    transition: none;
+
+    @media screen and (max-width: 600px){
+      display: none;
+    }
+
+    border-top: 1px solid #8ccaff;
+    background-color: #d0e9ff;
+    color: #00427b;
+    padding: 5px 10px !important;
+
+    a,
+    a:visited {
+      color: #00427B !important;
+      font-weight: bold;
+    }
+  }
+}
+
+.entry-content code,
+.entry-content pre {
+  font-family: "Menlo", "Monaco", "Consolas", sans-serif !important;
+}
+
+.entry-content > pre {
+  background-color: #f2f9ff;
+  color: #00427b;
+  padding-left: 10px;
+  margin-top: 10px;
+  margin-left: -10px;
+  margin-right: -10px;
+}
+
+.entry-content p > code {
+  background-color: #EEE;
+  padding: 1px 5px;
+  font-size: 14px;
+}
+
