@@ -3,42 +3,7 @@
 {% include google_analytics.html %}
 {% include custom/after_footer.html %}
 
-{% unless index %}
-  <!-- twitter -->
-  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-
-  <!-- hn -->
-  <script>
-    (function(d, t) {
-      var g = d.createElement(t),
-        s = d.getElementsByTagName(t)[0];
-      g.src = '//hnbutton.appspot.com/static/hn.js';
-      s.parentNode.insertBefore(g, s);
-    }(document, 'script'));
-  </script>
-{% endunless %}
-
 <!--MathJax CDN-->
-<script type="text/x-mathjax-config">
-  /*MathJax.Hub.Register.StartupHook("TeX Jax Ready", function() {
-    var TEX = MathJax.InputJax.TeX;
-    var PREFILTER = TEX.prefilterMath;
-    console.log(MathJax);
-    TEX.Augment({
-      prefilterMath: function(math, displaymode, script) {
-        console.log(math)
-        console.log(displaymode)
-        console.log(script)
-        console.log(TEX)
-        if (displaymode) {
-          math = "\\large{" + math + "}"
-        }
-        return PREFILTER.call(TEX, math, displaymode, script);
-      }
-    });
-  });*/
-</script>
-
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
   MathJax.Hub.Config({
     messageStyle: "none",
@@ -52,10 +17,6 @@
         "font-weight": "normal"
       }
     },
-    showMathMenu: false/*,
-    "HTML-CSS": {
-      scale: 125,
-      minScaleAdjust: 100
-    }*/
+    showMathMenu: false
   });
 </script>
