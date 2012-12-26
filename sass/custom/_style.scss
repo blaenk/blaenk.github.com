@@ -27,6 +27,14 @@
 	}
 }
 
+#main-nav > ul > li > a {
+  padding: 34px 0;
+}
+
+#header {
+  a:hover { border-bottom: 2px solid #258FB8; }
+}
+
 #comment {
 }
 
@@ -47,8 +55,8 @@ figure.code {
   padding: 0;
   border-radius: 0;
   border: 0;
-  margin-left: -10px;
-  margin-right: -10px;
+  margin-left: -23px; // -10px;
+  margin-right: -23px; // -10px;
 
   figcaption {
     @media screen and (max-width: 600px) {
@@ -57,7 +65,7 @@ figure.code {
 
     background-color: #D0E9FF;
     border-top: 1px solid #8CCAFF;
-    padding: 5px 10px;
+    padding: 5px 23px; // 5px 10px;
     color: #00427B;
 
     span {
@@ -68,7 +76,7 @@ figure.code {
     }
     a,
     a:visited {
-      right: 15px;
+      right: 23px; // 15px;
       color: #00427B;
       font-weight: bold;
     }
