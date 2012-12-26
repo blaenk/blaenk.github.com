@@ -19,14 +19,20 @@
   margin-left: 1.5em;
 }
 
+.inner{
+	width: 720px;
+	margin: 0 auto;
+	@media screen and (max-width: 1040px){
+		width: 100%;
+	}
+}
+
 #comment {
-  margin-left: 280px;
 }
 
 .post {
   .meta {
     margin-top: 15px;
-    margin-left: 280px;
     position: static;
     width: auto;
 
