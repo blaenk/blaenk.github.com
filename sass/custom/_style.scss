@@ -23,6 +23,20 @@
   margin-left: 280px;
 }
 
+.post {
+  .meta {
+    margin-top: 15px;
+    margin-left: 280px;
+    position: static;
+    width: auto;
+
+    .date, .tags, .comments {
+      @include inline-block;
+      margin-right: 30px;
+    }
+  }
+}
+
 figure.code {
   padding: 0;
   border-radius: 0;
