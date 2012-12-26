@@ -34,6 +34,13 @@
 }
 
 #comment {
+  padding: 15px 0;
+}
+
+#content {
+  article {
+    padding: 30px 0 15px 0;
+  }
 }
 
 .post {
@@ -45,6 +52,11 @@
     .date, .tags, .comments {
       @include inline-block;
       margin-right: 30px;
+    }
+
+    a:hover {
+      color: #258FB8;
+      text-decoration: underline;
     }
   }
 }

@@ -4,9 +4,10 @@ title: "Test Post"
 date: 2012-09-19 02:49
 comments: true
 categories:
-- Ruby
+- Octopress
+- Markdown
 - Math
-- Video Games
+- Ruby
 ---
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dolor nisi, feugiat sit amet egestas sit amet, mattis sit amet velit. Proin quis metus id mi vulputate adipiscing eget et **sapien**. Sed iaculis auctor sem ac convallis. Cras nisi libero, dignissim quis facilisis et, bibendum eget enim. Vivamus est leo, tristique ut adipiscing vitae, malesuada adipiscing tellus. Integer nec aliquam justo. Nam ac lacus erat. In ***hac habitasse platea*** dictumst. Donec pharetra, lectus sit amet ultrices fringilla, metus mi auctor ligula, in hendrerit dui arcu eu leo.
@@ -59,7 +60,7 @@ Aenean mauris augue, faucibus vel sagittis nec, viverra sit amet sapien. Etiam n
 * then do this other thing
 * then maybe, if you're not tired, do this last thing
 
-Here it is numbered for you (Also works on Windows :D):
+Here it is numbered for you:
 
 1. first do this
 2. then do this other thing
