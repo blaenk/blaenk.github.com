@@ -10,7 +10,7 @@
   }
 
 	h1.title, .entry-content{
-		@media screen and (max-width: 1040px){
+		@media screen and (max-width: 720px){
 			margin-left: 0;
 		}
 	}
@@ -21,7 +21,7 @@
 		font-size: 0.9em;
 		color: $color-gray02;
 		width: 230px;
-		@media screen and (max-width: 1040px){
+		@media screen and (max-width: 720px){
 			margin-top: 15px;
 			position: static;
 			width: auto;
@@ -40,7 +40,7 @@
 				position: absolute;
 				left: 0;
 			}
-			@media screen and (max-width: 1040px){
+			@media screen and (max-width: 720px){
 				@include inline-block;
 				margin-right: 30px;
 			}

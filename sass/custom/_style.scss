@@ -22,7 +22,7 @@
 .inner{
 	width: 720px;
 	margin: 0 auto;
-	@media screen and (max-width: 1040px){
+	@media screen and (max-width: 720px){
 		width: 100%;
 	}
 }
@@ -55,6 +55,17 @@ figure.code {
   border: 0;
   margin-left: -23px; // -10px;
   margin-right: -23px; // -10px;
+
+  @media screen and (max-width: 600px) {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  // 23 gap on either side (= 46) + 720
+  @media screen and (max-width: 766px) {
+    margin-left: 0;
+    margin-right: 0;
+  }
 
   figcaption {
     @media screen and (max-width: 600px) {
