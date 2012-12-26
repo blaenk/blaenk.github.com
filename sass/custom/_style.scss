@@ -29,10 +29,8 @@
 
 #main-nav > ul > li > a {
   padding: 34px 0;
-}
 
-#header {
-  a:hover { border-bottom: 2px solid #258FB8; }
+  &:hover { border-bottom: 2px solid #258FB8; }
 }
 
 #comment {
