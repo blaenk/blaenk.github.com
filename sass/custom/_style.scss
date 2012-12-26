@@ -69,8 +69,8 @@ figure.code {
   padding: 0;
   border-radius: 0;
   border: 0;
-  margin-left: -23px; // -10px;
-  margin-right: -23px; // -10px;
+  margin-left: -19px; // -10px;
+  margin-right: -19px; // -10px;
 
   @media screen and (max-width: 600px) {
     margin-left: 0;
@@ -116,7 +116,7 @@ figure.code {
       background-color: #ECECEC;
       color: #AAA;
       border-right: 1px solid #DDD;
-      padding: .5em;
+      padding: 5px;
       text-align: right;
     }
 
