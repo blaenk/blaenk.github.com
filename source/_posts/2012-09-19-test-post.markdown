@@ -3,6 +3,7 @@ layout: post
 title: "Test Post"
 date: 2012-09-19 02:49
 comments: true
+excerpt: Test the markdown features of kramdown with code blocks and LaTeX embeds
 categories:
 - Octopress
 - Markdown
@@ -11,10 +12,6 @@ categories:
 ---
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dolor nisi, feugiat sit amet egestas sit amet, mattis sit amet velit. Proin quis metus id mi vulputate adipiscing eget et **sapien**. Sed iaculis auctor sem ac convallis. Cras nisi libero, dignissim quis facilisis et, bibendum eget enim. Vivamus est leo, tristique ut adipiscing vitae, malesuada adipiscing tellus. Integer nec aliquam justo. Nam ac lacus erat. In ***hac habitasse platea*** dictumst. Donec pharetra, lectus sit amet ultrices fringilla, metus mi auctor ligula, in hendrerit dui arcu eu leo.
-
-``` latex
-$$\forall x, y : \mathbb{Z}, x > 3 \land y < 2 \Rightarrow x^2 - 2y > 5$$
-```
 
 Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla facilisi. Vestibulum consectetur nulla eget erat _fermentum malesuada_. Nullam ultricies nulla ut eros vulputate sed cursus tortor faucibus. Cras ac risus mauris. Suspendisse molestie elementum luctus. Vestibulum [venenatis blandit](http://www.google.com) velit ac pretium.
 
@@ -37,6 +34,19 @@ require 'base64'
 File.open('favicon.png', 'wb') do |f|
   f.write(Base64.decode64(base64))
 end
+```
+
+``` latex some latex
+$$ i\hbar\frac{\partial \psi}{\partial t}
+  = \frac{-\hbar^2}{2m} \left(
+    \frac{\partial^2}{\partial x^2}
+    + \frac{\partial^2}{\partial y^2}
+    + \frac{\partial^2}{\partial z^2}
+  \right) \psi + V \psi $$
+```
+
+``` latex this one wraps on iPhone
+$$R_{ab} - {\textstyle 1 \over 2}R\,g_{ab} + \Lambda\ g_{ab} = \kappa\, T_{ab}$$
 ```
 
 Donec vitae turpis non augue pulvinar imperdiet eu non erat. Integer mollis diam ac quam lobortis luctus. Suspendisse scelerisque sodales massa sit amet pharetra. $$\Delta S = \pi$$ Donec cursus, velit in mollis dapibus, nunc elit pharetra erat, et dictum sem sapien pretium ligula. Cras nibh elit, mollis eu eleifend sed, faucibus in velit. Aliquam gravida tristique molestie. Donec gravida, diam ac auctor auctor, nulla enim varius sem, non auctor urna mi vitae enim. Cras aliquam semper nibh, quis viverra urna ultrices et. Nunc rhoncus fringilla dapibus.

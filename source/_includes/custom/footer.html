@@ -1,6 +1,1 @@
-Copyright &copy; {{ site.time | date: "%Y" }}
-{% if site.author %}
-    {{ site.author }}
-{% else %}
-    {{ site.title }}
-{% endif %}
+{ <span id="generated">generated <time class="timeago" datetime="{{ site.time | date: \"%Y-%m-%dT%H:%M:%SZ\" }}" pubdate{% if updated %} data-updated="true"{% endif %}>{{ site.time | date: "%Y-%m-%dT%H:%M:%SZ" }}</time></span> }
