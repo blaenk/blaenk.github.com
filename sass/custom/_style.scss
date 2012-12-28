@@ -134,13 +134,9 @@ figure.code {
     }
 
     .code {
-      pre {
-        @media screen and (max-width: 600px) {
-          overflow-x: hidden;
-          word-break: break-word;
-          word-wrap: break-word;
-          white-space: pre-wrap;
-        }
+      @media screen and (max-width: 600px) {
+        padding-left: 2px;
+        line-height: 18px;
       }
 
       background-color: #F2F9FF;
@@ -214,7 +210,7 @@ figure.code {
 
 .entry-content code,
 .entry-content pre {
-  font-family: "Menlo", "Monaco", "Consolas", sans-serif !important;
+  font-family: Menlo, Monaco, Consolas, monospace;
 }
 
 .entry-content > pre {
