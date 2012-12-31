@@ -7,7 +7,7 @@ footer: false
 ---
 
 {% img right /images/me.png 128 %}
-I am Jorge Israel Peña, also known as Blaenk Denum. I am a software developer self-taught from the age of 12 with a Bachelor of Science in Computer Science. I currently live in Southern California. I speak English, Spanish, and French. My areas of interest are [Artificial Intelligence](http://en.wikipedia.org/wiki/Artificial_intelligence), [Machine Learning](http://en.wikipedia.org/wiki/Machine_learning), and [Digital Signal Processing](http://en.wikipedia.org/wiki/Digital_signal_processing). More specifically, I am interested in combining of each of these to create beautiful audio visualizations.
+I'm Jorge Israel Peña, also known as Blaenk Denum. I'm a software developer self-taught from the age of 12 with a Bachelor of Science in Computer Science. I currently live in Southern California. I speak English, Spanish, and French. My areas of interest are [Artificial Intelligence](http://en.wikipedia.org/wiki/Artificial_intelligence), [Machine Learning](http://en.wikipedia.org/wiki/Machine_learning), and [Digital Signal Processing](http://en.wikipedia.org/wiki/Digital_signal_processing). More specifically, I'm interested in combining of each of these to create beautiful audio visualizations.
 
 I try to be pragmatic when it comes to software development. I prefer not to be opinionated with regards to any particular technology, knowing that it's constantly evolving. Instead I use what works best for any given situation. In this spirit, I acknowledge and defer to experience. As a testament to this mindset, my PC triple-boots Windows 8, Arch Linux, and Mac OS X Mountain Lion. I use each one for different things.
 
