@@ -3,7 +3,7 @@ layout: post
 title: "Naive Convolution in Haskell"
 date: 2013-01-04 18:21
 comments: true
-excerpt: An array-less implementation of convolution in Haskell
+excerpt: A functional implementation of convolution in Haskell
 categories:
 - Haskell
 - Digital Signal Processing
@@ -13,7 +13,7 @@ categories:
 
 ## Principle ##
 
-The properties of [homogeneity](http://www.cns.nyu.edu/~david/handouts/linear-systems/linear-systems.html) and [shift-invariance](http://en.wikipedia.org/wiki/Shift-invariant_system) in [Linear Time-Invariant System Theory](http://en.wikipedia.org/wiki/LTI_system_theory) holds that scaling and shifting the input results in the same scaling and shifting in the output. Because of these properties, we can represent any impulse as a shifted and scaled delta function, and consequently know what the impulse response will be for that scaled and shifted impulse.
+The properties of [homogeneity](http://www.cns.nyu.edu/~david/handouts/linear-systems/linear-systems.html) and [shift-invariance](http://en.wikipedia.org/wiki/Shift-invariant_system) in [Linear Time-Invariant System Theory](http://en.wikipedia.org/wiki/LTI_system_theory) holds that scaling and shifting the input results in the same scaling and shifting in the output. Because of these properties, we can represent any impulse as a shifted and scaled delta function and consequently know what the impulse response will be for that scaled and shifted impulse.
 
 An impulse of -3 at the 8<sup>th</sup> sample would be represented as a unit impulse by scaling the delta function by -3 and shifting it to the right by 8 samples: $$-3\delta[n-8]$$, where $$n-8$$ means the 8<sup>th</sup> sample is now the 0<sup>th</sup>. Due to homogeneity and shift invariance, we can determine the impulse response of this impulse by simply scaling and shifting the unit impulse response in the same manner. In other words, $$-3\delta[n-8] \mapsto -3h[n-8]$$
 
@@ -27,23 +27,38 @@ Since convolution allows us to go from input signal $$x[n]$$ to output signal $$
 
 ## Definition ##
 
-The convolution summation is pretty simple, and is defined as follows:
+Convolution can be described by the so called _convolution summation_. The convolution summation is pretty simple, and is defined as follows:
 
 $$y[i] = \sum_{j=0}^{M-1}h[j]x[i-j]$$
 
-All this says is that a given sample in the output signal $$y[n]$$ is determined by the summation of every i<sup>th</sup> sample in every resultant impulse response. In effect, the summation above shows how different samples contribute to result in the single output sample.
+Where the length of the output signal $$y[n]$$ is defined as $$M + N - 1$$ where $$M$$ is the length of the unit impulse response and $$N$$ is the length of the input signal.
 
-As you can see, it makes use of arrays. This means that to implement convolution in Haskell without the use of [Arrays](http://hackage.haskell.org/package/array), we need to really understand the operation occurring in the convolution summation. The book [The Scientist and Engineer's Guide to Digital Signal Processing](http://www.dspguide.com) uses a metaphor known as the [Convolution Machine](http://www.dspguide.com/ch6/4.htm) to teach the convolution algorithm.
+All this says is that a given sample $$y[i]$$ in the output signal $$y[n]$$ is determined by the summation of every $$i^{th}$$ sample in every resultant impulse response. In effect, the summation above encodes how different samples in the resulting impulse responses contribute to a single output sample.
 
-The convolution machine is simply a theoretical machine in which the unit impulse response is:
+Natural imperative instinct might lead you to conclude that this can be easily implemented using nested iterations and arrays:
+
+``` cpp
+const int outputLength = M + N - 1;
+int *y = new int[outputLength]();
+
+for (int i = 0; i < outputLength; ++i) {
+  for (int j = 0; j < M; ++j) {
+    if (i - j >= 0) y[i] += x[i - j] * h[j];
+  }
+}
+```
+
+But wait up! We are using Haskell, a functional programming language which typically does without both arrays and iteration. This means that to implement convolution in Haskell without the use of [Arrays](http://hackage.haskell.org/package/array) or imperative iteration loops, we need to really understand the operation occurring in the convolution summation.
+
+The book [The Scientist and Engineer's Guide to Digital Signal Processing](http://www.dspguide.com) uses a metaphor known as the [Convolution Machine](http://www.dspguide.com/ch6/4.htm) to help conceptualize the convolution operation at a granular level. The convolution machine is simply a theoretical machine in which the unit impulse response is:
 
 1. wrapped onto a roller/cylinder
 2. rolled over the input signal such that each sample lines up with one on the reversed impulse response
 3. each lined-up pair of samples from input signal and impulse response is multiplied and each product is summed
 
-If you're wondering why step **3** mentions a _reversed_ impulse response, allow me to elaborate. Imagine you have a roller and the impulse response which is on a strip of tape. Now imagine that you apply the impulse response tape over and around the roller, such that the numbers are facing you and are in the correct order. Now, when you roll this roller over and across the input signal, from left to right, the numbers on the impulse response tape will make contact with the input signal in _reverse order_.
+If you're wondering why step **3** mentions a _reversed_ impulse response, imagine that you have a roller and that the impulse response is on a strip of tape. Now imagine that you apply the impulse response tape over and around the roller, such that the numbers are facing you and are in the correct order. Now, when you roll this roller over and across the input signal, from left to right, the numbers on the impulse response tape will make contact with the input signal in _reverse order_.
 
-See [this page](http://www.dspguide.com/ch6/4.htm) for an illustration of it in Figure 6-8.
+See [this page](http://www.dspguide.com/ch6/4.htm) for an illustration of the convolution machine in Figure 6-8.
 
 ## Implementation ##
 
@@ -52,26 +67,28 @@ Implementing the convolution machine is pretty straightforward once we are able 
 Let's start with the type signature. Since we're not using arrays, we'll represent the signals as lists of numbers. Convolution does something with two signals to produce a third signal, so the type signature is pretty straightforward:
 
 ``` haskell
-conv :: (Num a) => [a] -> [a] -> [a]
-conv hs xs = undefined
+convolve :: (Num a) => [a] -> [a] -> [a]
+convolve hs xs = undefined
 ```
 
 In the signature, `xs` refers to the input signal and `hs` refers to the impulse response.
 
 ### Padding ###
 
-Now for the implementation of `conv`. First, consider this component of the convolution summation:
+Now for the implementation of `convolve`. First, consider this component of the convolution summation:
 
 $$x[i-j]$$
 
-When we are computing the first sample, such that $$i = 0$$, in the output signal $$y[n]$$, then at one point we need to refer to the $$x[-(M-1)]$$ sample where $$M$$ is length of impulse response. However, there are no samples to the left of the first sample. So what we have to do is prepad the input signal with $$M-1$$ samples of value $$0$$. This padding has the added benefit of allowing us to simply map over the padded input signal to generate the output signal. This is because the convolution operation's output signal length is $$M + N - 1$$ where $$M$$ is the length of the impulse response and $$N$$ is the length of the input signal. The padding can be achieved with:
+When we are computing the first sample, such that $$i = 0$$, in the output signal $$y[n]$$, then at one point we need to refer to the $$x[-(M-1)]$$ sample where $$M$$ is length of impulse response. However, there are no samples to the left of the first sample.
+
+So what we have to do is prepad the input signal with $$M-1$$ samples of value $$0$$. This padding has the added benefit of allowing us to simply map over the padded input signal to generate the output signal. This is because the convolution operation's output signal length is $$M + N - 1$$ where $$M$$ is the length of the impulse response and $$N$$ is the length of the input signal. The padding can be achieved with:
 
 ``` haskell
 let pad = replicate ((length hs) - 1) 0
     ts = pad ++ xs
 ```
 
-Once we prepad the input signal with enough zero samples, we can pass the padded input signal and impulse response to a function which simulates the rolling of the convolution machine. This function will be nested within `conv` and will simply be used as a recursive helper function.
+Once we prepad the input signal with enough zero samples, we can pass the padded input signal and impulse response to a function which simulates the rolling of the convolution machine. This function will be nested within `convolve` and will simply be used as a recursive helper function.
 
 ### Let's Roll ###
 
@@ -100,11 +117,11 @@ roll hs ts = let sample = sum $ zipWith (*) ts hs
              in sample : roll hs (tail ts)
 ```
 
-Here is the whole convolution function `conv` put together:
+Here is the whole convolution function `convolve` put together:
 
 ``` haskell naive convolution in Haskell through the convolution machine
-conv :: (Num a) => [a] -> [a] -> [a]
-conv hs xs =
+convolve :: (Num a) => [a] -> [a] -> [a]
+convolve hs xs =
   let pad = replicate ((length hs) - 1) 0
       ts = pad ++ xs
   in roll ts (reverse hs)
@@ -124,8 +141,8 @@ The observation we should make is that the `roll` function acts like `map`, spec
 However, `tails` considers `[]` to be a tail of any list -- which is technically correct -- so we'll always have a trailing `0` element if we do it this way. That's why we simply take the `init` of the result of `tails`, which returns every element in a list except the last one. We also still need to prepad the signal, so those lines remain:
 
 ``` haskell a reduced form of the convolution machine implementation
-conv :: (Num a) => [a] -> [a] -> [a]
-conv hs xs =
+convolve :: (Num a) => [a] -> [a] -> [a]
+convolve hs xs =
   let pad = replicate ((length hs) - 1) 0
       ts = pad ++ xs
   in map (sum . zipWith (*) (reverse hs)) (init $ tails ts)

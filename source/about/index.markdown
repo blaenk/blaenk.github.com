@@ -19,6 +19,6 @@ I work out religiously, every other day, specifically doing strength training. I
 
 You can find me on [github](http://github.com/blaenk) and [stackoverflow](http://stackoverflow.com/users/101090/jorge-israel-pena). You can also check out what I'm up to [lately](/lately).
 
-If you would like to get in touch with me, you can email me at jorgepblank@gmail.com [^1]
+If you would like to get in touch with me, you can email me at jorgepblank@gmail.com[^1]
 
 [^1]: Why bother with futile attempts at obfuscation? 
