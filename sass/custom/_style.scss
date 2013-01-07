@@ -14,6 +14,16 @@
   margin-right: 1.5em;
 }
 
+.center {
+  margin: 0 auto;
+}
+
+sup[id^="fnref"] a {
+  font-size: 12px;
+  &:before { content: "["; }
+  &:after { content: "]"; }
+}
+
 sup { line-height: 1em; }
 
 .right {
@@ -89,16 +99,17 @@ figure.code {
   padding: 0;
   border-radius: 0;
   border: 0;
-  margin-left: -19px; // -10px;
-  margin-right: -19px; // -10px;
+  margin-left: -28px; // -10px;
+  margin-right: -28px; // -10px;
+  background-color: #F2F9FF;
 
   @media screen and (max-width: 600px) {
     margin-left: 0;
     margin-right: 0;
   }
 
-  // 23 gap on either side (= 46) + 720
-  @media screen and (max-width: 766px) {
+  // 28 gap on either side (= 56) + 720
+  @media screen and (max-width: 776px) {
     margin-left: 0;
     margin-right: 0;
   }
@@ -110,7 +121,7 @@ figure.code {
 
     background-color: #D0E9FF;
     border-top: 1px solid #8CCAFF;
-    padding: 5px 23px; // 5px 10px;
+    padding: 5px 28px; // 5px 10px;
     color: #00427B;
 
     span {
@@ -121,7 +132,7 @@ figure.code {
     }
     a,
     a:visited {
-      right: 23px; // 15px;
+      right: 28px; // 15px;
       color: #00427B;
       font-weight: bold;
     }
@@ -133,6 +144,7 @@ figure.code {
         display: none;
       }
 
+      width: 17px;
       background-color: #ECECEC;
       color: #AAA;
       border-right: 1px solid #DDD;
