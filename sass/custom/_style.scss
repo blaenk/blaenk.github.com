@@ -1,14 +1,6 @@
 // This File is imported last, and will override other styles in the cascade
 // Add styles here to make changes without digging in too much
 
-.MathJax_Display {
-  //color: black;
-}
-
-.MathJax {
-  //color: black;
-}
-
 .left {
   float: left;
   margin-right: 1.5em;
@@ -16,6 +8,10 @@
 
 .center {
   margin: 0 auto;
+}
+
+blockquote footer {
+  border-top: none;
 }
 
 sup[id^="fnref"] a {
