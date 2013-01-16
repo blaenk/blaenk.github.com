@@ -19,6 +19,9 @@ This page, which should be updated regularly, is where I talk about the things I
 ###Planning to Work On###
 
 * I'm considering adding functionality to [MPC-HC](http://mpc-hc.sourceforge.net) which allows one to watch things with others "in sync." Something like [Synchtube](http://www.synchtube.com/). I've yet to assess the feasibility of the project, but I feel it shouldn't be too difficult because MPC-HC already contains a remote web control system which I believe the authors were smart enough to abstract behind an event system. I figure I should be able to take advantage of this system.
+  * **Update**: The devs let me know that a third-party project already exists that supports this functionality with the ability to support multiple players, not just MPC-HC. The project is called [syncplay](https://github.com/Uriziel/syncplay). I've tried it with friends multiple times already and it seems to work great!
+
+      I did manage to get at least one [pull-request](https://github.com/mpc-hc/mpc-hc/pull/38) into MPC-HC however. The patch fixes seeking when the command to seek is sent from the web interface. I don't use the webui but I was checking it out when I was assessing methods of implementing the functionailty, since I figured I could leverage the code that interfaces with the webui.
 * I'm working on a streaming web video system, and I'd like to do something similar -- viewing videos in sync -- using the HTML5 media API which has support for video events. This functionality is showcased [here](http://www.w3.org/2010/05/video/mediaevents.html). I think this concept of synchronizing events maps directly to the observer pattern which maps to a popular use of [node.js](http://nodejs.org/): websockets. Specifically, I feel that this will be a perfect use of [socket.io](http://socket.io/).
 
 ###Currently Reading###
