@@ -85,7 +85,7 @@ So what we have to do is prepad the input signal with $$M-1$$ samples of value $
 
 ``` haskell
 let pad = replicate ((length hs) - 1) 0
-    ts = pad ++ xs
+    ts  = pad ++ xs
 ```
 
 Once we prepad the input signal with enough zero samples, we can pass the padded input signal and impulse response to a function which simulates the rolling of the convolution machine. This function will be nested within `convolve` and will simply be used as a recursive helper function.
@@ -123,7 +123,7 @@ Here is the whole convolution function `convolve` put together:
 convolve :: (Num a) => [a] -> [a] -> [a]
 convolve hs xs =
   let pad = replicate ((length hs) - 1) 0
-      ts = pad ++ xs
+      ts  = pad ++ xs
   in roll ts (reverse hs)
   where
     roll :: (Num a) => [a] -> [a] -> [a]
@@ -144,7 +144,7 @@ However, `tails` considers `[]` to be a tail of any list -- which is technically
 convolve :: (Num a) => [a] -> [a] -> [a]
 convolve hs xs =
   let pad = replicate ((length hs) - 1) 0
-      ts = pad ++ xs
+      ts  = pad ++ xs
   in map (sum . zipWith (*) (reverse hs)) (init $ tails ts)
 ```
 

@@ -2,8 +2,9 @@
   .hll { background-color: #ffffcc }
   .c { color: #999988; font-style: italic } /* Comment */
   .err { color: #a61717; background-color: #e3d2d2 } /* Error */
-  .k { color: #000000; font-weight: bold } /* Keyword */
-  .o { color: #000000; font-weight: bold } /* Operator */
+  .k { color: #258fb8; font-weight: bold } /* Keyword */
+  .o { color: #990000; } /* Operator */
+  .p { color: #258fb8; } /* Parenthesis */
   .cm { color: #999988; font-style: italic } /* Comment.Multiline */
   .cp { color: #999999; font-weight: bold; font-style: italic } /* Comment.Preproc */
   .c1 { color: #999988; font-style: italic } /* Comment.Single */
@@ -22,7 +23,7 @@
   .kd { color: #000000; font-weight: bold } /* Keyword.Declaration */
   .kn { color: #000000; font-weight: bold } /* Keyword.Namespace */
   .kp { color: #000000; font-weight: bold } /* Keyword.Pseudo */
-  .kr { color: #000000; font-weight: bold } /* Keyword.Reserved */
+  .kr { color: #258fb8; font-weight: bold } /* Keyword.Reserved */
   .kt { color: #445588; font-weight: bold } /* Keyword.Type */
   .m { color: #009999 } /* Literal.Number */
   .s { color: #d01040 } /* Literal.String */
@@ -38,7 +39,7 @@
   .nn { color: #555555 } /* Name.Namespace */
   .nt { color: #000080 } /* Name.Tag */
   .nv { color: #008080 } /* Name.Variable */
-  .ow { color: #000000; font-weight: bold } /* Operator.Word */
+  .ow { color: #258fb8; font-weight: bold } /* Operator.Word */
   .w { color: #bbbbbb } /* Text.Whitespace */
   .mf { color: #009999 } /* Literal.Number.Float */
   .mh { color: #009999 } /* Literal.Number.Hex */
