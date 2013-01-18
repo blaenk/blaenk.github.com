@@ -6,10 +6,17 @@
 {% capture updated_formatted %}{{ page.updated_formatted }}{{ post.updated_formatted }}{% endcapture %}
 {% capture was_updated %}{{ updated | size }}{% endcapture %}
 
+{% capture last_generated %}{{ site.time }}{% endcapture %}
+{% capture has_last_generated %}{{ last_generated | size }}{% endcapture %}
+
 {% if has_date != '0' %}
   {% capture time %}<time class="timeago" datetime="{{ date | datetime | date_to_xmlschema }}" pubdate{% if updated %} data-updated="true"{% endif %}>{{ date_formatted }}</time>{% endcapture %}
 {% endif %}
 
 {% if was_updated != '0' %}
-  {% capture updated %}<time class="timeago" datetime="{{ updated | datetime | date_to_xmlschema }}" class="updated">Updated {{ updated_formatted }}</time>{% endcapture %}
+  {% capture updated %}<time class="timeago updated" datetime="{{ updated | datetime | date_to_xmlschema }}">{{ updated_formatted }}</time>{% endcapture %}
 {% else %}{% assign updated = false %}{% endif %}
+
+{% if has_last_generated != '0' %}
+  {% capture last_generated %}<time class="timeago" datetime="{{ last_generated | datetime | date_to_xmlschema }}">{{ last_generated }}</time>{% endcapture %}
+{% else %}{% assign last_generated = false %}{% endif %}

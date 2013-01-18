@@ -1,1 +1,1 @@
-{ <span id="generated">generated <time class="timeago" datetime="{{ site.time | date: \"%Y-%m-%dT%H:%M:%SZ\" }}" pubdate{% if updated %} data-updated="true"{% endif %}>{{ site.time | date: "%Y-%m-%dT%H:%M:%SZ" }}</time></span> }
+{% include post/date.html %}{ <span id="generated">generated {{ last_generated }}</span> }

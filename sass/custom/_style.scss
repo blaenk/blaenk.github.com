@@ -27,12 +27,37 @@ sup { line-height: 1em; }
   margin-left: 1.5em;
 }
 
-.inner{
+.inner {
 	width: 720px;
 	margin: 0 auto;
 	@media screen and (max-width: 766px){
 		width: 100%;
 	}
+}
+
+article .entry-content > ul { margin-left: 0; }
+
+.entry-content ul li {
+  list-style-type: none;
+
+  &:before {
+    content: '\00BB';
+    position: absolute;
+    margin-left: -15px;
+    color: #258fb8;
+  }
+}
+
+#markdown-toc {
+  background-color: #F2F9FF;
+  padding: 5px 10px 5px 25px;
+  float: right;
+  margin-left: 10px;
+  margin-top: 0;
+}
+
+article .entry-content h2 {
+  overflow: hidden;
 }
 
 .footnotes {

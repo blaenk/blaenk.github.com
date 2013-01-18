@@ -2,12 +2,20 @@
 layout: page
 title: "Lately"
 date: 2012-12-28 23:19
+updated: 2013-01-17 23:19
 comments: true
 sharing: true
 footer: true
 ---
 
-This page, which should be updated regularly, is where I talk about the things I've been up to lately. Comments are enabled in case you'd like to comment on anything or have any questions.
+{% include post/date.html %}
+
+* Table of Contents
+{:toc}
+
+This page lists some things I've been up to lately. Comments are enabled in case you'd like to comment on anything or have any questions.
+
+_Updated {{ updated }}_
 
 ###Currently Working On###
 

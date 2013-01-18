@@ -2,12 +2,16 @@
 layout: post
 title: "Naive Convolution in Haskell"
 date: 2013-01-04 18:21
+updated: 2013-01-17 18:21
 comments: true
 excerpt: A functional implementation of convolution in Haskell
 categories:
 - Haskell
 - Digital Signal Processing
 ---
+
+* Table of Contents
+{:toc}
 
 [Convolution](http://en.wikipedia.org/wiki/Convolution) is a mathematical method of combining two signals to form a third signal. Passing the [Dirac delta function](http://en.wikipedia.org/wiki/Dirac_delta_function) (unit impulse) $$\delta[n]$$ through a linear system results in the impulse response $$h[n]$$. The impulse response is simply the signal resulting from passing the unit impulse (Dirac delta function) through a linear system.
 
@@ -161,4 +165,4 @@ Of course, this post concerns a _naive_ implementation of convolution. There are
 [^compute_shader]: As described in [3D Game Programming with DirectX 11](http://www.d3dcoder.net/d3d11.htm) by Frank D. Luna in Ch 12 page 450 § 12.7 
 [^motion_blur]: Despite this optimization of Gaussian Blurring, many implementations optimize further. Blurring typically involves rendering the scene to a separate buffer (e.g. Render-to-Texture) at a scaled-down resolution. This speeds up the blurring operation as there are less pixels to operate on. Then the result is rendered to the actual screen. Since the point is to blur, the upscaling is usually hardly noticeable.
 
-    Recently I purchased an old game on Steam which I had played circa 2003. This game was developed back when 1280x1024 was a popular resolution, that is 4:3 aspect ratio. I got to a part where the game displayed some sort of blur effect and noticed that the entire screen was completely blurred to the point where I couldn't make anything out. I presume this was not the intended effect. If I had to guess, I imagine they hard-coded a scaled down resolution -- and thus aspect ratio as well -- at which to render the scene for blurring, such that the upscaling it to my current 1920x1080 resolution 16:9 AR looked horrible. I imagine newer games take into account aspect ratio and use some sort of ratio to scale down from whatever the current resolution is. 
+    Recently I purchased an old game on Steam which I had played circa 2003. This game was developed back when 1280x1024 was a popular resolution, that is 4:3 aspect ratio. I got to a part where the game displayed some sort of blur effect and noticed that the entire screen was completely blurred to the point where I couldn't make anything out. I presume this was not the intended effect. If I had to guess, I imagine they hard-coded a scaled down resolution -- and thus aspect ratio as well -- at which to render the scene for blurring, such that upscaling it to my current 1920x1080 resolution 16:9 AR looked horrible. I imagine newer games take into account aspect ratio and some other factor to scale down the current resolution from. 
