@@ -112,7 +112,7 @@ With this information, we can finish the definition of `roll`:
 
 ``` haskell
 roll :: (Num a) => [a] -> [a] -> [a]
-roll [] _ = []
+roll [] _  = []
 roll hs ts = let sample = sum $ zipWith (*) ts hs
              in sample : roll hs (tail ts)
 ```
