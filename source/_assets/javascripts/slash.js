@@ -1,4 +1,4 @@
-(function($){
+$(function() {
 	// Open external links in new window
 	var externalLinks = function(){
 		var host = location.host;
@@ -59,4 +59,6 @@
 	}).click(function(e){
 		e.stopPropagation();
 	});
-})(jQuery);
+
+	$("time.timeago").timeago();
+});
