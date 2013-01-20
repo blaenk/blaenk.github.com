@@ -35,7 +35,7 @@ GEM
       syntax (>= 1.0.0)
     multi_json (1.5.0)
     posix-spawn (0.3.6)
-    pygments.rb (0.3.4)
+    pygments.rb (0.3.7)
       posix-spawn (~> 0.3.6)
       yajl-ruby (~> 1.1.0)
     rack (1.4.1)
