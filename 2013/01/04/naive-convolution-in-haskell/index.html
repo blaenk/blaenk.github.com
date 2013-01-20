@@ -1,0 +1,398 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Naive Convolution in Haskell - Jorge Israel Peña</title>
+	<meta name="author" content="Jorge Israel Peña">
+
+	
+	<meta name="description" content="Principle Definition Implementation Padding Let’s Roll Reduction Conclusion Convolution is a mathematical method of combining two signals to form a &hellip;">
+	
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, target-densitydpi=device-dpi">
+
+	<link href="" rel="alternate" title="Jorge Israel Peña" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <link href='/assets/site-fb076d739147b9e3db0c4f8a687ca89d.css' rel='stylesheet' type='text/css' />
+
+
+    <script src='/assets/site-5cb7438ce7671c41b092760f6bc11f68.js' type='text/javascript'></script>
+
+	
+</head>
+
+
+<body>
+	<header id="header" class="inner"><div id="stamp">
+  <h1><a href="/">Jorge Israel Peña</a></h1>
+  <h4>AKA Blaenk Denum</h4>
+</div>
+<nav id="main-nav"><ul class="main">
+	<li><a href="/about">About</a></li>
+	<li><a href="/lately">Lately</a></li>
+	<li><a href="/projects">Projects</a></li>
+	<li><a href="/resume">Résumé</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	<li><a href="/about">About</a></li>
+	<li><a href="/lately">Lately</a></li>
+	<li><a href="/projects">Projects</a></li>
+	<li><a href="/resume">Résumé</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:www.blaenkdenum.com">
+			</form>
+		</div>
+	</div>
+</nav>
+
+</header>
+	
+	<div id="content" class="inner"><article class="post">
+  <h2 class="title"><a href="">Naive Convolution in Haskell</a></h2>
+	<div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#principle">Principle</a></li>
+  <li><a href="#definition">Definition</a></li>
+  <li><a href="#implementation">Implementation</a>    <ul>
+      <li><a href="#padding">Padding</a></li>
+      <li><a href="#lets-roll">Let’s Roll</a></li>
+    </ul>
+  </li>
+  <li><a href="#reduction">Reduction</a></li>
+  <li><a href="#conclusion">Conclusion</a></li>
+</ul>
+
+<p><a href="http://en.wikipedia.org/wiki/Convolution">Convolution</a> is a mathematical method of combining two signals to form a third signal. Passing the <a href="http://en.wikipedia.org/wiki/Dirac_delta_function">Dirac delta function</a> (unit impulse) <script type="math/tex">\delta[n]</script> through a linear system results in the impulse response <script type="math/tex">h[n]</script>. The impulse response is simply the signal resulting from passing the unit impulse (Dirac delta function) through a linear system.</p>
+
+<h2 id="principle">Principle</h2>
+
+<p>The properties of <a href="http://www.cns.nyu.edu/~david/handouts/linear-systems/linear-systems.html">homogeneity</a> and <a href="http://en.wikipedia.org/wiki/Shift-invariant_system">shift-invariance</a> in <a href="http://en.wikipedia.org/wiki/LTI_system_theory">Linear Time-Invariant System Theory</a> holds that scaling and shifting the input results in the same scaling and shifting in the output. Because of these properties, we can represent any impulse as a shifted and scaled delta function and consequently know what the impulse response will be for that scaled and shifted impulse.</p>
+
+<p>An impulse of -3 at the 8<sup>th</sup> sample would be represented as a unit impulse by scaling the delta function by -3 and shifting it to the right by 8 samples: <script type="math/tex">-3\delta[n-8]</script>, where <script type="math/tex">n-8</script> means the 8<sup>th</sup> sample is now the 0<sup>th</sup>. Due to homogeneity and shift invariance, we can determine the impulse response of this impulse by simply scaling and shifting the unit impulse response in the same manner. In other words, <script type="math/tex">-3\delta[n-8] \mapsto -3h[n-8]</script></p>
+
+<p>What this means is that if we know the unit impulse response of a system, we consequently know how the system will react to <em>any</em> impulse. These impulse responses can then be synthesized to form the output signal that would result from running the input signal through the actual system.</p>
+
+<p>In short, the input signal <em>convolved</em> with the unit impulse response results in the output signal. Convolution of input signal <script type="math/tex">x[n]</script> with unit impulse <script type="math/tex">h[n]</script> to generate output signal <script type="math/tex">y[n]</script> is denoted as:</p>
+
+<script type="math/tex; mode=display">x[n] * h[n] = y[n]</script>
+
+<p>Since convolution allows us to go from input signal <script type="math/tex">x[n]</script> to output signal <script type="math/tex">y[n]</script>, we can conclude that convolution involves the generation of the impulse response for each impulse in the input signal as decomposed by <a href="http://www.dspguide.com/ch5/7.htm">impulse decomposition</a>, <em>as well as</em> the subsequent synthesis of each impulse response, to generate the output signal.</p>
+
+<h2 id="definition">Definition</h2>
+
+<p>Convolution can be described by the so called <em>convolution summation</em>. The convolution summation is pretty simple, and is defined as follows:</p>
+
+<script type="math/tex; mode=display">y[i] = \sum_{j=0}^{M-1}h[j]x[i-j]</script>
+
+<p>Where the length of the output signal <script type="math/tex">y[n]</script> is defined as <script type="math/tex">M + N - 1</script> where <script type="math/tex">M</script> is the length of the unit impulse response and <script type="math/tex">N</script> is the length of the input signal.</p>
+
+<p>All this says is that a given sample <script type="math/tex">y[i]</script> in the output signal <script type="math/tex">y[n]</script> is determined by the summation of every <script type="math/tex">i^{th}</script> sample in every resultant impulse response. In effect, the summation above encodes how different samples in the resulting impulse responses contribute to a single output sample.</p>
+
+<p>Natural imperative instinct might lead you to conclude that this can be easily implemented using nested iterations and arrays:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+</pre></td><td class="code"><pre><code class="cpp"><span class="line"><span class="k">const</span> <span class="kt">int</span> <span class="n">outputLength</span> <span class="o">=</span> <span class="n">M</span> <span class="o">+</span> <span class="n">N</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class="line"><span class="kt">int</span> <span class="o">*</span><span class="n">y</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="p">[</span><span class="n">outputLength</span><span class="p">]();</span>
+</span><span class="line">
+</span><span class="line"><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">outputLength</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">M</span><span class="p">;</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">    <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="n">h</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+</span><span class="line">  <span class="p">}</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>But wait up! We are using Haskell, a functional programming language which typically does without both arrays and iteration. This means that to implement convolution in Haskell without the use of <a href="http://hackage.haskell.org/package/array">Arrays</a> or imperative iteration loops, we need to really understand the operation occurring in the convolution summation.</p>
+
+<p>The book <a href="http://www.dspguide.com">The Scientist and Engineer’s Guide to Digital Signal Processing</a> uses a metaphor known as the <a href="http://www.dspguide.com/ch6/4.htm">Convolution Machine</a> to help conceptualize the convolution operation at a granular level. The convolution machine is simply a theoretical machine in which the unit impulse response is:</p>
+
+<ol>
+  <li>wrapped onto a roller/cylinder</li>
+  <li>rolled over the input signal such that each sample lines up with one on the reversed impulse response</li>
+  <li>each lined-up pair of samples from input signal and impulse response is multiplied and each product is summed</li>
+</ol>
+
+<p>If you’re wondering why step <strong>3</strong> mentions a <em>reversed</em> impulse response, imagine that you have a roller and that the impulse response is on a strip of tape. Now imagine that you apply the impulse response tape over and around the roller, such that the numbers are facing you and are in the correct order. Now, when you roll this roller over and across the input signal, from left to right, the numbers on the impulse response tape will make contact with the input signal in <em>reverse order</em>.</p>
+
+<p>See <a href="http://www.dspguide.com/ch6/4.htm">this page</a> for an illustration of the convolution machine in Figure 6-8.</p>
+
+<h2 id="implementation">Implementation</h2>
+
+<p>Implementing the convolution machine is pretty straightforward once we are able to conceptualize what it is actually doing.</p>
+
+<p>Let’s start with the type signature. Since we’re not using arrays, we’ll represent the signals as lists of numbers. Convolution does something with two signals to produce a third signal, so the type signature is pretty straightforward:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="haskell"><span class="line"><span class="nf">convolve</span> <span class="ow">::</span> <span class="p">(</span><span class="kt">Num</span> <span class="n">a</span><span class="p">)</span> <span class="ow">=&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span>
+</span><span class="line"><span class="nf">convolve</span> <span class="n">hs</span> <span class="n">xs</span> <span class="ow">=</span> <span class="n">undefined</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>In the signature, <code>xs</code> refers to the input signal and <code>hs</code> refers to the impulse response.</p>
+
+<h3 id="padding">Padding</h3>
+
+<p>Now for the implementation of <code>convolve</code>. First, consider this component of the convolution summation:</p>
+
+<script type="math/tex; mode=display">x[i-j]</script>
+
+<p>When we are computing the first sample, such that <script type="math/tex">i = 0</script>, in the output signal <script type="math/tex">y[n]</script>, then at one point we need to refer to the <script type="math/tex">x[-(M-1)]</script> sample where <script type="math/tex">M</script> is length of impulse response. However, there are no samples to the left of the first sample.</p>
+
+<p>So what we have to do is prepad the input signal with <script type="math/tex">M-1</script> samples of value <script type="math/tex">0</script>. This padding has the added benefit of allowing us to simply map over the padded input signal to generate the output signal. This is because the convolution operation’s output signal length is <script type="math/tex">M + N - 1</script> where <script type="math/tex">M</script> is the length of the impulse response and <script type="math/tex">N</script> is the length of the input signal. The padding can be achieved with:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="haskell"><span class="line"><span class="kr">let</span> <span class="n">pad</span> <span class="ow">=</span> <span class="n">replicate</span> <span class="p">((</span><span class="n">length</span> <span class="n">hs</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="mi">0</span>
+</span><span class="line">    <span class="n">ts</span>  <span class="ow">=</span> <span class="n">pad</span> <span class="o">++</span> <span class="n">xs</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Once we prepad the input signal with enough zero samples, we can pass the padded input signal and impulse response to a function which simulates the rolling of the convolution machine. This function will be nested within <code>convolve</code> and will simply be used as a recursive helper function.</p>
+
+<h3 id="lets-roll">Let’s Roll</h3>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class="haskell"><span class="line"><span class="nf">roll</span> <span class="ow">::</span> <span class="p">(</span><span class="kt">Num</span> <span class="n">a</span><span class="p">)</span> <span class="ow">=&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span>
+</span><span class="line"><span class="nf">roll</span> <span class="kr">_</span>  <span class="kt">[]</span> <span class="ow">=</span> <span class="kt">[]</span>
+</span><span class="line"><span class="nf">roll</span> <span class="n">hs</span> <span class="n">ts</span> <span class="ow">=</span> <span class="n">undefined</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>The <code>roll</code> function is recursive and will simulate the actual rolling of the convolution machine over the input signal. As it rolls, it will consume the <code>head</code> of the input signal <code>ts</code>. Think of the consumption of the <code>head</code> as if the input signal is being wrapped around the roller as it rolls. The input signal <code>ts</code> will therefore eventually be empty, meaning the convolution machine has finished rolling over the entire input signal.</p>
+
+<p>The <code>roll</code> function is run for every sample in the output signal. This is where the bulk of the implementation comes in. At any given sample in the input signal, we simulate the roll by zipping the input signal from that sample forward along with the impulse response. This generates a list of pairs each consisting of the input signal sample with its corresponding impulse response sample (which is being rolled over it).</p>
+
+<p>If you have trouble conceptualizing this, imagine that the impulse response on the roller is tape, so that when you roll it over the input signal, the impulse response – which, remember, makes contact with the input signal in reverse – sticks to the input signal and is lined up such that each sample in the impulse response is directly over a sample of the input signal.</p>
+
+<p>We then need to multiply the components of each pair with each other, i.e. the input sample multiplied by its corresponding impulse response sample. The act of zipping and multiplying the zipped up pairs can be done in one go with <code>zipWith (*)</code>. We then gather all of these products and <code>sum</code> them up. This sum is the latest computed sample in the output signal.</p>
+
+<p>We construct the complete output signal by cons’ing the sample with a recursive call to <code>roll</code>, however this <code>roll</code> will concern only the next sample forward, thereby simulating rolling across the input signal.</p>
+
+<p>With this information, we can finish the definition of <code>roll</code>:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class="haskell"><span class="line"><span class="nf">roll</span> <span class="ow">::</span> <span class="p">(</span><span class="kt">Num</span> <span class="n">a</span><span class="p">)</span> <span class="ow">=&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span>
+</span><span class="line"><span class="nf">roll</span> <span class="kr">_</span>  <span class="kt">[]</span> <span class="ow">=</span> <span class="kt">[]</span>
+</span><span class="line"><span class="nf">roll</span> <span class="n">hs</span> <span class="n">ts</span> <span class="ow">=</span> <span class="kr">let</span> <span class="n">sample</span> <span class="ow">=</span> <span class="n">sum</span> <span class="o">$</span> <span class="n">zipWith</span> <span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="n">ts</span> <span class="n">hs</span>
+</span><span class="line">             <span class="kr">in</span> <span class="n">sample</span> <span class="kt">:</span> <span class="n">roll</span> <span class="n">hs</span> <span class="p">(</span><span class="n">tail</span> <span class="n">ts</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Here is the whole convolution function <code>convolve</code> put together:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+</pre></td><td class="code"><pre><code class="haskell"><span class="line"><span class="nf">convolve</span> <span class="ow">::</span> <span class="p">(</span><span class="kt">Num</span> <span class="n">a</span><span class="p">)</span> <span class="ow">=&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span>
+</span><span class="line"><span class="nf">convolve</span> <span class="n">hs</span> <span class="n">xs</span> <span class="ow">=</span>
+</span><span class="line">  <span class="kr">let</span> <span class="n">pad</span> <span class="ow">=</span> <span class="n">replicate</span> <span class="p">((</span><span class="n">length</span> <span class="n">hs</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="mi">0</span>
+</span><span class="line">      <span class="n">ts</span>  <span class="ow">=</span> <span class="n">pad</span> <span class="o">++</span> <span class="n">xs</span>
+</span><span class="line">  <span class="kr">in</span> <span class="n">roll</span> <span class="n">ts</span> <span class="p">(</span><span class="n">reverse</span> <span class="n">hs</span><span class="p">)</span>
+</span><span class="line">  <span class="kr">where</span>
+</span><span class="line">    <span class="n">roll</span> <span class="ow">::</span> <span class="p">(</span><span class="kt">Num</span> <span class="n">a</span><span class="p">)</span> <span class="ow">=&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span>
+</span><span class="line">    <span class="n">roll</span> <span class="kr">_</span>  <span class="kt">[]</span> <span class="ow">=</span> <span class="kt">[]</span>
+</span><span class="line">    <span class="n">roll</span> <span class="n">hs</span> <span class="n">ts</span> <span class="ow">=</span> <span class="kr">let</span> <span class="n">sample</span> <span class="ow">=</span> <span class="n">sum</span> <span class="o">$</span> <span class="n">zipWith</span> <span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="n">ts</span> <span class="n">hs</span>
+</span><span class="line">                 <span class="kr">in</span> <span class="n">sample</span> <span class="kt">:</span> <span class="n">roll</span> <span class="n">hs</span> <span class="p">(</span><span class="n">tail</span> <span class="n">ts</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div><figcaption><span>naive convolution in Haskell through the convolution machine</span></figcaption></figure></notextile></div>
+
+<h2 id="reduction">Reduction</h2>
+
+<p>Now that we understand the concept behind convolution, we can reduce the above implementation a bit further.</p>
+
+<p>The observation we should make is that the <code>roll</code> function acts like <code>map</code>, specifically over <code>ts</code>. The only detail is that on every element mapped over, the result of that element’s mapping concerns the list <code>ts</code> from that element forward. If we are on the third element of <code>ts</code>, we only act on the third element forward. In other words, we are mapping over every <code>tail</code> of <code>ts</code>. Knowing this, we can change the <code>roll</code> function to a straight up <code>map</code> over <code>tails ts</code>.</p>
+
+<p>However, <code>tails</code> considers <code>[]</code> to be a tail of any list – which is technically correct – so we’ll always have a trailing <code>0</code> element if we do it this way. That’s why we simply take the <code>init</code> of the result of <code>tails</code>, which returns every element in a list except the last one. We also still need to prepad the signal, so those lines remain:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class="haskell"><span class="line"><span class="nf">convolve</span> <span class="ow">::</span> <span class="p">(</span><span class="kt">Num</span> <span class="n">a</span><span class="p">)</span> <span class="ow">=&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span>
+</span><span class="line"><span class="nf">convolve</span> <span class="n">hs</span> <span class="n">xs</span> <span class="ow">=</span>
+</span><span class="line">  <span class="kr">let</span> <span class="n">pad</span> <span class="ow">=</span> <span class="n">replicate</span> <span class="p">((</span><span class="n">length</span> <span class="n">hs</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="mi">0</span>
+</span><span class="line">      <span class="n">ts</span>  <span class="ow">=</span> <span class="n">pad</span> <span class="o">++</span> <span class="n">xs</span>
+</span><span class="line">  <span class="kr">in</span> <span class="n">map</span> <span class="p">(</span><span class="n">sum</span> <span class="o">.</span> <span class="n">zipWith</span> <span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="p">(</span><span class="n">reverse</span> <span class="n">hs</span><span class="p">))</span> <span class="p">(</span><span class="n">init</span> <span class="o">$</span> <span class="n">tails</span> <span class="n">ts</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div><figcaption><span>a reduced form of the convolution machine implementation</span></figcaption></figure></notextile></div>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>I’m new to Digital Signal Processing, so if you notice any glaring errors please feel free to correct me; I would appreciate it. If you are interested in this subject and would like to read a book to learn more, I wholeheartedly recommend <a href="http://www.dspguide.com">The Scientist and Engineer’s Guide to Digital Signal Processing</a>. If you would like to learn more about Convolution, you can check the relevant chapters in that freely available book.</p>
+
+<p>You can also check out <a href="http://www.songho.ca/dsp/convolution/convolution.html">this page</a> as well, which also covers multidimensional convolution with a concrete example of a <a href="http://en.wikipedia.org/wiki/Gaussian_filter">Gaussian filter</a> applied to an image for the purposes of blurring it. This specific application of the Gaussian filter is known as the <a href="http://en.wikipedia.org/wiki/Gaussian_blur">Gaussian Blur</a>. The Gaussian Blur is pretty popular in realtime image rendering, such as in video games, because of a property it has which allows it be applied in two dimensions, e.g. in an image, as two independent one-dimensional operations. This makes it dramatically faster and more efficient, and is trivial to implement in modern GPU <a href="http://www.opengl.org/wiki/Compute_Shader">Compute shaders</a><sup id="fnref:compute_shader"><a href="#fn:compute_shader" rel="footnote">1</a></sup>. Such shaders can then be used to implement effects such as motion blur in games<sup id="fnref:motion_blur"><a href="#fn:motion_blur" rel="footnote">2</a></sup>. The page also provides imperative implementations of convolution in C++.</p>
+
+<p>Haskell is known for having many ways of doing any one thing, so if you come up with a better solution feel free to <a href="https://gist.github.com">gist it</a> and post it in the comments.</p>
+
+<p>Of course, this post concerns a <em>naive</em> implementation of convolution. There are other more optimized implementations of convolution, such as FFT convolution which exploits the Fast Fourier Transform and the principle of duality – convolution in the time domain is equivalent to multiplication in the frequency domain – to perform convolution a lot faster in some cases.</p>
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:compute_shader">
+      <p>As described in <a href="http://www.d3dcoder.net/d3d11.htm">3D Game Programming with DirectX 11</a> by Frank D. Luna in Ch 12 page 450 § 12.7 <a href="#fnref:compute_shader" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:motion_blur">
+      <p>Despite this optimization of Gaussian Blurring, many implementations optimize further. Blurring typically involves rendering the scene to a separate buffer (e.g. Render-to-Texture) at a scaled-down resolution. This speeds up the blurring operation as there are less pixels to operate on. Then the result is rendered to the actual screen. Since the point is to blur, the upscaling is usually hardly noticeable.</p>
+
+      <p>Recently I purchased an old game on Steam which I had played circa 2003. This game was developed back when 1280x1024 was a popular resolution, that is 4:3 aspect ratio. I got to a part where the game displayed some sort of blur effect and noticed that the entire screen was completely blurred to the point where I couldn’t make anything out. I presume this was not the intended effect. If I had to guess, I imagine they hard-coded a scaled down resolution – and thus aspect ratio as well – at which to render the scene for blurring, such that upscaling it to my current 1920x1080 resolution 16:9 AR looked horrible. I imagine newer games take into account aspect ratio and some other factor to scale down the current resolution from. <a href="#fnref:motion_blur" rel="reference">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+<time class="" datetime="2013-01-04T18:21:00-08:00" pubdate data-updated="true">January 4<span>th</span>, 2013</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/categories/digital-signal-processing/'>Digital Signal Processing</a>, <a class='category' href='/categories/haskell/'>Haskell</a>
+
+
+</div>
+	
+</div>
+
+</article>
+
+	
+
+
+<section id="comment">
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+
+</div>
+	<footer id="footer" class="inner">
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+{ <span id="generated">generated <time class="" datetime="2013-01-19T20:07:42-08:00">January 19<span>th</span>, 2013</time></span> }
+</footer>
+	
+
+<script async="true" type="text/javascript">
+      var disqus_shortname = 'blaenkdenum';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://www.blaenkdenum.com/2013/01/04/naive-convolution-in-haskell/';
+        var disqus_url = 'http://www.blaenkdenum.com/2013/01/04/naive-convolution-in-haskell/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-37339861-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+
+<!--MathJax CDN-->
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+    messageStyle: "none",
+    styles: {
+      ".MathJax_Display": {
+        "font-weight": "normal"
+      },
+      ".MathJax": {
+        "font-weight": "normal"
+      }
+    },
+    showMathMenu: false
+  });
+</script>
+
+</body>
+</html>
