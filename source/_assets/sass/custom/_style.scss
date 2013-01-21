@@ -68,6 +68,7 @@ article .entry-content h2 {
 #main-nav > ul > li > a {
   padding: 34px 0;
 
+  &::after { padding-left: 0; }
   &:hover { border-bottom: 2px solid #258FB8; }
 
 	@media screen and (max-width: 766px){
