@@ -15,7 +15,7 @@ categories:
 
 [Convolution](http://en.wikipedia.org/wiki/Convolution) is a mathematical method of combining two signals to form a third signal. Passing the [Dirac delta function](http://en.wikipedia.org/wiki/Dirac_delta_function) (unit impulse) $$\delta[n]$$ through a linear system results in the impulse response $$h[n]$$. The impulse response is simply the signal resulting from passing the unit impulse (Dirac delta function) through a linear system.
 
-## Principle ##
+## Principle
 
 The properties of [homogeneity](http://www.cns.nyu.edu/~david/handouts/linear-systems/linear-systems.html) and [shift-invariance](http://en.wikipedia.org/wiki/Shift-invariant_system) in [Linear Time-Invariant System Theory](http://en.wikipedia.org/wiki/LTI_system_theory) holds that scaling and shifting the input results in the same scaling and shifting in the output. Because of these properties, we can represent any impulse as a shifted and scaled delta function and consequently know what the impulse response will be for that scaled and shifted impulse.
 
@@ -31,7 +31,7 @@ $$x[n] * h[n] = y[n]$$
 
 Since convolution allows us to go from input signal $$x[n]$$ to output signal $$y[n]$$, we can conclude that convolution involves the generation of the impulse response for each impulse in the input signal as decomposed by [impulse decomposition](http://www.dspguide.com/ch5/7.htm), _as well as_ the subsequent synthesis of each impulse response, to generate the output signal.
 
-## Definition ##
+## Definition
 
 Convolution can be described by the so called _convolution summation_. The convolution summation is pretty simple, and is defined as follows:
 
@@ -66,7 +66,7 @@ If you're wondering why step **3** mentions a _reversed_ impulse response, imagi
 
 See [this page](http://www.dspguide.com/ch6/4.htm) for an illustration of the convolution machine in Figure 6-8.
 
-## Implementation ##
+## Implementation
 
 Implementing the convolution machine is pretty straightforward once we are able to conceptualize what it is actually doing.
 
@@ -79,7 +79,7 @@ convolve hs xs = undefined
 
 In the signature, `xs` refers to the input signal and `hs` refers to the impulse response.
 
-### Padding ###
+### Padding
 
 Now for the implementation of `convolve`. First, consider this component of the convolution summation:
 
@@ -96,7 +96,7 @@ let pad = replicate ((length hs) - 1) 0
 
 Once we prepad the input signal with enough zero samples, we can pass the padded input signal and impulse response to a function which simulates the rolling of the convolution machine. This function will be nested within `convolve` and will simply be used as a recursive helper function.
 
-### Let's Roll ###
+### Let's Roll
 
 ``` haskell
 roll :: (Num a) => [a] -> [a] -> [a]
@@ -138,7 +138,7 @@ convolve hs xs =
                  in sample : roll hs (tail ts)
 ```
 
-## Reduction ##
+## Reduction
 
 Now that we understand the concept behind convolution, we can reduce the above implementation a bit further.
 
@@ -154,7 +154,98 @@ convolve hs xs =
   in map (sum . zipWith (*) (reverse hs)) (init $ tails ts)
 ```
 
-## Conclusion ##
+## Parallelization
+
+There's something to be said about how the various properties of the Haskell language come together to make certain algorithms trivially parallelizable. Green threads, single assignment, function purity and its consequent idempotence/referential transparency -- I can go on and on, but I'd rather not digress from the topic of this post. You won't get any Monad koolaid from me. Still, I think it's interesting to note how easy it can be to parallelize this naive convolution algorithm. So let's do it.
+
+### parMap
+
+The [parallel](http://hackage.haskell.org/package/parallel) Haskell package contains various tools for parallelization. One of these is the [Control.Parallel.Strategies](http://hackage.haskell.org/packages/archive/parallel/latest/doc/html/Control-Parallel-Strategies.html) module, which defines the [`parMap`](http://hackage.haskell.org/packages/archive/parallel/latest/doc/html/Control-Parallel-Strategies.html#v:parMap) function, which maps over list elements in parallel, in essence, a parallel map:
+
+``` haskell
+parMap :: Strategy b -> (a -> b) -> [a] -> [b]
+```
+
+`parMap` takes an [evaluation strategy](http://hackage.haskell.org/packages/archive/parallel/latest/doc/html/Control-Parallel-Strategies.html#t:Strategy) which is used to actually perform the evaluation in parallel. We use the [`rdeepseq`](http://hackage.haskell.org/packages/archive/parallel/latest/doc/html/Control-Parallel-Strategies.html#v:rdeepseq) evaluation strategy, which fully evaluates the argument to Normal Form (i.e. fully evaluated), as opposed to [`rseq`](http://hackage.haskell.org/packages/archive/parallel/latest/doc/html/Control-Parallel-Strategies.html#v:rseq) which merely evaluates the argument to [Weak Head Normal Form](http://en.wikibooks.org/wiki/Haskell/Graph_reduction#Weak_Head_Normal_Form) (WHNF). The `rdeepseq` strategy can only operate on arguments it knows it can fully evaluate, those that conform to the [`NFData`](http://hackage.haskell.org/packages/archive/deepseq/latest/doc/html/Control-DeepSeq.html#t:NFData) typeclass from the [Control.Deepseq](http://hackage.haskell.org/package/deepseq) module. To conform to this, we add another type constraint to our convolution parameters:
+
+``` haskell
+parConvolve :: (NFData a, Num a) => [a] -> [a] -> [a]
+```
+
+Continuing forward, all we have to do now is make a drop-in replacement of `map` with `parMap`. Actually, it's not quite a drop-in replacement, because we need to supply `parMap` with the `rdeepseq` evaluation strategy:
+
+``` haskell a parallelized version of the reduced naive convolution algorithm
+parConvolve :: (NFData a, Num a) => [a] -> [a] -> [a]
+parConvolve hs xs =
+  let pad = replicate ((length hs) - 1) 0
+      ts  = pad ++ xs
+  in parMap rdeepseq (sum . zipWith (*) (reverse hs)) (init $ tails ts)
+```
+
+### Benchmark
+
+The [`criterion`](http://hackage.haskell.org/packages/archive/criterion) Haskell package provides tools for benchmarking and analyzing code. The synthetic benchmark we will conduct will run each implementation with an impulse response of length 100 and an input signal of length 1000.
+
+In the following code, `conv` is the naive implementation, `conv'` is the reduced naive implementation, and `parConv` is the parallel implementation:
+
+``` haskell criterion benchmarking code
+data ConvType = Naive | Reduced | Parallel deriving (Eq, Ord)
+convTypes = Data.Map.fromList [(Naive, conv), (Reduced, conv'), (Parallel, parConv)]
+
+main = defaultMain [
+  bench "Naive Convolution" (runConv Naive),
+  bench "Reduced Convolution" (runConv Reduced),
+  bench "Parallelized Convolution" (runConv Parallel) ]
+  where runConv ctype =
+          let hs = [1..100 :: Int]
+              ts = [1..1000 :: Int]
+              convfn = fromJust $ Data.Map.lookup ctype convTypes
+          in nf (convfn hs) ts
+```
+
+Compile the benchmark with:
+
+``` plain
+$ ghc --make -O2 -threaded -o conv conv.hs
+```
+
+Run it with:
+
+``` plain
+$ ./conv -o bench.html -r out.csv +RTS -N4
+```
+
+The `-o` parameter specifies an output file for generated [charts and graphs](../../../../assets/html/convolution-criterion.html). The `-r` parameter specifies a comma separated value (CSV) file to output relative statistics which we use to measure performance relative to the reference, non-reduced naive implementation.
+
+The `+RTS` parameter is a delimiter which begins parameters to the [runtime system](http://www.haskell.org/ghc/docs/latest/html/users_guide/runtime-control.html). The `-N#` parameter specifies how many cores to utilize. The machine I was using has 6 cores, but I found that using less than that lowered the amount of statistical variance. I imagine this was because the computer was able to continue its own tasks on the other two cores.
+
+The above benchmark yielded the following results:
+
+| Name              | % faster |
+|:-----             |:--------:|
+| Naive (Reference) | 0        |
+| Reduced           | 0        |
+| Parallel          | 54       |
+
+The parallel version apparently really boosts performance. An important thing to realize is that when parallelizing things, it's considered best to only parallelize when the benefits outweigh the relative overhead of managing the green threads.
+
+For example, in my tests, changing the impulse response length to 5 and the input signal length to 10 shows the parallel version to be 27% slower than the naive implementation. Also notice that the reduced version is a bit slower, for what I can only imagine to be a GHC optimization that applies to the naive implementation but not to the reduced version.
+
+| Name              | % faster |
+|:-----             |:--------:|
+| Naive (Reference) | 0        |
+| Reduced           | -16      |
+| Parallel          | -27      |
+
+On the other hand, increasing the impulse response length to 1000 and the input signal length to 10,000 maintained a similar performance increase:
+
+| Name              | % faster |
+|:-----             |:--------:|
+| Naive (Reference) | 0        |
+| Reduced           | 0        |
+| Parallel          | 48       |
+
+## Conclusion
 
 I'm new to Digital Signal Processing, so if you notice any glaring errors please feel free to correct me; I would appreciate it. If you are interested in this subject and would like to read a book to learn more, I wholeheartedly recommend [The Scientist and Engineer's Guide to Digital Signal Processing](http://www.dspguide.com). If you would like to learn more about Convolution, you can check the relevant chapters in that freely available book.
 
