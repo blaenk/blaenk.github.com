@@ -33,7 +33,7 @@ module JekyllAssetPipeline
 
     def compress
       begin
-      	return Uglifier.compile(@content)
+      	return Uglifier.compile(@content, :copyright => false)
       rescue StandardError => e
       	puts e.message
       end
