@@ -61,4 +61,12 @@ $(function() {
 	});
 
 	$("time.timeago").timeago();
+
+	// header links
+	$('.entry-content').find('h1, h2, h3, h4, h5').each(function() {
+		var $id = $(this).attr('id');
+		var $text = $(this).text();
+
+		$(this).html('').prepend('<span class="hash">#</span>').append('<a href="#' + $id + '">' + $text + '</a>');
+	});
 });

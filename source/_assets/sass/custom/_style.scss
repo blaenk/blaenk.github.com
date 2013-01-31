@@ -77,10 +77,6 @@ article .entry-content > ul { margin-left: 0; }
   margin-top: 0;
 }
 
-article .entry-content h2 {
-  overflow: hidden;
-}
-
 .footnotes {
   font-size: 12px;
   ol li p { margin-top: 0; }
@@ -291,3 +287,34 @@ figure.code {
   padding: 1px 5px;
 }
 
+.entry-content {
+  h2 { border-bottom: none !important; }
+  h1, h2, h3, h4, h5, {
+    margin-top: 0;
+    overflow: hidden;
+    position: static !important;
+    left: -20px;
+
+    &:hover .hash { color: #ccc; }
+
+    .hash {
+      cursor: default;
+      color: #ddd;
+      position: absolute;
+      left: -20px;
+
+      @media screen and (max-width: 766px) {
+        display: none;
+      }
+    }
+
+    a {
+      display: inline-block;
+      position: relative;
+      width: 100%;
+      color: inherit;
+    }
+  }
+
+  h2 a { border-bottom: 1px solid #ddd; }
+}
