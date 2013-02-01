@@ -86,7 +86,8 @@ sup { line-height: 1em; }
 	}
 }
 
-article .entry-content > ul { margin-left: 0; }
+article .entry-content > ul,
+article .entry-content > ol { margin-left: 0; }
 
 .entry-content ul li {
   list-style-type: none;
