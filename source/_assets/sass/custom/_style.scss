@@ -35,6 +35,13 @@ blockquote footer {
   border-top: none;
 }
 
+abbr {
+  cursor: help;
+  border-bottom: 1px dotted #ddd;
+
+  &:hover { border-bottom: 1px solid #ccc; }
+}
+
 sup[id^="fnref"] {
   font-family: Menlo,Monaco,Consolas,"Liberation Mono",monospace;
   vertical-align: baseline;

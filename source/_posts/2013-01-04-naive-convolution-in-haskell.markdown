@@ -255,6 +255,13 @@ Haskell is known for having many ways of doing any one thing, so if you come up 
 
 Of course, this post concerns a _naive_ implementation of convolution. There are other more optimized implementations of convolution, such as FFT convolution which exploits the Fast Fourier Transform and the principle of duality -- convolution in the time domain is equivalent to multiplication in the frequency domain -- to perform convolution a lot faster in some cases.
 
+*[GHC]: Glasgow Haskell Compiler
+*[CSV]: Comma Separated Value
+*[WHNF]: Weak Head Normal Form
+*[GPU]: Graphics Processing Unit
+*[FFT]: Fast Fourier Transform
+*[AR]: Aspect Ratio
+
 [^compute_shader]: As described in [3D Game Programming with DirectX 11](http://www.d3dcoder.net/d3d11.htm) by Frank D. Luna in Ch 12 page 450 § 12.7 
 [^motion_blur]: Despite this optimization of Gaussian Blurring, many implementations optimize further. Blurring typically involves rendering the scene to a separate buffer (e.g. Render-to-Texture) at a scaled-down resolution. This speeds up the blurring operation as there are less pixels to operate on. Then the result is rendered to the actual screen. Since the point is to blur, the upscaling is usually hardly noticeable.
 
