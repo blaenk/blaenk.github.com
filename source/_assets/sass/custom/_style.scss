@@ -35,10 +35,17 @@ blockquote footer {
   border-top: none;
 }
 
-sup[id^="fnref"] a {
-  font-size: 12px;
-  &:before { content: "["; }
-  &:after { content: "]"; }
+sup[id^="fnref"] {
+  font-family: Menlo,Monaco,Consolas,"Liberation Mono",monospace;
+  margin-left: 5px;
+  vertical-align: baseline;
+  font-size: inherit;
+
+  a {
+    color: #990000;
+    &:before { content: "[#"; }
+    &:after { content: "]"; }
+  }
 }
 
 sup { line-height: 1em; }
