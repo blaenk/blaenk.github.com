@@ -11,6 +11,10 @@ I'm Jorge Israel Peña, also known as Blaenk Denum. I'm a software developer sel
 
 My areas of interest are [Artificial Intelligence](http://en.wikipedia.org/wiki/Artificial_intelligence), [Machine Learning](http://en.wikipedia.org/wiki/Machine_learning), and [Digital Signal Processing](http://en.wikipedia.org/wiki/Digital_signal_processing). More specifically, I'm interested in the combination of each of these fields in the interdisciplinary science of [Music Information Retrieval](http://en.wikipedia.org/wiki/Music_information_retrieval), particularly for music visualization.
 
+You can check out what I'm up to [lately](/lately) or find me on [github](http://github.com/blaenk) and [stackoverflow](http://stackoverflow.com/users/101090/jorge-israel-pena).
+
+If you'd like to get in touch you can email me at jorgepblank@gmail.com [^1]
+
 ### Technology ###
 I try to be a [pragmatic programmer](http://en.wikipedia.org/wiki/The_Pragmatic_Programmer). I love to learn different technologies, most recently [Haskell and Digital Signal Processing](http://blaenkdenum.com/2013/01/04/naive-convolution-in-haskell/). I don't do it to be elitist or to jump on the latest bandwagon and be hip, but because I have a genuine interest in gaining different perspectives on software development in order to maintain an open and malleable mind. I think it'll help to prepare me for future technological disruptions.
 
@@ -23,10 +27,5 @@ I love Electronic Dance Music, which I primarily listen to by filtering various 
 
 ### Fitness ###
 I work out religiously, every other day, specifically doing strength training. I do squats, overhead presses, bench presses, deadlifts, and barbell rows.
-
-### Contact ###
-You can check out what I'm up to [lately](/lately) or find me on [github](http://github.com/blaenk) and [stackoverflow](http://stackoverflow.com/users/101090/jorge-israel-pena).
-
-If you'd like to get in touch you can email me at jorgepblank@gmail.com [^1]
 
 [^1]: Why bother with futile attempts at obfuscation? 
