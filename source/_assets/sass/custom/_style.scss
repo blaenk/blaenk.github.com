@@ -42,6 +42,23 @@ abbr {
   &:hover { border-bottom: 1px solid #ccc; }
 }
 
+#footnote_box {
+  background-color: #F2F9FF;
+  color: #00427B;
+  padding: 10px;
+  border: 2px solid #258fb8;
+  font-size: 12px;
+  line-height: 2;
+
+  a:hover { text-decoration: underline; }
+
+  p {
+    margin-bottom: 15px;
+    &:last-child { margin-bottom: 0; }
+    a[rel="reference"] { display: none; }
+  }
+}
+
 sup[id^="fnref"] {
   font-family: Menlo,Monaco,Consolas,"Liberation Mono",monospace;
   vertical-align: baseline;
