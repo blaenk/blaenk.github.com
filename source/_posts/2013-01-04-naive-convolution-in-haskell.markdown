@@ -56,6 +56,8 @@ for (int i = 0; i < outputLength; ++i) {
 
 But wait up! We are using Haskell, a functional programming language which typically does without both arrays and iteration. This means that to implement convolution in Haskell without the use of [Arrays](http://hackage.haskell.org/package/array) or imperative iteration loops, we need to really understand the operation occurring in the convolution summation.
 
+### Convolution Machine
+
 The book [The Scientist and Engineer's Guide to Digital Signal Processing](http://www.dspguide.com) uses a metaphor known as the [Convolution Machine](http://www.dspguide.com/ch6/4.htm) to help conceptualize the convolution operation at a granular level. The convolution machine is simply a theoretical machine in which the unit impulse response is:
 
 1. wrapped onto a roller/cylinder
@@ -249,7 +251,11 @@ On the other hand, increasing the impulse response length to 1000 and the input 
 
 I'm new to Digital Signal Processing, so if you notice any glaring errors please feel free to correct me; I would appreciate it. If you are interested in this subject and would like to read a book to learn more, I wholeheartedly recommend [The Scientist and Engineer's Guide to Digital Signal Processing](http://www.dspguide.com). If you would like to learn more about Convolution, you can check the relevant chapters in that freely available book.
 
+### Imperative Approach
+
 You can also check out [this page](http://www.songho.ca/dsp/convolution/convolution.html) as well, which also covers multidimensional convolution with a concrete example of a [Gaussian filter](http://en.wikipedia.org/wiki/Gaussian_filter) applied to an image for the purposes of blurring it. This specific application of the Gaussian filter is known as the [Gaussian Blur](http://en.wikipedia.org/wiki/Gaussian_blur). The Gaussian Blur is pretty popular in realtime image rendering, such as in video games, because of a property it has which allows it be applied in two dimensions, e.g. in an image, as two independent one-dimensional operations. This makes it dramatically faster and more efficient, and is trivial to implement in modern GPU [Compute shaders](http://www.opengl.org/wiki/Compute_Shader) [^compute_shader]. Such shaders can then be used to implement effects such as motion blur in games [^motion_blur]. The page also provides imperative implementations of convolution in C++.
+
+### Optimizations
 
 Haskell is known for having many ways of doing any one thing, so if you come up with a better solution feel free to [gist it](https://gist.github.com) and post it in the comments.
 
