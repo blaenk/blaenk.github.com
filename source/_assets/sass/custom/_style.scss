@@ -361,10 +361,9 @@ figure.code {
   float: right;
   input[type="text"] {
     width: 390px;
-    outline-color: #258fb8 !important;
     padding: 2px;
 
-    &:focus { outline-color: #258fb8 !important; }
+    &:focus { outline: none; }
   }
 
   @media screen and (max-width: 766px) {
