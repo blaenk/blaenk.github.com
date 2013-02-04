@@ -355,3 +355,34 @@ figure.code {
 
   h2 a { border-bottom: 1px solid #ddd; }
 }
+
+.desk_search {
+  display: none;
+  float: right;
+  input[type="text"] {
+    width: 390px;
+    outline-color: #258fb8 !important;
+    padding: 2px;
+
+    &:focus { outline-color: #258fb8 !important; }
+  }
+
+  @media screen and (max-width: 766px) {
+    float: none;
+  }
+
+  @media screen and (max-width: 600px) {
+    display: none !important;
+  }
+}
+
+#search_btn {
+  cursor: pointer;
+  @media screen and (max-width: 600px) {
+    display: none !important;
+  }
+}
+
+#main-nav > ul.searching > li > a {
+  padding: 34px 0 0 0;
+}
