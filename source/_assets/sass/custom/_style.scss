@@ -102,6 +102,7 @@ article .entry-content > ol { margin-left: 0; }
 }
 
 #markdown-toc {
+  border-top: 2px solid #8ccaff;
   background-color: #F2F9FF;
   padding: 5px 10px 5px 25px;
   float: right;
@@ -196,7 +197,7 @@ figure.code {
     }
 
     background-color: #D0E9FF;
-    border-top: 1px solid #8CCAFF;
+    border-top: 2px solid #8CCAFF;
     padding: 5px 28px; // 5px 10px;
     color: #00427B;
 
