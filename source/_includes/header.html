@@ -5,7 +5,7 @@
 <nav id="main-nav">
 	{% include navigation.html %}
 	<form class="desk_search" action="{{ site.simple_search }}" method="get">
-		<input type="text" name="q" results="0" placeholder="Search... (Click 'Search' to hide)" autocomplete="off">
+		<input type="text" name="q" results="0" placeholder="Search... (Click 'Search' to hide)" autocomplete="off" spellcheck="false">
 		<input type="hidden" name="q" value="site:{{ site.url | shorthand_url }}">
 	</form>
 </nav>
