@@ -88,7 +88,10 @@ sup { line-height: 1em; }
 }
 
 article .entry-content > ul,
-article .entry-content > ol { margin-left: 0; }
+article .entry-content > ol {
+  li { margin-top: 10px; }
+  margin-left: 0;
+}
 
 .entry-content ul li {
   list-style-type: none;
@@ -102,6 +105,7 @@ article .entry-content > ol { margin-left: 0; }
 }
 
 #markdown-toc {
+  li { margin-top: 0; }
   border-top: 2px solid #8ccaff;
   background-color: #F2F9FF;
   padding: 5px 10px 5px 25px;
