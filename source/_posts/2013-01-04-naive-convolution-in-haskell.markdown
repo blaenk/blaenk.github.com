@@ -207,13 +207,13 @@ main = defaultMain [
 
 Compile the benchmark with:
 
-``` plain
+``` bash
 $ ghc --make -O2 -threaded -o conv conv.hs
 ```
 
 Run it with:
 
-``` plain
+``` bash
 $ ./conv -o bench.html -r out.csv +RTS -N4
 ```
 
