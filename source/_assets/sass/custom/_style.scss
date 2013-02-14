@@ -14,7 +14,12 @@
 }
 
 .center {
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+img.center {
+  display: block;
 }
 
 article .entry-content > table {
@@ -61,7 +66,7 @@ abbr {
 }
 
 sup[id^="fnref"] {
-  font-family: Menlo,Monaco,Consolas,"Liberation Mono",monospace;
+  font-family: Menlo,Monaco,Consolas,"DejaVu Sans Mono", "Liberation Mono",monospace;
   vertical-align: baseline;
   font-size: inherit;
 
@@ -311,7 +316,7 @@ figure.code {
 
 .entry-content code,
 .entry-content pre {
-  font-family: Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-family: Menlo, Monaco, Consolas, "DejaVu Sans Mono", "Liberation Mono", monospace;
 }
 
 .entry-content > pre {
