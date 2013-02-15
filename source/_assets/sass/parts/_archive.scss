@@ -35,7 +35,7 @@
 	}
 	article{
     margin-left: 280px;
-		padding: 15px 0;
+		padding: 15px 0 !important;
 		@media screen and (max-width: 766px){
       margin-left: 150px;
     }
@@ -56,22 +56,29 @@
         }
       }
 		}
+    .excerpt {
+      margin-top: 5px;
+      color: #999;
+    }
+    & > .meta {
+      display: inline-block;
+      width: 80px;
+      vertical-align: top;
+    }
 		.meta{
 			color: $color-gray02;
 			font-size: 0.9em;
-			line-height: 2;
-			margin-top: 15px;
 			@media screen and (max-width: 600px){
 				display: none;
 			}
 			span{
-				margin-right: 30px;
 				@include inline-block;
 				&:before{
 					color: $color-gray03;
 					font: 1.3em $font-icon;
 					padding-right: 10px;
 				}
+        vertical-align: baseline;
 			}
 			a{
 				color: $color-gray02;
@@ -84,5 +91,13 @@
 			.tags:before{content: "\f02c";}
 			.comments:before{content: "\f075";}
 		}
+    .post-info {
+      display: inline-block;
+      max-width: 340px;
+      & > .meta {
+        margin-top: 5px;
+        .tags > .category { vertical-align: top; }
+      }
+    }
 	}
 }
