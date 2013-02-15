@@ -28,4 +28,4 @@ I love Electronic Dance Music, which I primarily listen to by filtering various 
 ### Fitness ###
 I work out religiously, every other day, specifically doing strength training. I do squats, overhead presses, bench presses, deadlifts, and barbell rows.
 
-[^1]: Why bother with futile attempts at obfuscation? 
+[^1]: Why bother with futile attempts at obfuscation?
