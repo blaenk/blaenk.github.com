@@ -1,6 +1,5 @@
 article{
 	border-bottom: 1px solid $color-gray04;
-	border-top: 1px solid $color-gray05;
 	padding: 30px 0;
 	position: relative;
 	@media screen and (max-width: 800px){
@@ -12,9 +11,12 @@ article{
 	h2.title{
 		font-weight: 300;
 		line-height: 35px;
-		margin-bottom: 20px;
+		margin-bottom: 5px;
 		a{
 			color: $color-gray01;
+      display: inline-block;
+      width: 100%;
+      &:hover { text-decoration: underline; }
 		}
 	}
 	.entry-content{

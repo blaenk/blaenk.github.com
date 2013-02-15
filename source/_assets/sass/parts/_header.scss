@@ -5,6 +5,9 @@ $header-height: 30px;
 	padding: 30px 0;
 	border-bottom: 1px solid $color-gray04;
 	line-height: $header-height;
+  @media screen and (max-width: 766px){
+    text-align: center;
+  }
 	@media screen and (max-width: 766px){
 		height: auto;
 		position: relative;
@@ -22,6 +25,8 @@ $header-height: 30px;
     @media screen and (max-width: 766px){
       float: none;
       text-align: center;
+      display: inline-block;
+      margin: 0 auto;
     }
     h1{
       font-weight: 300;
@@ -30,7 +35,7 @@ $header-height: 30px;
     }
     h4{
       color: #666;
-      margin-left: 93px;
+      text-align: right;
     }
   }
 }
@@ -160,6 +165,7 @@ $header-height: 30px;
 	position: relative;
 	@media screen and (max-width: 600px){
 		display: block;
+    text-align: left;
 	}
 	a{
 		display: block;

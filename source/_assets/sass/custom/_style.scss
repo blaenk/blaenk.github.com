@@ -87,10 +87,16 @@ sup { line-height: 1em; }
 .inner {
 	width: 720px;
 	margin: 0 auto;
+  padding-top: 15px;
 	@media screen and (max-width: 766px){
 		width: 100%;
 	}
 }
+/*
+.content > .post:first-child,
+.content > .archives:first-child,
+.content > .page:first-child { margin-top: 15px; }
+*/
 
 article .entry-content > ul,
 article .entry-content > ol {
@@ -144,13 +150,10 @@ article .entry-content > ol {
   }
 }
 
-#comment {
-  padding: 15px 0;
-}
-
 #content {
   article {
-    padding: 30px 0 15px 0;
+    padding: 0 0 15px 0;
+    margin-bottom: 15px;
 
     .entry-content > p {
       font-size: 16px;
@@ -163,13 +166,9 @@ article .entry-content > ol {
   color: #999;
 }
 
-.archives {
-  .year { padding-top: 30px; }
-}
-
 .post {
   .meta {
-    margin-top: 15px;
+    margin-top: 10px;
     position: static;
     width: auto;
 
@@ -252,69 +251,6 @@ figure.code {
     }
 
     .code, .gutter { line-height: 24px; }
-  }
-}
-
-.gist {
-  margin-top: 10px !important;
-}
-
-.entry-content .gist .gist-file {
-  border: 0;
-  margin-left: -10px;
-  margin-right: -10px;
-  margin-bottom: 0;
-
-  .gist-data {
-    background-color: #f2f9ff;
-    border-bottom: none;
-
-    .data {
-      table {
-        background: none !important;
-        border: none !important;
-        margin-top: 0 !important;
-
-        td { text-align: left; }
-      }
-
-      .line_numbers {
-        @media screen and (max-width: 600px) {
-          display: none;
-        }
-      }
-
-      .line_data {
-        padding: 0;
-        color: #00427b;
-      }
-    }
-  }
-
-  .gist-meta {
-    background: none;
-    font-family: $font-default;
-    text-shadow: none;
-    border: 0;
-    padding: 0;
-    -moz-transition: none;
-    -webkit-transition: none;
-    transition: none;
-
-    @media screen and (max-width: 600px){
-      display: none;
-    }
-
-    border-top: 1px solid #8ccaff;
-    background-color: #d0e9ff;
-    color: #00427b;
-    padding: 5px 10px !important;
-
-    a,
-    a:visited {
-      color: #00427B !important;
-      font-weight: bold;
-    }
   }
 }
 

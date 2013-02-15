@@ -5,54 +5,23 @@
 			content: "";
 			position: absolute;
 			bottom: 0;
-			width: 280px;
-			border-top: 1px solid $color-gray04;
-		}
-	}
-	.year{
-		line-height: 35px;
-		position: absolute;
-		top: 0;
-		padding-top: 15px;
-		border-top: 1px solid #fff;
-    width: 230px;
-    text-align: right;
-		&:before{
-			content: "";
-			position: absolute;
-			top: -2px;
 			width: 100%;
 			border-top: 1px solid $color-gray04;
-		}
-		@media screen and (max-width: 766px){
-      width: auto;
-    }
-		@media screen and (max-width: 600px){
-			position: relative;
-      text-align: left;
-			width: 100%;
 		}
 	}
 	article{
-    margin-left: 280px;
+    border: none;
 		padding: 15px 0 !important;
-		@media screen and (max-width: 766px){
-      margin-left: 150px;
-    }
-		@media screen and (max-width: 600px){
-			margin-left: 0;
-			&:first-of-type{
-				border-top: none;
-				padding-top: 30px;
-			}
-		}
 		.title{
 			margin-bottom: 0;
       a{
         color: #666;
+        display: inline-block;
+        width: 100%;
         @include transition(color 0.3s);
         &:hover{
           color: $color-main;
+          text-decoration: underline;
         }
       }
 		}
@@ -62,12 +31,12 @@
     }
     & > .meta {
       display: inline-block;
-      width: 80px;
       vertical-align: top;
     }
 		.meta{
 			color: $color-gray02;
 			font-size: 0.9em;
+      float: left;
 			@media screen and (max-width: 600px){
 				display: none;
 			}
@@ -92,8 +61,12 @@
 			.comments:before{content: "\f075";}
 		}
     .post-info {
-      display: inline-block;
-      max-width: 340px;
+      margin-left: 85px;
+
+			@media screen and (max-width: 600px){
+        margin-left: 0;
+      }
+
       & > .meta {
         margin-top: 5px;
         .tags > .category { vertical-align: top; }
