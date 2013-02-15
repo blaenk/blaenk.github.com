@@ -77,7 +77,7 @@
 				color: $color-gray02;
 				@include transition(0.3s);
 				&:hover{
-					color: $color-gray01;
+					color: #258FB8;
 				}
 			}
 			.date:before{content: "\f073";}
