@@ -6,7 +6,8 @@ comments: true
 published: false
 excerpt: My various urxvt and zsh customizations
 categories:
-- Linux
+- urxvt
+- zsh
 ---
 
 * Table of Contents
