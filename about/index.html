@@ -16,12 +16,11 @@
 	<link href="" rel="alternate" title="Jorge Israel Peña" type="application/atom+xml">
 	<link rel="canonical" href="">
 	<link href="/favicon.png" rel="shortcut icon">
+	<link href='/assets/site-21874b1398e5eec56224c6515453f9ab.css' rel='stylesheet' type='text/css' media='screen' />
+
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-    <link href='/assets/site-fb076d739147b9e3db0c4f8a687ca89d.css' rel='stylesheet' type='text/css' />
-
-
-    <script src='/assets/site-5cb7438ce7671c41b092760f6bc11f68.js' type='text/javascript'></script>
+	<!--[if lt IE 9]><script async="true" src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <script async='true' src='/assets/site-eb3dc54832a736d0b21d8a9b8da65f03.js' type='text/javascript'></script>
 
 	
 </head>
@@ -32,13 +31,19 @@
   <h1><a href="/">Jorge Israel Peña</a></h1>
   <h4>AKA Blaenk Denum</h4>
 </div>
-<nav id="main-nav"><ul class="main">
+<nav id="main-nav">
+	<ul class="main">
 	<li><a href="/about">About</a></li>
 	<li><a href="/lately">Lately</a></li>
 	<li><a href="/projects">Projects</a></li>
 	<li><a href="/resume">Résumé</a></li>
 	<li><a href="/blog/archives">Archives</a></li>
+	<li><a id="search_btn">Search</a></li>
 </ul>
+	<form class="desk_search" action="http://google.com/search" method="get">
+		<input type="text" name="q" results="0" placeholder="Search... (Click 'Search' to hide)" autocomplete="off" spellcheck="false">
+		<input type="hidden" name="q" value="site:blaenkdenum.com">
+	</form>
 </nav>
 <nav id="mobile-nav">
 	<div class="alignleft menu">
@@ -49,15 +54,15 @@
 	<li><a href="/projects">Projects</a></li>
 	<li><a href="/resume">Résumé</a></li>
 	<li><a href="/blog/archives">Archives</a></li>
-</ul>
-</div>
+	<li><a id="search_btn">Search</a></li>
+</ul></div>
 	</div>
 	<div class="alignright search">
 		<a class="button"></a>
 		<div class="container">
 			<form action="http://google.com/search" method="get">
 				<input type="text" name="q" results="0">
-				<input type="hidden" name="q" value="site:www.blaenkdenum.com">
+				<input type="hidden" name="q" value="site:blaenkdenum.com">
 			</form>
 		</div>
 	</div>
@@ -74,6 +79,10 @@ I’m Jorge Israel Peña, also known as Blaenk Denum. I’m a software developer
 
 <p>My areas of interest are <a href="http://en.wikipedia.org/wiki/Artificial_intelligence">Artificial Intelligence</a>, <a href="http://en.wikipedia.org/wiki/Machine_learning">Machine Learning</a>, and <a href="http://en.wikipedia.org/wiki/Digital_signal_processing">Digital Signal Processing</a>. More specifically, I’m interested in the combination of each of these fields in the interdisciplinary science of <a href="http://en.wikipedia.org/wiki/Music_information_retrieval">Music Information Retrieval</a>, particularly for music visualization.</p>
 
+<p>You can check out what I’m up to <a href="/lately">lately</a> or find me on <a href="http://github.com/blaenk">github</a> and <a href="http://stackoverflow.com/users/101090/jorge-israel-pena">stackoverflow</a>.</p>
+
+<p>If you’d like to get in touch you can email me at jorgepblank@gmail.com <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></p>
+
 <h3 id="technology">Technology</h3>
 <p>I try to be a <a href="http://en.wikipedia.org/wiki/The_Pragmatic_Programmer">pragmatic programmer</a>. I love to learn different technologies, most recently <a href="http://blaenkdenum.com/2013/01/04/naive-convolution-in-haskell/">Haskell and Digital Signal Processing</a>. I don’t do it to be elitist or to jump on the latest bandwagon and be hip, but because I have a genuine interest in gaining different perspectives on software development in order to maintain an open and malleable mind. I think it’ll help to prepare me for future technological disruptions.</p>
 
@@ -87,15 +96,10 @@ I’m Jorge Israel Peña, also known as Blaenk Denum. I’m a software developer
 <h3 id="fitness">Fitness</h3>
 <p>I work out religiously, every other day, specifically doing strength training. I do squats, overhead presses, bench presses, deadlifts, and barbell rows.</p>
 
-<h3 id="contact">Contact</h3>
-<p>You can check out what I’m up to <a href="/lately">lately</a> or find me on <a href="http://github.com/blaenk">github</a> and <a href="http://stackoverflow.com/users/101090/jorge-israel-pena">stackoverflow</a>.</p>
-
-<p>If you’d like to get in touch you can email me at jorgepblank@gmail.com <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></p>
-
 <div class="footnotes">
   <ol>
     <li id="fn:1">
-      <p>Why bother with futile attempts at obfuscation? <a href="#fnref:1" rel="reference">&#8617;</a></p>
+      <p>Why bother with futile attempts at obfuscation?<a href="#fnref:1" rel="reference">&#8617;</a></p>
     </li>
   </ol>
 </div>
@@ -104,7 +108,7 @@ I’m Jorge Israel Peña, also known as Blaenk Denum. I’m a software developer
 
 
 </div>
-	<footer id="footer" class="inner">
+	<footer id="footer">
 
 
 
@@ -125,7 +129,7 @@ I’m Jorge Israel Peña, also known as Blaenk Denum. I’m a software developer
 
   
 
-{ <span id="generated">generated <time class="" datetime="2013-01-19T20:07:42-08:00">January 19<span>th</span>, 2013</time></span> }
+{ <span id="generated">generated <time class="" datetime="2013-02-15T16:43:11-08:00">February 15<span>th</span>, 2013</time></span> }
 </footer>
 	
 
@@ -144,7 +148,7 @@ I’m Jorge Israel Peña, also known as Blaenk Denum. I’m a software developer
 
 
 
-	<script type="text/javascript">
+	<script async="true" type="text/javascript">
 		var _gaq = _gaq || [];
 		_gaq.push(['_setAccount', 'UA-37339861-1']);
 		_gaq.push(['_trackPageview']);
@@ -160,7 +164,7 @@ I’m Jorge Israel Peña, also known as Blaenk Denum. I’m a software developer
 
 
 <!--MathJax CDN-->
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script async="true" type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
   MathJax.Hub.Config({
     messageStyle: "none",
     styles: {

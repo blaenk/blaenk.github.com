@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Octopress | Jorge Israel Peña]]></title>
-  <link href="http://www.blaenkdenum.com/categories/octopress/atom.xml" rel="self"/>
-  <link href="http://www.blaenkdenum.com/"/>
-  <updated>2013-01-19T20:07:42-08:00</updated>
-  <id>http://www.blaenkdenum.com/</id>
+  <link href="http://blaenkdenum.com/categories/octopress/atom.xml" rel="self"/>
+  <link href="http://blaenkdenum.com/"/>
+  <updated>2013-02-15T16:43:11-08:00</updated>
+  <id>http://blaenkdenum.com/</id>
   <author>
     <name><![CDATA[Jorge Israel Peña]]></name>
     
@@ -15,14 +15,20 @@
   
   <entry>
     <title type="html"><![CDATA[I'm Back]]></title>
-    <link href="http://www.blaenkdenum.com/2012/12/25/im-back/"/>
+    <link href="http://blaenkdenum.com/2012/12/25/im-back/"/>
     <updated>2012-12-25T23:25:00-08:00</updated>
-    <id>http://www.blaenkdenum.com/2012/12/25/im-back</id>
+    <id>http://blaenkdenum.com/2012/12/25/im-back</id>
     <content type="html"><![CDATA[<p>It’s been a while since I last had a blog. In fact, I think it’s been two, maybe three years now. I previously had a WordPress blog that I updated regularly. However, the things I was studying on my own at the time consumed me and I considered writing about those things to be a low priority. After all, who want’s to hear what a noob thinks about something he’s barely beginning to learn about? So instead I figured I’d continue reading and studying, and maintaining a blog kind of fell into the backburner.</p>
+
+<h3 id="blogging">Blogging</h3>
 
 <p>For over a year now I had wanted to get back into blogging, at the very least to serve as a sort of journal for what I’ve learned, what I’m working on, etc. I didn’t want to bother maintaining a WordPress blog anymore, so I gave tumblr a shot. I felt that tumblr wasn’t as flexible as I would like and lost interest again. A few months ago I got the urge again to set up a blog, and having heard of static site generators on hacker news, I ended up giving Jekyll/Octopress a try. That’s what I’m running right now and so far it’s working out well. I actually set this up a few months ago, but hadn’t had the time to properly set it up and design myself a theme.</p>
 
+<h3 id="haskell">Haskell</h3>
+
 <p>I’ve done a lot during my absence these past few years. In fact, it’s all a big blur so I don’t know where to begin to talk about it. Most recently, for example, I worked on a <a href="https://github.com/blaenk/pulse-visualizer">music visualizer</a> for Linux’ Pulse Audio in Haskell using OpenGL and FFTW. This was the first program I wrote in Haskell, aside from little programs I would write to learn the language. I learned Haskell primarily using a combination of <a href="http://learnyouahaskell.com/">Learn You a Haskell for Great Good</a> and <a href="http://book.realworldhaskell.org/read/">Real World Haskell</a>. For certain things, such as understanding the concept of laziness in Haskell, I used the <a href="http://en.wikibooks.org/wiki/Haskell/Laziness">Haskell Wikibook</a>. I also had a Professor at school, who was familiar with Haskell and DSP, as my mentor. Thanks to his previous experience, I was able to learn both things pretty quickly. Whenever I was unsure of my understanding of a given topic, such as Monads, I had him to discuss and refine my understanding with.</p>
+
+<h3 id="digital-signal-processing">Digital Signal Processing</h3>
 
 <p>I worked on this project to learn both Haskell and Digital Signal Processing. The book I used for learning Digital Signal Processing is <a href="http://www.dspguide.com/pdfbook.htm">The Scientist and Engineer’s Guide to Digital Signal Processing</a>. For the longest time – probably the same amount of time I’ve been without a blog – I’ve wanted to learn about Digital Signal Processing, but every book I found assumed some prior DSP knowledge, electronics/circuits knowledge, or hardcore mathematical understanding. This book seems to teach DSP from the perspective of a developer, showing code for algorithms discussed throughout, such as the <a href="http://en.wikipedia.org/wiki/Fast_Fourier_transform">Fast Fourier Transform</a>.</p>
 
@@ -32,10 +38,10 @@
   
   <entry>
     <title type="html"><![CDATA[Test Post]]></title>
-    <link href="http://www.blaenkdenum.com/2012/09/19/test-post/"/>
+    <link href="http://blaenkdenum.com/2012/09/19/test-post/"/>
     <updated>2012-09-19T02:49:00-07:00</updated>
-    <id>http://www.blaenkdenum.com/2012/09/19/test-post</id>
-    <content type="html"><![CDATA[<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dolor nisi, feugiat sit amet egestas sit amet, mattis sit amet velit. Proin quis metus id mi vulputate adipiscing eget et <strong>sapien</strong>. Sed iaculis auctor sem ac convallis<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>. Cras nisi libero, dignissim quis facilisis et, bibendum eget enim. Vivamus est leo, tristique ut adipiscing vitae, malesuada adipiscing tellus. Integer nec aliquam justo. Nam ac lacus erat. In <strong><em>hac habitasse platea</em></strong> dictumst. Donec pharetra, lectus sit amet ultrices fringilla, metus mi auctor ligula, in hendrerit dui arcu eu leo.</p>
+    <id>http://blaenkdenum.com/2012/09/19/test-post</id>
+    <content type="html"><![CDATA[<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dolor nisi, feugiat sit amet egestas sit amet, mattis sit amet velit. Proin quis metus id mi vulputate adipiscing eget et <strong>sapien</strong>. Sed iaculis auctor sem ac convallis <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>. Cras nisi libero, dignissim quis facilisis et, bibendum eget enim. Vivamus est leo, tristique ut adipiscing vitae, malesuada adipiscing tellus. Integer nec aliquam justo. Nam ac lacus erat. In <strong><em>hac habitasse platea</em></strong> dictumst. Donec pharetra, lectus sit amet ultrices fringilla, metus mi auctor ligula, in hendrerit dui arcu eu leo.</p>
 
 <p>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla facilisi. Vestibulum consectetur nulla eget erat <em>fermentum malesuada</em>. Nullam ultricies nulla ut eros vulputate sed cursus tortor faucibus. Cras ac risus mauris. Suspendisse molestie elementum luctus. Vestibulum <a href="http://www.google.com">venenatis blandit</a> velit ac pretium.</p>
 
@@ -60,9 +66,9 @@ require ‘base64’</p>
 end
 ```</p>
 
-<p>Donec vitae turpis non augue pulvinar imperdiet eu non erat. Integer mollis diam ac quam lobortis luctus. Suspendisse scelerisque sodales massa sit amet pharetra. <script type="math/tex">\Delta S = \pi</script><sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup> Donec cursus, velit in mollis dapibus, nunc elit pharetra erat, et dictum sem sapien pretium ligula. Cras nibh elit, mollis eu eleifend sed, faucibus in velit. Aliquam gravida tristique molestie. Donec gravida, diam ac auctor auctor, nulla enim varius sem, non auctor urna mi vitae enim. Cras aliquam semper nibh, quis viverra urna ultrices et. Nunc rhoncus fringilla dapibus.</p>
+<p>Donec vitae turpis non augue pulvinar imperdiet eu non erat. Integer mollis diam ac quam lobortis luctus. Suspendisse scelerisque sodales massa sit amet pharetra. <script type="math/tex">\Delta S = \pi</script> <sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup> Donec cursus, velit in mollis dapibus, nunc elit pharetra erat, et dictum sem sapien pretium ligula. Cras nibh elit, mollis eu eleifend sed, faucibus in velit. Aliquam gravida tristique molestie. Donec gravida, diam ac auctor auctor, nulla enim varius sem, non auctor urna mi vitae enim. Cras aliquam semper nibh, quis viverra urna ultrices et. Nunc rhoncus fringilla dapibus.</p>
 
-<p><img src="http://placekitten.com/720/250"></p>
+<p><img class="center" src="http://placekitten.com/720/250"></p>
 
 <h1 id="immortal-words">Immortal Words</h1>
 

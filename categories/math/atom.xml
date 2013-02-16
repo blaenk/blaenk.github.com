@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Math | Jorge Israel Peña]]></title>
-  <link href="http://www.blaenkdenum.com/categories/math/atom.xml" rel="self"/>
-  <link href="http://www.blaenkdenum.com/"/>
-  <updated>2013-01-19T20:07:42-08:00</updated>
-  <id>http://www.blaenkdenum.com/</id>
+  <link href="http://blaenkdenum.com/categories/math/atom.xml" rel="self"/>
+  <link href="http://blaenkdenum.com/"/>
+  <updated>2013-02-15T16:43:11-08:00</updated>
+  <id>http://blaenkdenum.com/</id>
   <author>
     <name><![CDATA[Jorge Israel Peña]]></name>
     
@@ -15,10 +15,10 @@
   
   <entry>
     <title type="html"><![CDATA[Test Post]]></title>
-    <link href="http://www.blaenkdenum.com/2012/09/19/test-post/"/>
+    <link href="http://blaenkdenum.com/2012/09/19/test-post/"/>
     <updated>2012-09-19T02:49:00-07:00</updated>
-    <id>http://www.blaenkdenum.com/2012/09/19/test-post</id>
-    <content type="html"><![CDATA[<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dolor nisi, feugiat sit amet egestas sit amet, mattis sit amet velit. Proin quis metus id mi vulputate adipiscing eget et <strong>sapien</strong>. Sed iaculis auctor sem ac convallis<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>. Cras nisi libero, dignissim quis facilisis et, bibendum eget enim. Vivamus est leo, tristique ut adipiscing vitae, malesuada adipiscing tellus. Integer nec aliquam justo. Nam ac lacus erat. In <strong><em>hac habitasse platea</em></strong> dictumst. Donec pharetra, lectus sit amet ultrices fringilla, metus mi auctor ligula, in hendrerit dui arcu eu leo.</p>
+    <id>http://blaenkdenum.com/2012/09/19/test-post</id>
+    <content type="html"><![CDATA[<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dolor nisi, feugiat sit amet egestas sit amet, mattis sit amet velit. Proin quis metus id mi vulputate adipiscing eget et <strong>sapien</strong>. Sed iaculis auctor sem ac convallis <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>. Cras nisi libero, dignissim quis facilisis et, bibendum eget enim. Vivamus est leo, tristique ut adipiscing vitae, malesuada adipiscing tellus. Integer nec aliquam justo. Nam ac lacus erat. In <strong><em>hac habitasse platea</em></strong> dictumst. Donec pharetra, lectus sit amet ultrices fringilla, metus mi auctor ligula, in hendrerit dui arcu eu leo.</p>
 
 <p>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla facilisi. Vestibulum consectetur nulla eget erat <em>fermentum malesuada</em>. Nullam ultricies nulla ut eros vulputate sed cursus tortor faucibus. Cras ac risus mauris. Suspendisse molestie elementum luctus. Vestibulum <a href="http://www.google.com">venenatis blandit</a> velit ac pretium.</p>
 
@@ -43,9 +43,9 @@ require ‘base64’</p>
 end
 ```</p>
 
-<p>Donec vitae turpis non augue pulvinar imperdiet eu non erat. Integer mollis diam ac quam lobortis luctus. Suspendisse scelerisque sodales massa sit amet pharetra. <script type="math/tex">\Delta S = \pi</script><sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup> Donec cursus, velit in mollis dapibus, nunc elit pharetra erat, et dictum sem sapien pretium ligula. Cras nibh elit, mollis eu eleifend sed, faucibus in velit. Aliquam gravida tristique molestie. Donec gravida, diam ac auctor auctor, nulla enim varius sem, non auctor urna mi vitae enim. Cras aliquam semper nibh, quis viverra urna ultrices et. Nunc rhoncus fringilla dapibus.</p>
+<p>Donec vitae turpis non augue pulvinar imperdiet eu non erat. Integer mollis diam ac quam lobortis luctus. Suspendisse scelerisque sodales massa sit amet pharetra. <script type="math/tex">\Delta S = \pi</script> <sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup> Donec cursus, velit in mollis dapibus, nunc elit pharetra erat, et dictum sem sapien pretium ligula. Cras nibh elit, mollis eu eleifend sed, faucibus in velit. Aliquam gravida tristique molestie. Donec gravida, diam ac auctor auctor, nulla enim varius sem, non auctor urna mi vitae enim. Cras aliquam semper nibh, quis viverra urna ultrices et. Nunc rhoncus fringilla dapibus.</p>
 
-<p><img src="http://placekitten.com/720/250"></p>
+<p><img class="center" src="http://placekitten.com/720/250"></p>
 
 <h1 id="immortal-words">Immortal Words</h1>
 

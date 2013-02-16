@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Jorge Israel Peña]]></title>
-  <link href="http://www.blaenkdenum.com/atom.xml" rel="self"/>
-  <link href="http://www.blaenkdenum.com/"/>
-  <updated>2013-01-19T20:07:42-08:00</updated>
-  <id>http://www.blaenkdenum.com/</id>
+  <link href="http://blaenkdenum.com/atom.xml" rel="self"/>
+  <link href="http://blaenkdenum.com/"/>
+  <updated>2013-02-15T16:43:11-08:00</updated>
+  <id>http://blaenkdenum.com/</id>
   <author>
     <name><![CDATA[Jorge Israel Peña]]></name>
     
@@ -15,19 +15,31 @@
   
   <entry>
     <title type="html"><![CDATA[Naive Convolution in Haskell]]></title>
-    <link href="http://www.blaenkdenum.com/2013/01/04/naive-convolution-in-haskell/"/>
+    <link href="http://blaenkdenum.com/2013/01/04/naive-convolution-in-haskell/"/>
     <updated>2013-01-04T18:21:00-08:00</updated>
-    <id>http://www.blaenkdenum.com/2013/01/04/naive-convolution-in-haskell</id>
+    <id>http://blaenkdenum.com/2013/01/04/naive-convolution-in-haskell</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#principle">Principle</a></li>
-  <li><a href="#definition">Definition</a></li>
+  <li><a href="#definition">Definition</a>    <ul>
+      <li><a href="#convolution-machine">Convolution Machine</a></li>
+    </ul>
+  </li>
   <li><a href="#implementation">Implementation</a>    <ul>
       <li><a href="#padding">Padding</a></li>
       <li><a href="#lets-roll">Let’s Roll</a></li>
     </ul>
   </li>
   <li><a href="#reduction">Reduction</a></li>
-  <li><a href="#conclusion">Conclusion</a></li>
+  <li><a href="#parallelization">Parallelization</a>    <ul>
+      <li><a href="#parmap">parMap</a></li>
+      <li><a href="#benchmark">Benchmark</a></li>
+    </ul>
+  </li>
+  <li><a href="#conclusion">Conclusion</a>    <ul>
+      <li><a href="#imperative-approach">Imperative Approach</a></li>
+      <li><a href="#optimizations">Optimizations</a></li>
+    </ul>
+  </li>
 </ul>
 
 <p><a href="http://en.wikipedia.org/wiki/Convolution">Convolution</a> is a mathematical method of combining two signals to form a third signal. Passing the <a href="http://en.wikipedia.org/wiki/Dirac_delta_function">Dirac delta function</a> (unit impulse) <script type="math/tex">\delta[n]</script> through a linear system results in the impulse response <script type="math/tex">h[n]</script>. The impulse response is simply the signal resulting from passing the unit impulse (Dirac delta function) through a linear system.</p>
@@ -36,7 +48,9 @@
 
 <p>The properties of <a href="http://www.cns.nyu.edu/~david/handouts/linear-systems/linear-systems.html">homogeneity</a> and <a href="http://en.wikipedia.org/wiki/Shift-invariant_system">shift-invariance</a> in <a href="http://en.wikipedia.org/wiki/LTI_system_theory">Linear Time-Invariant System Theory</a> holds that scaling and shifting the input results in the same scaling and shifting in the output. Because of these properties, we can represent any impulse as a shifted and scaled delta function and consequently know what the impulse response will be for that scaled and shifted impulse.</p>
 
-<p>An impulse of -3 at the 8<sup>th</sup> sample would be represented as a unit impulse by scaling the delta function by -3 and shifting it to the right by 8 samples: <script type="math/tex">-3\delta[n-8]</script>, where <script type="math/tex">n-8</script> means the 8<sup>th</sup> sample is now the 0<sup>th</sup>. Due to homogeneity and shift invariance, we can determine the impulse response of this impulse by simply scaling and shifting the unit impulse response in the same manner. In other words, <script type="math/tex">-3\delta[n-8] \mapsto -3h[n-8]</script></p>
+<p>An impulse of <script type="math/tex">-3</script> at the <script type="math/tex">8^{th}</script> sample would be represented as a unit impulse by scaling the delta function by <script type="math/tex">-3</script> and shifting it to the right by <script type="math/tex">8</script> samples: <script type="math/tex">-3\delta[n-8]</script>, where <script type="math/tex">n-8</script> means the <script type="math/tex">8^{th}</script> sample is now the <script type="math/tex">0^{th}</script>. Due to homogeneity and shift invariance, we can determine the impulse response of this impulse by simply scaling and shifting the unit impulse response in the same manner. In other words:</p>
+
+<script type="math/tex; mode=display">-3\delta[n-8] \mapsto -3h[n-8]</script>
 
 <p>What this means is that if we know the unit impulse response of a system, we consequently know how the system will react to <em>any</em> impulse. These impulse responses can then be synthesized to form the output signal that would result from running the input signal through the actual system.</p>
 
@@ -77,6 +91,8 @@
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>But wait up! We are using Haskell, a functional programming language which typically does without both arrays and iteration. This means that to implement convolution in Haskell without the use of <a href="http://hackage.haskell.org/package/array">Arrays</a> or imperative iteration loops, we need to really understand the operation occurring in the convolution summation.</p>
+
+<h3 id="convolution-machine">Convolution Machine</h3>
 
 <p>The book <a href="http://www.dspguide.com">The Scientist and Engineer’s Guide to Digital Signal Processing</a> uses a metaphor known as the <a href="http://www.dspguide.com/ch6/4.htm">Convolution Machine</a> to help conceptualize the convolution operation at a granular level. The convolution machine is simply a theoretical machine in which the unit impulse response is:</p>
 
@@ -198,25 +214,186 @@
 </span><span class="line">  <span class="kr">in</span> <span class="n">map</span> <span class="p">(</span><span class="n">sum</span> <span class="o">.</span> <span class="n">zipWith</span> <span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="p">(</span><span class="n">reverse</span> <span class="n">hs</span><span class="p">))</span> <span class="p">(</span><span class="n">init</span> <span class="o">$</span> <span class="n">tails</span> <span class="n">ts</span><span class="p">)</span>
 </span></code></pre></td></tr></table></div><figcaption><span>a reduced form of the convolution machine implementation</span></figcaption></figure></notextile></div>
 
+<h2 id="parallelization">Parallelization</h2>
+
+<p>There’s something to be said about how the various properties of the Haskell language come together to make certain algorithms trivially parallelizable. Green threads, single assignment, function purity and its consequent idempotence/referential transparency – I can go on and on, but I’d rather not digress from the topic of this post. You won’t get any Monad koolaid from me. Still, I think it’s interesting to note how easy it can be to parallelize this naive convolution algorithm. So let’s do it.</p>
+
+<h3 id="parmap">parMap</h3>
+
+<p>The <a href="http://hackage.haskell.org/package/parallel">parallel</a> Haskell package contains various tools for parallelization. One of these is the <a href="http://hackage.haskell.org/packages/archive/parallel/latest/doc/html/Control-Parallel-Strategies.html">Control.Parallel.Strategies</a> module, which defines the <a href="http://hackage.haskell.org/packages/archive/parallel/latest/doc/html/Control-Parallel-Strategies.html#v:parMap"><code>parMap</code></a> function, which maps over list elements in parallel, in essence, a parallel map:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="haskell"><span class="line"><span class="nf">parMap</span> <span class="ow">::</span> <span class="kt">Strategy</span> <span class="n">b</span> <span class="ow">-&gt;</span> <span class="p">(</span><span class="n">a</span> <span class="ow">-&gt;</span> <span class="n">b</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="p">[</span><span class="n">b</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><code>parMap</code> takes an <a href="http://hackage.haskell.org/packages/archive/parallel/latest/doc/html/Control-Parallel-Strategies.html#t:Strategy">evaluation strategy</a> which is used to actually perform the evaluation in parallel. We use the <a href="http://hackage.haskell.org/packages/archive/parallel/latest/doc/html/Control-Parallel-Strategies.html#v:rdeepseq"><code>rdeepseq</code></a> evaluation strategy, which fully evaluates the argument to Normal Form (i.e. fully evaluated), as opposed to <a href="http://hackage.haskell.org/packages/archive/parallel/latest/doc/html/Control-Parallel-Strategies.html#v:rseq"><code>rseq</code></a> which merely evaluates the argument to <a href="http://en.wikibooks.org/wiki/Haskell/Graph_reduction#Weak_Head_Normal_Form">Weak Head Normal Form</a> (<abbr title="Weak Head Normal Form">WHNF</abbr>). The <code>rdeepseq</code> strategy can only operate on arguments it knows it can fully evaluate, those that conform to the <a href="http://hackage.haskell.org/packages/archive/deepseq/latest/doc/html/Control-DeepSeq.html#t:NFData"><code>NFData</code></a> typeclass from the <a href="http://hackage.haskell.org/package/deepseq">Control.Deepseq</a> module. To conform to this, we add another type constraint to our convolution parameters:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="haskell"><span class="line"><span class="nf">parConvolve</span> <span class="ow">::</span> <span class="p">(</span><span class="kt">NFData</span> <span class="n">a</span><span class="p">,</span> <span class="kt">Num</span> <span class="n">a</span><span class="p">)</span> <span class="ow">=&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Continuing forward, all we have to do now is make a drop-in replacement of <code>map</code> with <code>parMap</code>. Actually, it’s not quite a drop-in replacement, because we need to supply <code>parMap</code> with the <code>rdeepseq</code> evaluation strategy:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class="haskell"><span class="line"><span class="nf">parConvolve</span> <span class="ow">::</span> <span class="p">(</span><span class="kt">NFData</span> <span class="n">a</span><span class="p">,</span> <span class="kt">Num</span> <span class="n">a</span><span class="p">)</span> <span class="ow">=&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="ow">-&gt;</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span>
+</span><span class="line"><span class="nf">parConvolve</span> <span class="n">hs</span> <span class="n">xs</span> <span class="ow">=</span>
+</span><span class="line">  <span class="kr">let</span> <span class="n">pad</span> <span class="ow">=</span> <span class="n">replicate</span> <span class="p">((</span><span class="n">length</span> <span class="n">hs</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="mi">0</span>
+</span><span class="line">      <span class="n">ts</span>  <span class="ow">=</span> <span class="n">pad</span> <span class="o">++</span> <span class="n">xs</span>
+</span><span class="line">  <span class="kr">in</span> <span class="n">parMap</span> <span class="n">rdeepseq</span> <span class="p">(</span><span class="n">sum</span> <span class="o">.</span> <span class="n">zipWith</span> <span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="p">(</span><span class="n">reverse</span> <span class="n">hs</span><span class="p">))</span> <span class="p">(</span><span class="n">init</span> <span class="o">$</span> <span class="n">tails</span> <span class="n">ts</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div><figcaption><span>a parallelized version of the reduced naive convolution algorithm</span></figcaption></figure></notextile></div>
+
+<h3 id="benchmark">Benchmark</h3>
+
+<p>The <a href="http://hackage.haskell.org/packages/archive/criterion"><code>criterion</code></a> Haskell package provides tools for benchmarking and analyzing code. The synthetic benchmark we will conduct will run each implementation with an impulse response of length 100 and an input signal of length 1000.</p>
+
+<p>In the following code, <code>conv</code> is the naive implementation, <code>conv'</code> is the reduced naive implementation, and <code>parConv</code> is the parallel implementation:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+</pre></td><td class="code"><pre><code class="haskell"><span class="line"><span class="kr">data</span> <span class="kt">ConvType</span> <span class="ow">=</span> <span class="kt">Naive</span> <span class="o">|</span> <span class="kt">Reduced</span> <span class="o">|</span> <span class="kt">Parallel</span> <span class="kr">deriving</span> <span class="p">(</span><span class="kt">Eq</span><span class="p">,</span> <span class="kt">Ord</span><span class="p">)</span>
+</span><span class="line"><span class="nf">convTypes</span> <span class="ow">=</span> <span class="kt">Data</span><span class="o">.</span><span class="kt">Map</span><span class="o">.</span><span class="n">fromList</span> <span class="p">[(</span><span class="kt">Naive</span><span class="p">,</span> <span class="n">conv</span><span class="p">),</span> <span class="p">(</span><span class="kt">Reduced</span><span class="p">,</span> <span class="n">conv&#39;</span><span class="p">),</span> <span class="p">(</span><span class="kt">Parallel</span><span class="p">,</span> <span class="n">parConv</span><span class="p">)]</span>
+</span><span class="line">
+</span><span class="line"><span class="nf">main</span> <span class="ow">=</span> <span class="n">defaultMain</span> <span class="p">[</span>
+</span><span class="line">  <span class="n">bench</span> <span class="s">&quot;Naive Convolution&quot;</span> <span class="p">(</span><span class="n">runConv</span> <span class="kt">Naive</span><span class="p">),</span>
+</span><span class="line">  <span class="n">bench</span> <span class="s">&quot;Reduced Convolution&quot;</span> <span class="p">(</span><span class="n">runConv</span> <span class="kt">Reduced</span><span class="p">),</span>
+</span><span class="line">  <span class="n">bench</span> <span class="s">&quot;Parallelized Convolution&quot;</span> <span class="p">(</span><span class="n">runConv</span> <span class="kt">Parallel</span><span class="p">)</span> <span class="p">]</span>
+</span><span class="line">  <span class="kr">where</span> <span class="n">runConv</span> <span class="n">ctype</span> <span class="ow">=</span>
+</span><span class="line">          <span class="kr">let</span> <span class="n">hs</span> <span class="ow">=</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">100</span> <span class="ow">::</span> <span class="kt">Int</span><span class="p">]</span>
+</span><span class="line">              <span class="n">ts</span> <span class="ow">=</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">1000</span> <span class="ow">::</span> <span class="kt">Int</span><span class="p">]</span>
+</span><span class="line">              <span class="n">convfn</span> <span class="ow">=</span> <span class="n">fromJust</span> <span class="o">$</span> <span class="kt">Data</span><span class="o">.</span><span class="kt">Map</span><span class="o">.</span><span class="n">lookup</span> <span class="n">ctype</span> <span class="n">convTypes</span>
+</span><span class="line">          <span class="kr">in</span> <span class="n">nf</span> <span class="p">(</span><span class="n">convfn</span> <span class="n">hs</span><span class="p">)</span> <span class="n">ts</span>
+</span></code></pre></td></tr></table></div><figcaption><span>criterion benchmarking code</span></figcaption></figure></notextile></div>
+
+<p>Compile the benchmark with:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>ghc --make -O2 -threaded -o conv conv.hs
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Run it with:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>./conv -o bench.html -r out.csv +RTS -N4
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>The <code>-o</code> parameter specifies an output file for generated <a href="../../../../assets/html/convolution-criterion.html">charts and graphs</a>. The <code>-r</code> parameter specifies a comma separated value (<abbr title="Comma Separated Value">CSV</abbr>) file to output relative statistics which we use to measure performance relative to the reference, non-reduced naive implementation.</p>
+
+<p>The <code>+RTS</code> parameter is a delimiter which begins parameters to the <a href="http://www.haskell.org/ghc/docs/latest/html/users_guide/runtime-control.html">runtime system</a>. The <code>-N#</code> parameter specifies how many cores to utilize. The machine I was using has 6 cores, but I found that using less than that lowered the amount of statistical variance. I imagine this was because the computer was able to continue its own tasks on the other two cores.</p>
+
+<p>The above benchmark yielded the following results:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Name</th>
+      <th style="text-align: center">% faster</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Naive (Reference)</td>
+      <td style="text-align: center">0</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Reduced</td>
+      <td style="text-align: center">0</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Parallel</td>
+      <td style="text-align: center">54</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The parallel version apparently really boosts performance. An important thing to realize is that when parallelizing things, it’s considered best to only parallelize when the benefits outweigh the relative overhead of managing the green threads.</p>
+
+<p>For example, in my tests, changing the impulse response length to 5 and the input signal length to 10 shows the parallel version to be 27% slower than the naive implementation. Also notice that the reduced version is a bit slower, for what I can only imagine to be a <abbr title="Glasgow Haskell Compiler">GHC</abbr> optimization that applies to the naive implementation but not to the reduced version.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Name</th>
+      <th style="text-align: center">% faster</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Naive (Reference)</td>
+      <td style="text-align: center">0</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Reduced</td>
+      <td style="text-align: center">-16</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Parallel</td>
+      <td style="text-align: center">-27</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>On the other hand, increasing the impulse response length to 1000 and the input signal length to 10,000 maintained a similar performance increase:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Name</th>
+      <th style="text-align: center">% faster</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Naive (Reference)</td>
+      <td style="text-align: center">0</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Reduced</td>
+      <td style="text-align: center">0</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Parallel</td>
+      <td style="text-align: center">48</td>
+    </tr>
+  </tbody>
+</table>
+
 <h2 id="conclusion">Conclusion</h2>
 
 <p>I’m new to Digital Signal Processing, so if you notice any glaring errors please feel free to correct me; I would appreciate it. If you are interested in this subject and would like to read a book to learn more, I wholeheartedly recommend <a href="http://www.dspguide.com">The Scientist and Engineer’s Guide to Digital Signal Processing</a>. If you would like to learn more about Convolution, you can check the relevant chapters in that freely available book.</p>
 
-<p>You can also check out <a href="http://www.songho.ca/dsp/convolution/convolution.html">this page</a> as well, which also covers multidimensional convolution with a concrete example of a <a href="http://en.wikipedia.org/wiki/Gaussian_filter">Gaussian filter</a> applied to an image for the purposes of blurring it. This specific application of the Gaussian filter is known as the <a href="http://en.wikipedia.org/wiki/Gaussian_blur">Gaussian Blur</a>. The Gaussian Blur is pretty popular in realtime image rendering, such as in video games, because of a property it has which allows it be applied in two dimensions, e.g. in an image, as two independent one-dimensional operations. This makes it dramatically faster and more efficient, and is trivial to implement in modern GPU <a href="http://www.opengl.org/wiki/Compute_Shader">Compute shaders</a><sup id="fnref:compute_shader"><a href="#fn:compute_shader" rel="footnote">1</a></sup>. Such shaders can then be used to implement effects such as motion blur in games<sup id="fnref:motion_blur"><a href="#fn:motion_blur" rel="footnote">2</a></sup>. The page also provides imperative implementations of convolution in C++.</p>
+<h3 id="imperative-approach">Imperative Approach</h3>
+
+<p>You can also check out <a href="http://www.songho.ca/dsp/convolution/convolution.html">this page</a> as well, which also covers multidimensional convolution with a concrete example of a <a href="http://en.wikipedia.org/wiki/Gaussian_filter">Gaussian filter</a> applied to an image for the purposes of blurring it. This specific application of the Gaussian filter is known as the <a href="http://en.wikipedia.org/wiki/Gaussian_blur">Gaussian Blur</a>. The Gaussian Blur is pretty popular in realtime image rendering, such as in video games, because of a property it has which allows it be applied in two dimensions, e.g. in an image, as two independent one-dimensional operations. This makes it dramatically faster and more efficient, and is trivial to implement in modern <abbr title="Graphics Processing Unit">GPU</abbr> <a href="http://www.opengl.org/wiki/Compute_Shader">Compute shaders</a> <sup id="fnref:compute_shader"><a href="#fn:compute_shader" rel="footnote">1</a></sup>. Such shaders can then be used to implement effects such as motion blur in games <sup id="fnref:motion_blur"><a href="#fn:motion_blur" rel="footnote">2</a></sup>. The page also provides imperative implementations of convolution in C++.</p>
+
+<h3 id="optimizations">Optimizations</h3>
 
 <p>Haskell is known for having many ways of doing any one thing, so if you come up with a better solution feel free to <a href="https://gist.github.com">gist it</a> and post it in the comments.</p>
 
-<p>Of course, this post concerns a <em>naive</em> implementation of convolution. There are other more optimized implementations of convolution, such as FFT convolution which exploits the Fast Fourier Transform and the principle of duality – convolution in the time domain is equivalent to multiplication in the frequency domain – to perform convolution a lot faster in some cases.</p>
+<p>Of course, this post concerns a <em>naive</em> implementation of convolution. There are other more optimized implementations of convolution, such as <abbr title="Fast Fourier Transform">FFT</abbr> convolution which exploits the Fast Fourier Transform and the principle of duality – convolution in the time domain is equivalent to multiplication in the frequency domain – to perform convolution a lot faster in some cases.</p>
 
 <div class="footnotes">
   <ol>
     <li id="fn:compute_shader">
-      <p>As described in <a href="http://www.d3dcoder.net/d3d11.htm">3D Game Programming with DirectX 11</a> by Frank D. Luna in Ch 12 page 450 § 12.7 <a href="#fnref:compute_shader" rel="reference">&#8617;</a></p>
+      <p>As described in <a href="http://www.d3dcoder.net/d3d11.htm">3D Game Programming with DirectX 11</a> by Frank D. Luna in Ch 12 page 450 § 12.7<a href="#fnref:compute_shader" rel="reference">&#8617;</a></p>
     </li>
     <li id="fn:motion_blur">
       <p>Despite this optimization of Gaussian Blurring, many implementations optimize further. Blurring typically involves rendering the scene to a separate buffer (e.g. Render-to-Texture) at a scaled-down resolution. This speeds up the blurring operation as there are less pixels to operate on. Then the result is rendered to the actual screen. Since the point is to blur, the upscaling is usually hardly noticeable.</p>
 
-      <p>Recently I purchased an old game on Steam which I had played circa 2003. This game was developed back when 1280x1024 was a popular resolution, that is 4:3 aspect ratio. I got to a part where the game displayed some sort of blur effect and noticed that the entire screen was completely blurred to the point where I couldn’t make anything out. I presume this was not the intended effect. If I had to guess, I imagine they hard-coded a scaled down resolution – and thus aspect ratio as well – at which to render the scene for blurring, such that upscaling it to my current 1920x1080 resolution 16:9 AR looked horrible. I imagine newer games take into account aspect ratio and some other factor to scale down the current resolution from. <a href="#fnref:motion_blur" rel="reference">&#8617;</a></p>
+      <p>Recently I purchased an old game on Steam which I had played circa 2003. This game was developed back when 1280x1024 was a popular resolution, that is 4:3 aspect ratio. I got to a part where the game displayed some sort of blur effect and noticed that the entire screen was completely blurred to the point where I couldn’t make anything out. I presume this was not the intended effect. If I had to guess, I imagine they hard-coded a scaled down resolution – and thus aspect ratio as well – at which to render the scene for blurring, such that upscaling it to my current 1920x1080 resolution 16:9 AR looked horrible. I imagine newer games take into account aspect ratio and some other factor to scale down the current resolution from.<a href="#fnref:motion_blur" rel="reference">&#8617;</a></p>
     </li>
   </ol>
 </div>
@@ -225,27 +402,33 @@
   
   <entry>
     <title type="html"><![CDATA[I'm Back]]></title>
-    <link href="http://www.blaenkdenum.com/2012/12/25/im-back/"/>
+    <link href="http://blaenkdenum.com/2012/12/25/im-back/"/>
     <updated>2012-12-25T23:25:00-08:00</updated>
-    <id>http://www.blaenkdenum.com/2012/12/25/im-back</id>
+    <id>http://blaenkdenum.com/2012/12/25/im-back</id>
     <content type="html"><![CDATA[<p>It’s been a while since I last had a blog. In fact, I think it’s been two, maybe three years now. I previously had a WordPress blog that I updated regularly. However, the things I was studying on my own at the time consumed me and I considered writing about those things to be a low priority. After all, who want’s to hear what a noob thinks about something he’s barely beginning to learn about? So instead I figured I’d continue reading and studying, and maintaining a blog kind of fell into the backburner.</p>
+
+<h3 id="blogging">Blogging</h3>
 
 <p>For over a year now I had wanted to get back into blogging, at the very least to serve as a sort of journal for what I’ve learned, what I’m working on, etc. I didn’t want to bother maintaining a WordPress blog anymore, so I gave tumblr a shot. I felt that tumblr wasn’t as flexible as I would like and lost interest again. A few months ago I got the urge again to set up a blog, and having heard of static site generators on hacker news, I ended up giving Jekyll/Octopress a try. That’s what I’m running right now and so far it’s working out well. I actually set this up a few months ago, but hadn’t had the time to properly set it up and design myself a theme.</p>
 
+<h3 id="haskell">Haskell</h3>
+
 <p>I’ve done a lot during my absence these past few years. In fact, it’s all a big blur so I don’t know where to begin to talk about it. Most recently, for example, I worked on a <a href="https://github.com/blaenk/pulse-visualizer">music visualizer</a> for Linux’ Pulse Audio in Haskell using OpenGL and FFTW. This was the first program I wrote in Haskell, aside from little programs I would write to learn the language. I learned Haskell primarily using a combination of <a href="http://learnyouahaskell.com/">Learn You a Haskell for Great Good</a> and <a href="http://book.realworldhaskell.org/read/">Real World Haskell</a>. For certain things, such as understanding the concept of laziness in Haskell, I used the <a href="http://en.wikibooks.org/wiki/Haskell/Laziness">Haskell Wikibook</a>. I also had a Professor at school, who was familiar with Haskell and DSP, as my mentor. Thanks to his previous experience, I was able to learn both things pretty quickly. Whenever I was unsure of my understanding of a given topic, such as Monads, I had him to discuss and refine my understanding with.</p>
+
+<h3 id="digital-signal-processing">Digital Signal Processing</h3>
 
 <p>I worked on this project to learn both Haskell and Digital Signal Processing. The book I used for learning Digital Signal Processing is <a href="http://www.dspguide.com/pdfbook.htm">The Scientist and Engineer’s Guide to Digital Signal Processing</a>. For the longest time – probably the same amount of time I’ve been without a blog – I’ve wanted to learn about Digital Signal Processing, but every book I found assumed some prior DSP knowledge, electronics/circuits knowledge, or hardcore mathematical understanding. This book seems to teach DSP from the perspective of a developer, showing code for algorithms discussed throughout, such as the <a href="http://en.wikipedia.org/wiki/Fast_Fourier_transform">Fast Fourier Transform</a>.</p>
 
-<p>I will probably write a post with more information about the project and what it was like to learn Haskell and DSP, and where I intend to go forward with this. For now I just wanted to push out a real post, unlike the <a href="http://www.blaenkdenum.com/2012/09/19/test-post/">test post</a> which I use to test the design and markup of this site.</p>
+<p>I will probably write a post with more information about the project and what it was like to learn Haskell and DSP, and where I intend to go forward with this. For now I just wanted to push out a real post, unlike the <a href="http://blaenkdenum.com/2012/09/19/test-post/">test post</a> which I use to test the design and markup of this site.</p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Test Post]]></title>
-    <link href="http://www.blaenkdenum.com/2012/09/19/test-post/"/>
+    <link href="http://blaenkdenum.com/2012/09/19/test-post/"/>
     <updated>2012-09-19T02:49:00-07:00</updated>
-    <id>http://www.blaenkdenum.com/2012/09/19/test-post</id>
-    <content type="html"><![CDATA[<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dolor nisi, feugiat sit amet egestas sit amet, mattis sit amet velit. Proin quis metus id mi vulputate adipiscing eget et <strong>sapien</strong>. Sed iaculis auctor sem ac convallis<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>. Cras nisi libero, dignissim quis facilisis et, bibendum eget enim. Vivamus est leo, tristique ut adipiscing vitae, malesuada adipiscing tellus. Integer nec aliquam justo. Nam ac lacus erat. In <strong><em>hac habitasse platea</em></strong> dictumst. Donec pharetra, lectus sit amet ultrices fringilla, metus mi auctor ligula, in hendrerit dui arcu eu leo.</p>
+    <id>http://blaenkdenum.com/2012/09/19/test-post</id>
+    <content type="html"><![CDATA[<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dolor nisi, feugiat sit amet egestas sit amet, mattis sit amet velit. Proin quis metus id mi vulputate adipiscing eget et <strong>sapien</strong>. Sed iaculis auctor sem ac convallis <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>. Cras nisi libero, dignissim quis facilisis et, bibendum eget enim. Vivamus est leo, tristique ut adipiscing vitae, malesuada adipiscing tellus. Integer nec aliquam justo. Nam ac lacus erat. In <strong><em>hac habitasse platea</em></strong> dictumst. Donec pharetra, lectus sit amet ultrices fringilla, metus mi auctor ligula, in hendrerit dui arcu eu leo.</p>
 
 <p>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla facilisi. Vestibulum consectetur nulla eget erat <em>fermentum malesuada</em>. Nullam ultricies nulla ut eros vulputate sed cursus tortor faucibus. Cras ac risus mauris. Suspendisse molestie elementum luctus. Vestibulum <a href="http://www.google.com">venenatis blandit</a> velit ac pretium.</p>
 
@@ -274,9 +457,9 @@
 </span><span class="line"><span class="k">end</span>
 </span></code></pre></td></tr></table></div><figcaption><span>an example of base64 decoding in ruby </span><a href="https://gist.github.com/3759076">gist</a></figcaption></figure></notextile></div>
 
-<p>Donec vitae turpis non augue pulvinar imperdiet eu non erat. Integer mollis diam ac quam lobortis luctus. Suspendisse scelerisque sodales massa sit amet pharetra. <script type="math/tex">\Delta S = \pi</script><sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup> Donec cursus, velit in mollis dapibus, nunc elit pharetra erat, et dictum sem sapien pretium ligula. Cras nibh elit, mollis eu eleifend sed, faucibus in velit. Aliquam gravida tristique molestie. Donec gravida, diam ac auctor auctor, nulla enim varius sem, non auctor urna mi vitae enim. Cras aliquam semper nibh, quis viverra urna ultrices et. Nunc rhoncus fringilla dapibus.</p>
+<p>Donec vitae turpis non augue pulvinar imperdiet eu non erat. Integer mollis diam ac quam lobortis luctus. Suspendisse scelerisque sodales massa sit amet pharetra. <script type="math/tex">\Delta S = \pi</script> <sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup> Donec cursus, velit in mollis dapibus, nunc elit pharetra erat, et dictum sem sapien pretium ligula. Cras nibh elit, mollis eu eleifend sed, faucibus in velit. Aliquam gravida tristique molestie. Donec gravida, diam ac auctor auctor, nulla enim varius sem, non auctor urna mi vitae enim. Cras aliquam semper nibh, quis viverra urna ultrices et. Nunc rhoncus fringilla dapibus.</p>
 
-<p><img src="http://placekitten.com/720/250" /></p>
+<p><img class="center" src="http://placekitten.com/720/250" /></p>
 
 <h1 id="immortal-words">Immortal Words</h1>
 

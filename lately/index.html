@@ -7,7 +7,7 @@
 	<meta name="author" content="Jorge Israel Peña">
 
 	
-	<meta name="description" content="Currently Working On Planning to Work On Currently Reading Currently Studying This page lists some things I&#8217;ve been up to lately. Comments are &hellip;">
+	<meta name="description" content="Currently Working On Planning to Work On Currently Reading Currently Studying This page lists some things I’ve been up to lately. Comments are &hellip;">
 	
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
@@ -16,12 +16,11 @@
 	<link href="" rel="alternate" title="Jorge Israel Peña" type="application/atom+xml">
 	<link rel="canonical" href="">
 	<link href="/favicon.png" rel="shortcut icon">
+	<link href='/assets/site-21874b1398e5eec56224c6515453f9ab.css' rel='stylesheet' type='text/css' media='screen' />
+
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-    <link href='/assets/site-fb076d739147b9e3db0c4f8a687ca89d.css' rel='stylesheet' type='text/css' />
-
-
-    <script src='/assets/site-5cb7438ce7671c41b092760f6bc11f68.js' type='text/javascript'></script>
+	<!--[if lt IE 9]><script async="true" src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <script async='true' src='/assets/site-eb3dc54832a736d0b21d8a9b8da65f03.js' type='text/javascript'></script>
 
 	
 </head>
@@ -32,13 +31,19 @@
   <h1><a href="/">Jorge Israel Peña</a></h1>
   <h4>AKA Blaenk Denum</h4>
 </div>
-<nav id="main-nav"><ul class="main">
+<nav id="main-nav">
+	<ul class="main">
 	<li><a href="/about">About</a></li>
 	<li><a href="/lately">Lately</a></li>
 	<li><a href="/projects">Projects</a></li>
 	<li><a href="/resume">Résumé</a></li>
 	<li><a href="/blog/archives">Archives</a></li>
+	<li><a id="search_btn">Search</a></li>
 </ul>
+	<form class="desk_search" action="http://google.com/search" method="get">
+		<input type="text" name="q" results="0" placeholder="Search... (Click 'Search' to hide)" autocomplete="off" spellcheck="false">
+		<input type="hidden" name="q" value="site:blaenkdenum.com">
+	</form>
 </nav>
 <nav id="mobile-nav">
 	<div class="alignleft menu">
@@ -49,15 +54,15 @@
 	<li><a href="/projects">Projects</a></li>
 	<li><a href="/resume">Résumé</a></li>
 	<li><a href="/blog/archives">Archives</a></li>
-</ul>
-</div>
+	<li><a id="search_btn">Search</a></li>
+</ul></div>
 	</div>
 	<div class="alignright search">
 		<a class="button"></a>
 		<div class="container">
 			<form action="http://google.com/search" method="get">
 				<input type="text" name="q" results="0">
-				<input type="hidden" name="q" value="site:www.blaenkdenum.com">
+				<input type="hidden" name="q" value="site:blaenkdenum.com">
 			</form>
 		</div>
 	</div>
@@ -77,48 +82,62 @@
   <li><a href="#currently-studying">Currently Studying</a></li>
 </ul>
 
-<p>This page lists some things I&#8217;ve been up to lately. Comments are enabled in case you&#8217;d like to comment on anything or have any questions.</p>
+<p>This page lists some things I’ve been up to lately. Comments are enabled in case you’d like to comment on anything or have any questions. Updates are highlighted.</p>
 
-<p><em>Updated <time class="updated" datetime="2013-01-17T23:19:00-08:00">January 17<span>th</span>, 2013</time></em></p>
+<p><em>updated <time class="updated" datetime="2013-02-10T18:37:00-08:00">February 10<span>th</span>, 2013</time></em></p>
 
 <h3 id="currently-working-on">Currently Working On</h3>
 
 <ul>
-  <li>This website. The site&#8217;s design is &#8220;responsive,&#8221; meaning that it automatically changes based on the size of the viewing device&#8217;s display. The theme is based on the <a href="http://zespia.tw/Octopress-Theme-Slash/">slash</a> theme for Octopress. Though if you ask me I don&#8217;t notice any resemblance.</li>
+  <li>This website. The site’s design is “responsive,” meaning that it automatically changes based on the size of the viewing device’s display. The theme is based on the <a href="http://zespia.tw/Octopress-Theme-Slash/">slash</a> theme for Octopress. Though if you ask me I don’t notice any resemblance.</li>
   <li>
-    <p>Phoenix is the name of a web interface I created for <a href="https://github.com/rakshasa/rtorrent">rtorrent</a> made with Rails. Admittedly, Rails is probably overkill for this kind of project. I try to balance this by storing most necessary metadata in the torrent objects within rtorrent as Base64 encoded JSON. rtorrent&#8217;s API is served using XML-RPC. The interface is developed with a multi-user environment in mind.</p>
+    <p>Phoenix is the name of a web interface I created for <a href="https://github.com/rakshasa/rtorrent">rtorrent</a> made with Rails. Admittedly, Rails is probably overkill for this kind of project. I try to balance this by storing most necessary metadata in the torrent objects within rtorrent as Base64 encoded JSON. rtorrent’s API is served using XML-RPC. The interface is developed with a multi-user environment in mind.</p>
 
-    <p>This is the fourth major iteration, in as many years, of such an interface, having started as a heavily modified wTorrent interface. If I&#8217;m ever bored in the future, I may rewrite it to be even lighter, using something like Sinatra with Ruby, Flask with Python, or Snap with Haskell.</p>
+    <p>This is the fourth major iteration, in as many years, of such an interface, having started as a heavily modified wTorrent interface. If I’m ever bored in the future, I may rewrite it to be even lighter, using something like <a href="http://www.sinatrarb.com/">Sinatra</a> with Ruby, <a href="http://flask.pocoo.org/">Flask</a> with Python, or <a href="http://snapframework.com/">Snap</a> with Haskell.</p>
   </li>
 </ul>
 
 <h3 id="planning-to-work-on">Planning to Work On</h3>
 
 <ul>
-  <li>I&#8217;m considering adding functionality to <a href="http://mpc-hc.sourceforge.net">MPC-HC</a> which allows one to watch things with others &#8220;in sync.&#8221; Something like <a href="http://www.synchtube.com/">Synchtube</a>. I&#8217;ve yet to assess the feasibility of the project, but I feel it shouldn&#8217;t be too difficult because MPC-HC already contains a remote web control system which I believe the authors were smart enough to abstract behind an event system. I figure I should be able to take advantage of this system.
+  <li>I’m considering adding functionality to <a href="http://mpc-hc.sourceforge.net">MPC-HC</a> which allows one to watch things with others “in sync.” Something like <a href="http://www.synchtube.com/">Synchtube</a>. I’ve yet to assess the feasibility of the project, but I feel it shouldn’t be too difficult because MPC-HC already contains a remote web control system which I believe the authors were smart enough to abstract behind an event system. I figure I should be able to take advantage of this system.
     <ul>
       <li>
-        <p><strong>Update</strong>: The devs let me know that a third-party project already exists that supports this functionality with the ability to support multiple players, not just MPC-HC. The project is called <a href="https://github.com/Uriziel/syncplay">syncplay</a>. I&#8217;ve tried it with friends multiple times already and it seems to work great!</p>
+        <p><strong>Update</strong>: The devs let me know that a third-party project already exists that supports this functionality with the ability to support multiple players, not just MPC-HC. The project is called <a href="https://github.com/Uriziel/syncplay">syncplay</a>. I’ve tried it with friends multiple times already and it seems to work great!</p>
 
-        <p>I did manage to get at least one <a href="https://github.com/mpc-hc/mpc-hc/pull/38">patch</a> into MPC-HC however. The patch fixes seeking when the command to seek is sent from the web interface. I don&#8217;t use the webui but I was checking it out when I was assessing methods of implementing the functionailty, since I figured I could leverage the code that interfaces with the webui.</p>
+        <p>I did manage to get at least one <a href="https://github.com/mpc-hc/mpc-hc/pull/38">patch</a> into MPC-HC however. The patch fixes seeking when the command to seek is sent from the web interface. I don’t use the webui but I was checking it out when I was assessing methods of implementing the functionailty, since I figured I could leverage the code that interfaces with the webui.</p>
       </li>
     </ul>
   </li>
-  <li>I&#8217;m working on a streaming web video system, and I&#8217;d like to do something similar &#8211; viewing videos in sync &#8211; using the HTML5 media API which has support for video events. This functionality is showcased <a href="http://www.w3.org/2010/05/video/mediaevents.html">here</a>. I think this concept of synchronizing events maps directly to the observer pattern which maps to a popular use of <a href="http://nodejs.org/">node.js</a>: websockets. Specifically, I feel that this will be a perfect use of <a href="http://socket.io/">socket.io</a>.</li>
+  <li>I’m working on a streaming web video system, and I’d like to do something similar – viewing videos in sync – using the HTML5 media API which has support for <a href="http://www.w3.org/2010/05/video/mediaevents.html">video events</a>. I think this concept of synchronizing events maps directly to the observer pattern which maps to a popular use of <a href="http://nodejs.org/">node.js</a>: websockets. Specifically, I feel that this will be a perfect use of <a href="http://socket.io/">socket.io</a>.</li>
 </ul>
 
 <h3 id="currently-reading">Currently Reading</h3>
 
 <ul>
-  <li><a href="http://amzn.com/0321714113">C++ Primer</a>: <em>Not</em> C++ Primer <strong>Plus</strong>, which is a similarly titled book. I&#8217;ve been using this book in conjunction with the 2<sup>nd</sup> edition of <a href="http://amzn.com/0321623215">The C++ Standard Library</a> to get up to speed on C++11. I&#8217;m breezing through it thanks to the author&#8217;s direct and clear coverage of C++11 concepts. It moves fast because it seems to assume previous programming knowledge, so I wouldn&#8217;t recommend this to beginners. It&#8217;s great for people who want to refresh on C++11 &#8211; or C++ in general for that matter &#8211; very quickly.</li>
-  <li><a href="http://amzn.com/1593272200">The Linux Programming Inteface</a>: This book is amazing. It concerns the userspace API of Linux. It probably should be named &#8220;The POSIX Programming Inteface&#8221; because although it focuses on Linux, it&#8217;s always very clear about which topics apply to which standards, treating Linux-specific funcitonality more like edge-cases within the POSIX ecosystem. This is perhaps a reasonable approach, considering that Linux is not POSIX compliant. The reverse approach would probably lessen the scope of material of which the majority probably applies to many other systems anyways, not just Linux. It&#8217;s one of my favorite books currently on my shelf. I&#8217;m barely on the 18<sup>th</sup> chapter &#8211; concerning Directories and Links &#8211; and I&#8217;m barely through a quarter of the book.</li>
-  <li><a href="http://amzn.com/0672329468">Linux Kernel Development</a>: Whereas TLPI focuses on the userspace API, this book concerns the kernel API. I&#8217;m just starting it so I can&#8217;t really comment on it, but it seems like a very popular book. I highly recommend TLPI and LKD to anyone who really wants to understand Linux.</li>
+  <li><a href="http://amzn.com/0321714113">C++ Primer</a>: <em>Not</em> C++ Primer <strong>Plus</strong>, which is a similarly titled book. I’ve been using this book in conjunction with the 2<sup>nd</sup> edition of <a href="http://amzn.com/0321623215">The C++ Standard Library</a> to get up to speed on C++11. I’m breezing through it thanks to the author’s direct and clear coverage of C++11 concepts. It moves fast because it seems to assume previous programming knowledge, so I wouldn’t recommend this to beginners. It’s great for people who want to refresh on C++11 – or C++ in general for that matter – very quickly.
+    <ul class="highlight">
+      <li><strong>Update</strong>: I completed it. I feel a lot more comfortable with C++ than I had before, and perhaps more importantly, I feel like I’m quite up to speed with the new features introduced in C++11.</li>
+    </ul>
+  </li>
+  <li><a href="http://amzn.com/1593272200">The Linux Programming Inteface</a>: This book is amazing. It concerns the userspace API of Linux. It probably should be named “The POSIX Programming Inteface” because although it focuses on Linux, it’s always very clear about which topics apply to which standards, treating Linux-specific funcitonality more like edge-cases within the POSIX ecosystem. This is perhaps a reasonable approach, considering that Linux is not POSIX compliant. The reverse approach would probably lessen the scope of material of which the majority probably applies to many other systems anyways, not just Linux. It’s one of my favorite books currently on my shelf. I’m barely on the 18<sup>th</sup> chapter – concerning Directories and Links – and I’m barely through a quarter of the book.</li>
+  <li><a href="http://amzn.com/032157351X">Algorithms</a>: This beautiful hardcover book is just what I needed for a quick refresher on various algorithms. It masterfully covers various topics such as red-black trees and tries using pretty illustrations and very clear writing. The book uses Java as its didactic language which makes for quick coverage of universal concepts.</li>
+  <li><a href="http://amzn.com/1849967202">Algorithm Design Manual</a>: This book is similar to Sedgewick’s (above) but uses C and focuses more on providing a summary overview of various algorithms. The first half covers certain algorithms in-depth, with a seeming bias for graph related algorithms. The second half of the book serves as a sort of reference for various algorithms, with references to popular implementations (e.g. FFT → <a href="http://www.fftw.org/">FFTW</a>).</li>
 </ul>
 
 <h3 id="currently-studying">Currently Studying</h3>
 
 <ul>
-  <li>Machine Learning: Having completed the edX UC Berkeley <a href="http://edx.org/ai">CS 188</a> class on Artificial Intelligence, I&#8217;m now going through the <a href="https://class.coursera.org/ml-2012-002/lecture/index">Machine Learning</a> class by Stanford on coursera. My goal is to apply Machine Learning concepts to Digital Signal Processing, such as for <a href="http://www.cs.usc.edu/research/08-895.pdf">onset detection</a>.</li>
+  <li><a href="https://class.coursera.org/ml-2012-002/lecture/index">Machine Learning</a>: Having completed the edX UC Berkeley <a href="http://edx.org/ai">CS 188</a> class on Artificial Intelligence, I’m now going through the <a href="https://class.coursera.org/ml-2012-002/lecture/index">Machine Learning</a> class by Stanford on coursera. My goal is to apply Machine Learning concepts to Digital Signal Processing, such as for <a href="http://www.cs.usc.edu/research/08-895.pdf">onset detection</a>.</li>
+  <li>
+    <p class="highlight"><a href="https://www.udacity.com/course/cs344">Parallel Programming with GPUs</a>: I’m dedicating myself to the <a href="https://www.udacity.com/course/cs344">Introduction to Parallel Programming</a> class on <a href="https://www.udacity.com">udacity</a>. It teaches <abbr title="General Purpose GPU">GPGPU</abbr> programming using <a href="http://en.wikipedia.org/wiki/CUDA">CUDA</a>. I already had some basic experience with <a href="http://en.wikipedia.org/wiki/DirectCompute">DirectCompute</a> so I wasn’t entirely out of the loop going into the class.</p>
+
+    <p>So far I’ve completed the first week. The production quality is high and the course is taught by very knowledgeable instructors. The assignments seem to be geared towards image processing, making the results of what we learn clearly visible. The first assignment involved writing a CUDA program kernel to run on the GPU which converts a color image to grayscale.</p>
+
+    <p>A problem I encountered was that I don’t have an Nvidia GPU necessary to run CUDA programs. I had to get rid of my previous one in lieu of an ATI card to appease my hackintosh setup as the 400 series seemed to have a problem in Mac OS X Lion. Thankfully the class contains an online editor which allows students to submit the code they’ve edited for compilation and execution on an Amazon AWS server. The results are then displayed in the same page. Furthermore, since we’re working on GPU image processing, the result is displayed alongside a reference result image along with statistics describing the level to which we match the reference image.</p>
+
+    <p>Using this editor can sometimes be a pain, as it makes for slow iteration and oftentimes nondescript error messages. However, it is pretty clever and definitely helps people like myself, who are currently without an Nvidia card, to benefit from the class.</p>
+  </li>
 </ul>
 
 </div>
@@ -133,7 +152,7 @@
 </section>
 
 </div>
-	<footer id="footer" class="inner">
+	<footer id="footer">
 
 
 
@@ -156,7 +175,7 @@
 
   
 
-{ <span id="generated">generated <time class="" datetime="2013-01-19T20:07:42-08:00">January 19<span>th</span>, 2013</time></span> }
+{ <span id="generated">generated <time class="" datetime="2013-02-15T16:43:11-08:00">February 15<span>th</span>, 2013</time></span> }
 </footer>
 	
 
@@ -165,8 +184,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://www.blaenkdenum.com/lately/index.html';
-        var disqus_url = 'http://www.blaenkdenum.com/lately/index.html';
+        var disqus_identifier = 'http://blaenkdenum.com/lately/index.html';
+        var disqus_url = 'http://blaenkdenum.com/lately/index.html';
         var disqus_script = 'embed.js';
       
     (function () {
@@ -178,7 +197,7 @@
 
 
 
-	<script type="text/javascript">
+	<script async="true" type="text/javascript">
 		var _gaq = _gaq || [];
 		_gaq.push(['_setAccount', 'UA-37339861-1']);
 		_gaq.push(['_trackPageview']);
@@ -194,7 +213,7 @@
 
 
 <!--MathJax CDN-->
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script async="true" type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
   MathJax.Hub.Config({
     messageStyle: "none",
     styles: {
