@@ -3,7 +3,6 @@ layout: post
 title: "Terminal Customization"
 date: 2013-02-12 04:33
 comments: true
-published: false
 excerpt: My various urxvt and zsh customizations
 categories:
 - urxvt
