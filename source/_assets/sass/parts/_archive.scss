@@ -1,3 +1,4 @@
+#category-title { margin-bottom: 15px; }
 .archives{
 	position: relative;
 	&:last-of-type{
@@ -14,6 +15,9 @@
 		padding: 15px 0 !important;
     margin-bottom: 0 !important;
 		.title{
+			@media screen and (max-width: 600px){
+        font-size: 18px;
+      }
 			margin-bottom: 0;
       a{
         color: #666;
@@ -31,13 +35,12 @@
       color: #999;
     }
     & > .meta {
-      display: inline-block;
-      vertical-align: top;
+      float: left;
+      line-height: 35px;
     }
 		.meta{
 			color: $color-gray02;
 			font-size: 0.9em;
-      float: left;
 			@media screen and (max-width: 600px){
 				display: none;
 			}

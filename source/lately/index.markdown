@@ -13,7 +13,7 @@ footer: true
 * Table of Contents
 {:toc}
 
-This page lists some things I've been up to lately. Comments are enabled in case you'd like to comment on anything or have any questions.
+This page lists some things I've been up to lately. Comments are enabled in case you'd like to comment on anything or have any questions. Updates are highlighted.
 
 _updated {{ updated }}_
 
@@ -36,6 +36,7 @@ _updated {{ updated }}_
 
 * [C++ Primer](http://amzn.com/0321714113): _Not_ C++ Primer **Plus**, which is a similarly titled book. I've been using this book in conjunction with the 2<sup>nd</sup> edition of [The C++ Standard Library](http://amzn.com/0321623215) to get up to speed on C++11. I'm breezing through it thanks to the author's direct and clear coverage of C++11 concepts. It moves fast because it seems to assume previous programming knowledge, so I wouldn't recommend this to beginners. It's great for people who want to refresh on C++11 -- or C++ in general for that matter -- very quickly.
   * **Update**: I completed it. I feel a lot more comfortable with C++ than I had before, and perhaps more importantly, I feel like I'm quite up to speed with the new features introduced in C++11.
+  {:.highlight}
 * [The Linux Programming Inteface](http://amzn.com/1593272200): This book is amazing. It concerns the userspace API of Linux. It probably should be named "The POSIX Programming Inteface" because although it focuses on Linux, it's always very clear about which topics apply to which standards, treating Linux-specific funcitonality more like edge-cases within the POSIX ecosystem. This is perhaps a reasonable approach, considering that Linux is not POSIX compliant. The reverse approach would probably lessen the scope of material of which the majority probably applies to many other systems anyways, not just Linux. It's one of my favorite books currently on my shelf. I'm barely on the 18<sup>th</sup> chapter -- concerning Directories and Links -- and I'm barely through a quarter of the book.
 * [Algorithms](http://amzn.com/032157351X): This beautiful hardcover book is just what I needed for a quick refresher on various algorithms. It masterfully covers various topics such as red-black trees and tries using pretty illustrations and very clear writing. The book uses Java as its didactic language which makes for quick coverage of universal concepts.
 * [Algorithm Design Manual](http://amzn.com/1849967202): This book is similar to Sedgewick's (above) but uses C and focuses more on providing a summary overview of various algorithms. The first half covers certain algorithms in-depth, with a seeming bias for graph related algorithms. The second half of the book serves as a sort of reference for various algorithms, with references to popular implementations (e.g. FFT → [FFTW](http://www.fftw.org/)).
@@ -43,13 +44,13 @@ _updated {{ updated }}_
 ###Currently Studying###
 
 * [Machine Learning](https://class.coursera.org/ml-2012-002/lecture/index): Having completed the edX UC Berkeley [CS 188](http://edx.org/ai) class on Artificial Intelligence, I'm now going through the [Machine Learning](https://class.coursera.org/ml-2012-002/lecture/index) class by Stanford on coursera. My goal is to apply Machine Learning concepts to Digital Signal Processing, such as for [onset detection](http://www.cs.usc.edu/research/08-895.pdf).
-
 * [Parallel Programming with GPUs](https://www.udacity.com/course/cs344): I'm dedicating myself to the [Introduction to Parallel Programming](https://www.udacity.com/course/cs344) class on [udacity](https://www.udacity.com). It teaches GPGPU programming using [CUDA](http://en.wikipedia.org/wiki/CUDA). I already had some basic experience with [DirectCompute](http://en.wikipedia.org/wiki/DirectCompute) so I wasn't entirely out of the loop going into the class.
+  {:.highlight}
 
 	So far I've completed the first week. The production quality is high and the course is taught by very knowledgeable instructors. The assignments seem to be geared towards image processing, making the results of what we learn clearly visible. The first assignment involved writing a CUDA program kernel to run on the GPU which converts a color image to grayscale.
 
-    A problem I encountered was that I don't have an Nvidia GPU necessary to run CUDA programs. I had to get rid of my previous one in lieu of an ATI card to appease my hackintosh setup as the 400 series seemed to have a problem in Mac OS X Lion. Thankfully the class contains an online editor which allows students to submit the code they've edited for compilation and execution on an Amazon AWS server. The results are then displayed in the same page. Furthermore, since we're working on GPU image processing, the result is displayed alongside a reference result image along with statistics describing the level to which we match the reference image.
+  A problem I encountered was that I don't have an Nvidia GPU necessary to run CUDA programs. I had to get rid of my previous one in lieu of an ATI card to appease my hackintosh setup as the 400 series seemed to have a problem in Mac OS X Lion. Thankfully the class contains an online editor which allows students to submit the code they've edited for compilation and execution on an Amazon AWS server. The results are then displayed in the same page. Furthermore, since we're working on GPU image processing, the result is displayed alongside a reference result image along with statistics describing the level to which we match the reference image.
 
-    Using this editor can sometimes be a pain, as it makes for slow iteration and oftentimes nondescript error messages. However, it is pretty clever and definitely helps people like myself, who are currently without an Nvidia card, to benefit from the class.
+  Using this editor can sometimes be a pain, as it makes for slow iteration and oftentimes nondescript error messages. However, it is pretty clever and definitely helps people like myself, who are currently without an Nvidia card, to benefit from the class.
 
 *[GPGPU]: General Purpose GPU

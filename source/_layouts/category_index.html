@@ -2,6 +2,8 @@
 layout: default
 ---
 
+<h2 class="title" id="category-title">{{ page.category }}</h2>
+
 {% for post in site.categories[page.category] %}
 	{% include archive_post.html %}
 {% endfor %}
