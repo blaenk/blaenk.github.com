@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Awesome | Jorge Israel Peña]]></title>
+  <link href="http://blaenkdenum.com/categories/awesome/atom.xml" rel="self"/>
+  <link href="http://blaenkdenum.com/"/>
+  <updated>2013-02-25T00:52:22-08:00</updated>
+  <id>http://blaenkdenum.com/</id>
+  <author>
+    <name><![CDATA[Jorge Israel Peña]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[XMonad Ignores Bindings]]></title>
+    <link href="http://blaenkdenum.com/2013/02/24/xmonad-ignores-bindings/"/>
+    <updated>2013-02-24T22:25:00-08:00</updated>
+    <id>http://blaenkdenum.com/2013/02/24/xmonad-ignores-bindings</id>
+    <content type="html"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#media-keys">Media Keys</a></li>
+  <li><a href="#binding">Binding</a></li>
+  <li><a href="#the-problem">The Problem</a></li>
+  <li><a href="#bug-hunting">Bug Hunting</a></li>
+  <li><a href="#workaround">Workaround</a></li>
+  <li><a href="#bug-report">Bug Report</a></li>
+</ul>
+
+<p><strong>Disclaimer</strong>: This post is titled to make it easy for people who are experiencing the same problem to find this post. XMonad does <em>not</em> ignore <em>all</em> bindings.</p>
+
+<p>In my <a href="/2013/02/12/terminal-customization/">previous post</a> I talked about how I spent a while configuring my system, specifically urxvt and zsh, in preparation for setting up <a href="http://xmonad.org">XMonad</a>. I’ve finally gotten around to setting up XMonad. One problem in particular stopped me from continuing with the rest of the configuration.</p>
+
+<h2 id="media-keys">Media Keys</h2>
+
+<p>I have a regular keyboard layout, <a href="http://www.daskeyboard.com/model-s-ultimate/">Das Keyboard Model S Ultimate</a>, which lacks media keys (i.e. volume up, down, etc). This wasn’t too much of a problem when I used headsets because most of them have dedicated volume controls. However, I got tired of headsets being rendered useless when any little thing messed up (e.g. microphone, a speaker, etc).</p>
+
+<p>As a result I ended up buying a <a href="http://amzn.com/B00029MTMQ">cheap standalone mic</a> and now use my iPhone’s <a href="http://amzn.com/B004PNZFZ8">Shure SE215-K</a> earbuds for sound on my computer. This is very easy to do given my computer case’ front panel audio connector. Of course, the problem now is that there aren’t any dedicated media keys and having to use a GUI to change the volume is cumbersome.</p>
+
+<p>My solution to this problem in Windows and Mac is to bind the bottom right keys to media keys as follows:</p>
+
+<ul>
+  <li>Right Control → Volume Up</li>
+  <li>Menu Key → Volume Down</li>
+  <li>Right Windows Key → Volume Mute</li>
+</ul>
+
+<h2 id="binding">Binding</h2>
+
+<p>Creating these binds is possible on Windows via a registry hack, facilitated using a program such as <a href="http://www.randyrants.com/sharpkeys/">SharpKeys</a>.</p>
+
+<p>On Linux I initially did this using <code>xmodmap</code>:</p>
+
+<p>``` plain
+remove Control = Control_R
+keycode 105 = XF86AudioRaiseVolume
+add Control = Control_R</p>
+
+<p>keycode 135 = XF86AudioLowerVolume</p>
+
+<p>remove mod4 = Super_R
+keycode 134 = XF86AudioMute
+add mod4 = Super_R
+```</p>
+
+<p>Binding to these <code>XF86Audio*</code> keys automatically adds support for these keys in different applications like <a href="http://www.mplayer2.org/">mplayer2</a>, but I wanted system-wide volume support. This is typically accomplished by wiring them up in your given Desktop Environment or Window Manager. So I went ahead and did so in <code>xmonad.hs</code>:</p>
+
+<p><code>haskell
+((0, xF86XK_AudioMute), spawn "amixer -q set Master,0 toggle"),
+((0, xF86XK_AudioLowerVolume), spawn "amixer -q set Master,0 5%- unmute"),
+((0, xF86XK_AudioRaiseVolume), spawn "amixer -q set Master,0 5%+ unmute")
+</code></p>
+
+<h2 id="the-problem">The Problem</h2>
+
+<p>The problem was that XMonad would only react to the Right Control key (Volume Up). However, <code>xev</code> correctly interpreted the keys as having been bound to the <code>XF86Audio*</code> keys. I was really confused as to why the binds apparently did work at the system level but only one of them worked at the window manager level.</p>
+
+<p>To rule out that it wasn’t something with the system-level (xmodmap) binds, I decided to check if it worked in <a href="http://awesome.naquadah.org/">Awesome</a>:</p>
+
+<p>``` lua
+awful.key({}, “XF86AudioLowerVolume”, function () awful.util.spawn(“amixer -q set Master,0 5%- unmute”, false) end),
+awful.key({}, “XF86AudioRaiseVolume”, function () awful.util.spawn(“amixer -q set Master,0 5%+ unmute”, false) end),
+awful.key({}, “XF86AudioMute”, function () awful.util.spawn(“amixer set Master,0 toggle”, false) end),</p>
+
+<p>```</p>
+
+<p>Indeed it worked perfectly. So now I had narrowed down the problem to XMonad.</p>
+
+<h2 id="bug-hunting">Bug Hunting</h2>
+
+<p>Eventually I decided to stop by <code>#xmonad</code> on freenode. There I found Paul Fertser who spent the next ~6 hours helping me track down what he figured to be a bug in XMonad. I told him that the system-level binds did work, but not in XMonad. I showed him my binds using <code>xmodmap -pke</code>.</p>
+
+<p>He noticed that the <code>XF86Audio*</code> keys were bound twice: once by default by XKB (<code>xmodmap</code>’s more modern replacement) bound to the keycodes I would have if my keyboard had media keys, and bound again to the keys I chose (the bottom right keys). He then hypothesized that XMonad wasn’t grabbing the keys at all due to Xlib limitations. Specifically, the <code>XKeysymToKeycode</code> function only returns one keycode per key, biased towards lower keycodes, presumably due to an increasing iterative search of the keycodes for a match.</p>
+
+<p>This theory accounted for why the Right Control (Volume Up) bind did work and not the others. What happened was that Right Control’s keycode was lower than the duplicate bind’s keycode. As a result, when XMonad used <code>XKeysymToKeycode</code> it retrieved the correct keycode. The other two binds, however, have higher keycodes than the default-bound ones, and so <code>XKeysymToKeycode</code> returned the first (lower) keycode it found and as a result XMonad never even knew of the other binds’ existence.</p>
+
+<p>To test this theory, Paul had me run <a href="http://en.wikipedia.org/wiki/Ltrace"><code>ltrace</code></a> on XMonad to see which keys XMonad grabbed. The output of this clearly showed that XMonad only grabbed the keys with the lower keycodes.</p>
+
+<h2 id="workaround">Workaround</h2>
+
+<p>Now that we were pretty sure of the cause of this, the workaround was to remove the other keycodes (for keys I didn’t even have on my keyboard). At this time I decided I might as well switch over to XKB. The first order of business was to <a href="http://unix.stackexchange.com/a/65600/10163">dump my XKB map</a>:</p>
+
+<p><code>bash
+$ setxkbmap -print &gt; ~/.xkb/keymap/mymap
+</code></p>
+
+<p>Then I created a <code>~/.xkb/symbols/volume_keys</code> file to store my media key binds. It took me a long while to figure out how to remove/unbind the default-bound keys. One problem was that XKB sets different aliases for keys. For example, <code>&lt;I0D&gt;</code> (I guess that’s a media key) was aliased to <code>&lt;MUTE&gt;</code>. I looked around in <code>/usr/share/X11/xkb/rules/evdev</code> to see what was aliased and made sure to unbind those too. As for unbinding, at first Paul suggested to bind the keys to <code>NoSymbol</code> but that apparently had no effect. Eventually I found out it was possible with <a href="http://madduck.net/docs/extending-xkb/#attaching_symbols_to_keys"><code>VoidSymbol</code></a>.</p>
+
+<p>``` plain
+partial modifier_keys
+xkb_symbols “volume_keys” {
+  // mute
+  replace key <mute> { [ VoidSymbol ] };
+  replace key <i0d> { [ VoidSymbol ] };</i0d></mute></p>
+
+<p>// lower volume
+  replace key <vol-> { [ VoidSymbol ] };
+  replace key <i0e> { [ VoidSymbol ] };</i0e></vol-></p>
+
+<p>// raise volume
+  replace key &lt;VOL+&gt; { [ VoidSymbol ] };
+  replace key <i0f> { [ VoidSymbol ] };</i0f></p>
+
+<p>replace key <rctl> { [ XF86AudioRaiseVolume ] };
+  replace key &lt;MENU&gt; { [ XF86AudioLowerVolume ] };
+  replace key <rwin> { [ XF86AudioMute ] };
+  replace key <ralt> { [ Multi_key ] };
+};
+```</ralt></rwin></rctl></p>
+
+<p>Now I loaded my XKB map in <code>~/.xinitrc</code>:</p>
+
+<p><code>bash
+xkbcomp -I$HOME/.xkb ~/.xkb/keymap/mymap $DISPLAY
+</code></p>
+
+<p>I restarted XMonad with <code>Mod-Shift-Q</code> (so that <code>~/.xinitrc</code> is rerun) and everything now worked perfectly.</p>
+
+<h2 id="bug-report">Bug Report</h2>
+
+<p>Over the course of my transition to XKB, Paul found that there was already <a href="https://code.google.com/p/xmonad/issues/detail?id=273">an issue</a> opened back in 2009 concerning this. The issue report has a patch attached that fixes this, but the patch has yet to be applied to XMonad. Paul suggested I try the patch myself and communicate my results back to the issue report. So I went ahead and got XMonad and XMonadContrib from the darcs repository, ran a simple <code>darcs apply keycode.dpatch</code>, and installed each with a <code>--prefix</code> to prevent clashing with the ones already installed with pacman. Indeed, the patch worked perfectly.</p>
+
+]]></content>
+  </entry>
+  
+</feed>
