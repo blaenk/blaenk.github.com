@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Markdown | Jorge Israel Peña]]></title>
   <link href="http://blaenkdenum.com/categories/markdown/atom.xml" rel="self"/>
   <link href="http://blaenkdenum.com/"/>
-  <updated>2013-02-25T00:52:22-08:00</updated>
+  <updated>2013-03-01T23:45:07-08:00</updated>
   <id>http://blaenkdenum.com/</id>
   <author>
     <name><![CDATA[Jorge Israel Peña]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Test Post]]></title>
-    <link href="http://blaenkdenum.com/2012/09/19/test-post/"/>
+    <link href="http://blaenkdenum.com/posts/test-post/"/>
     <updated>2012-09-19T02:49:00-07:00</updated>
-    <id>http://blaenkdenum.com/2012/09/19/test-post</id>
+    <id>http://blaenkdenum.com/posts/test-post</id>
     <content type="html"><![CDATA[<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dolor nisi, feugiat sit amet egestas sit amet, mattis sit amet velit. Proin quis metus id mi vulputate adipiscing eget et <strong>sapien</strong>. Sed iaculis auctor sem ac convallis <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>. Cras nisi libero, dignissim quis facilisis et, bibendum eget enim. Vivamus est leo, tristique ut adipiscing vitae, malesuada adipiscing tellus. Integer nec aliquam justo. Nam ac lacus erat. In <strong><em>hac habitasse platea</em></strong> dictumst. Donec pharetra, lectus sit amet ultrices fringilla, metus mi auctor ligula, in hendrerit dui arcu eu leo.</p>
 
 <p>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla facilisi. Vestibulum consectetur nulla eget erat <em>fermentum malesuada</em>. Nullam ultricies nulla ut eros vulputate sed cursus tortor faucibus. Cras ac risus mauris. Suspendisse molestie elementum luctus. Vestibulum <a href="http://www.google.com">venenatis blandit</a> velit ac pretium.</p>

@@ -4,7 +4,7 @@
   <title><![CDATA[Jorge Israel Peña]]></title>
   <link href="http://blaenkdenum.com/atom.xml" rel="self"/>
   <link href="http://blaenkdenum.com/"/>
-  <updated>2013-02-25T00:52:22-08:00</updated>
+  <updated>2013-03-01T23:45:07-08:00</updated>
   <id>http://blaenkdenum.com/</id>
   <author>
     <name><![CDATA[Jorge Israel Peña]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[XMonad Ignores Bindings]]></title>
-    <link href="http://blaenkdenum.com/2013/02/24/xmonad-ignores-bindings/"/>
+    <link href="http://blaenkdenum.com/posts/xmonad-ignores-bindings/"/>
     <updated>2013-02-24T22:25:00-08:00</updated>
-    <id>http://blaenkdenum.com/2013/02/24/xmonad-ignores-bindings</id>
+    <id>http://blaenkdenum.com/posts/xmonad-ignores-bindings</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#media-keys">Media Keys</a></li>
   <li><a href="#binding">Binding</a></li>
@@ -172,9 +172,9 @@
   
   <entry>
     <title type="html"><![CDATA[Terminal Customization]]></title>
-    <link href="http://blaenkdenum.com/2013/02/12/terminal-customization/"/>
+    <link href="http://blaenkdenum.com/posts/terminal-customization/"/>
     <updated>2013-02-12T04:33:00-08:00</updated>
-    <id>http://blaenkdenum.com/2013/02/12/terminal-customization</id>
+    <id>http://blaenkdenum.com/posts/terminal-customization</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#dotfiles">dotfiles</a></li>
   <li><a href="#urxvt">urxvt</a>    <ul>
@@ -302,9 +302,9 @@
   
   <entry>
     <title type="html"><![CDATA[Naive Convolution in Haskell]]></title>
-    <link href="http://blaenkdenum.com/2013/01/04/naive-convolution-in-haskell/"/>
+    <link href="http://blaenkdenum.com/posts/naive-convolution-in-haskell/"/>
     <updated>2013-01-04T18:21:00-08:00</updated>
-    <id>http://blaenkdenum.com/2013/01/04/naive-convolution-in-haskell</id>
+    <id>http://blaenkdenum.com/posts/naive-convolution-in-haskell</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#principle">Principle</a></li>
   <li><a href="#definition">Definition</a>    <ul>
@@ -535,7 +535,7 @@
 
 <h3 id="benchmark">Benchmark</h3>
 
-<p>The <a href="http://hackage.haskell.org/packages/archive/criterion"><code>criterion</code></a> Haskell package provides tools for benchmarking and analyzing code. The synthetic benchmark we will conduct will run each implementation with an impulse response of length 100 and an input signal of length 1000.</p>
+<p>The <a href="http://hackage.haskell.org/packages/archive/criterion"><code>criterion</code></a> Haskell package provides tools for benchmarking and analyzing code. The synthetic benchmark we will conduct will run each implementation with an impulse response of length 100 and an input signal of length 1,000.</p>
 
 <p>In the following code, <code>conv</code> is the naive implementation, <code>conv'</code> is the reduced naive implementation, and <code>parConv</code> is the parallel implementation:</p>
 
@@ -689,9 +689,9 @@
   
   <entry>
     <title type="html"><![CDATA[I'm Back]]></title>
-    <link href="http://blaenkdenum.com/2012/12/25/im-back/"/>
+    <link href="http://blaenkdenum.com/posts/im-back/"/>
     <updated>2012-12-25T23:25:00-08:00</updated>
-    <id>http://blaenkdenum.com/2012/12/25/im-back</id>
+    <id>http://blaenkdenum.com/posts/im-back</id>
     <content type="html"><![CDATA[<p>It’s been a while since I last had a blog. In fact, I think it’s been two, maybe three years now. I previously had a WordPress blog that I updated regularly. However, the things I was studying on my own at the time consumed me and I considered writing about those things to be a low priority. After all, who want’s to hear what a noob thinks about something he’s barely beginning to learn about? So instead I figured I’d continue reading and studying, and maintaining a blog kind of fell into the backburner.</p>
 
 <h3 id="blogging">Blogging</h3>
@@ -700,7 +700,7 @@
 
 <h3 id="haskell">Haskell</h3>
 
-<p>I’ve done a lot during my absence these past few years. In fact, it’s all a big blur so I don’t know where to begin to talk about it. Most recently, for example, I worked on a <a href="https://github.com/blaenk/pulse-visualizer">music visualizer</a> for Linux’ Pulse Audio in Haskell using OpenGL and FFTW. This was the first program I wrote in Haskell, aside from little programs I would write to learn the language. I learned Haskell primarily using a combination of <a href="http://learnyouahaskell.com/">Learn You a Haskell for Great Good</a> and <a href="http://book.realworldhaskell.org/read/">Real World Haskell</a>. For certain things, such as understanding the concept of laziness in Haskell, I used the <a href="http://en.wikibooks.org/wiki/Haskell/Laziness">Haskell Wikibook</a>. I also had a Professor at school, who was familiar with Haskell and DSP, as my mentor. Thanks to his previous experience, I was able to learn both things pretty quickly. Whenever I was unsure of my understanding of a given topic, such as Monads, I had him to discuss and refine my understanding with.</p>
+<p>I’ve done a lot during my absence these past few years. In fact, it’s all a big blur so I don’t know where to begin to talk about it. Most recently, for example, I worked on a <a href="https://github.com/blaenk/pulse-visualizer">music visualizer</a> for Linux’ Pulse Audio in Haskell using OpenGL and FFTW. This was the first program I wrote in Haskell, aside from little programs I would write to learn the language. I learned Haskell primarily using a combination of <a href="http://learnyouahaskell.com/">Learn You a Haskell for Great Good</a> and <a href="http://book.realworldhaskell.org/read/">Real World Haskell</a>. For certain things, such as understanding the concept of laziness in Haskell, I used the <a href="http://en.wikibooks.org/wiki/Haskell/Laziness">Haskell Wikibook</a>. I also had a Professor at school who was familiar with Haskell and DSP as my mentor. Thanks to his previous experience, I was able to learn both things pretty quickly. Whenever I was unsure of my understanding of a given topic, such as Monads, I had him to discuss and refine my understanding with.</p>
 
 <h3 id="digital-signal-processing">Digital Signal Processing</h3>
 
@@ -712,9 +712,9 @@
   
   <entry>
     <title type="html"><![CDATA[Test Post]]></title>
-    <link href="http://blaenkdenum.com/2012/09/19/test-post/"/>
+    <link href="http://blaenkdenum.com/posts/test-post/"/>
     <updated>2012-09-19T02:49:00-07:00</updated>
-    <id>http://blaenkdenum.com/2012/09/19/test-post</id>
+    <id>http://blaenkdenum.com/posts/test-post</id>
     <content type="html"><![CDATA[<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dolor nisi, feugiat sit amet egestas sit amet, mattis sit amet velit. Proin quis metus id mi vulputate adipiscing eget et <strong>sapien</strong>. Sed iaculis auctor sem ac convallis <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>. Cras nisi libero, dignissim quis facilisis et, bibendum eget enim. Vivamus est leo, tristique ut adipiscing vitae, malesuada adipiscing tellus. Integer nec aliquam justo. Nam ac lacus erat. In <strong><em>hac habitasse platea</em></strong> dictumst. Donec pharetra, lectus sit amet ultrices fringilla, metus mi auctor ligula, in hendrerit dui arcu eu leo.</p>
 
 <p>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla facilisi. Vestibulum consectetur nulla eget erat <em>fermentum malesuada</em>. Nullam ultricies nulla ut eros vulputate sed cursus tortor faucibus. Cras ac risus mauris. Suspendisse molestie elementum luctus. Vestibulum <a href="http://www.google.com">venenatis blandit</a> velit ac pretium.</p>

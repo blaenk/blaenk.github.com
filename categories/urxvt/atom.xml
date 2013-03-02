@@ -4,7 +4,7 @@
   <title><![CDATA[Category: urxvt | Jorge Israel Peña]]></title>
   <link href="http://blaenkdenum.com/categories/urxvt/atom.xml" rel="self"/>
   <link href="http://blaenkdenum.com/"/>
-  <updated>2013-02-25T00:52:22-08:00</updated>
+  <updated>2013-03-01T23:45:07-08:00</updated>
   <id>http://blaenkdenum.com/</id>
   <author>
     <name><![CDATA[Jorge Israel Peña]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Terminal Customization]]></title>
-    <link href="http://blaenkdenum.com/2013/02/12/terminal-customization/"/>
+    <link href="http://blaenkdenum.com/posts/terminal-customization/"/>
     <updated>2013-02-12T04:33:00-08:00</updated>
-    <id>http://blaenkdenum.com/2013/02/12/terminal-customization</id>
+    <id>http://blaenkdenum.com/posts/terminal-customization</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#dotfiles">dotfiles</a></li>
   <li><a href="#urxvt">urxvt</a>    <ul>

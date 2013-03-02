@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Linux | Jorge Israel Peña]]></title>
   <link href="http://blaenkdenum.com/categories/linux/atom.xml" rel="self"/>
   <link href="http://blaenkdenum.com/"/>
-  <updated>2013-02-25T00:52:22-08:00</updated>
+  <updated>2013-03-01T23:45:07-08:00</updated>
   <id>http://blaenkdenum.com/</id>
   <author>
     <name><![CDATA[Jorge Israel Peña]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[XMonad Ignores Bindings]]></title>
-    <link href="http://blaenkdenum.com/2013/02/24/xmonad-ignores-bindings/"/>
+    <link href="http://blaenkdenum.com/posts/xmonad-ignores-bindings/"/>
     <updated>2013-02-24T22:25:00-08:00</updated>
-    <id>http://blaenkdenum.com/2013/02/24/xmonad-ignores-bindings</id>
+    <id>http://blaenkdenum.com/posts/xmonad-ignores-bindings</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#media-keys">Media Keys</a></li>
   <li><a href="#binding">Binding</a></li>
