@@ -7,6 +7,7 @@ published: false
 excerpt: Directories and Links
 categories: 
 - Linux
+- Notes
 ---
 
 This chapter covers directories and links.
