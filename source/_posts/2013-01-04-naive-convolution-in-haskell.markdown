@@ -186,7 +186,7 @@ parConvolve hs xs =
 
 ### Benchmark
 
-The [`criterion`](http://hackage.haskell.org/packages/archive/criterion) Haskell package provides tools for benchmarking and analyzing code. The synthetic benchmark we will conduct will run each implementation with an impulse response of length 100 and an input signal of length 1000.
+The [`criterion`](http://hackage.haskell.org/packages/archive/criterion) Haskell package provides tools for benchmarking and analyzing code. The synthetic benchmark we will conduct will run each implementation with an impulse response of length 100 and an input signal of length 1,000.
 
 In the following code, `conv` is the naive implementation, `conv'` is the reduced naive implementation, and `parConv` is the parallel implementation:
 
