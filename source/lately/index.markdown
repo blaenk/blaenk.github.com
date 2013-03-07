@@ -2,7 +2,7 @@
 layout: page
 title: "Lately"
 date: 2012-12-28 23:19
-updated: 2013-02-15 16:44
+updated: 2013-03-06 16:44
 comments: true
 sharing: true
 footer: true
@@ -19,6 +19,8 @@ _updated {{ updated }}_
 
 ###Currently Working On###
 
+* An audio player, though it'll ultimately be used for something else other than general audio playback. I'm decoding audio frames using [ffmpeg](http://www.ffmpeg.org/)'s libavcodec, libavformat, libavutil, and libswresample. Playback is currently done using [PulseAudio](http://www.freedesktop.org/wiki/Software/PulseAudio) although I intend to switch to a cross-platform library like [PortAudio](http://www.portaudio.com/). It works with any format/container/codec supported by ffmpeg. Source will be up soon.
+{:.highlight}
 * This website. The site's design is "responsive," meaning that it automatically changes based on the size of the viewing device's display. The theme is based on the [slash](http://zespia.tw/Octopress-Theme-Slash/) theme for Octopress. Though if you ask me I don't notice any resemblance.
 * Phoenix is the name of a web interface I created for [rtorrent](https://github.com/rakshasa/rtorrent) made with Rails. Admittedly, Rails is probably overkill for this kind of project. I try to balance this by storing most necessary metadata in the torrent objects within rtorrent as Base64 encoded JSON. rtorrent's API is served using XML-RPC. The interface is developed with a multi-user environment in mind.
 
