@@ -239,7 +239,7 @@ For example, in my tests, changing the impulse response length to 5 and the inpu
 | Reduced           | -16      |
 | Parallel          | -27      |
 
-On the other hand, increasing the impulse response length to 1000 and the input signal length to 10,000 maintained a similar performance increase:
+On the other hand, increasing the impulse response length to 1,000 and the input signal length to 10,000 maintained a similar performance increase:
 
 | Name              | % faster |
 |:-----             |:--------:|
