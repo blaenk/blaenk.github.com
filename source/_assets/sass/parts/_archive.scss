@@ -44,12 +44,13 @@
 			}
 			span{
 				@include inline-block;
+				text-transform: uppercase;
 				&:before{
 					color: $color-gray03;
 					font: 1.3em $font-icon;
 					padding-right: 10px;
 				}
-        vertical-align: baseline;
+        		vertical-align: baseline;
 			}
 			a{
 				color: $color-gray02;
