@@ -6,12 +6,13 @@ banner: false
 {% include head.html %}
 
 <body>
+	<div id="strip"></div>
 	<header id="header" class="inner">{% include header.html %}</header>
 	{% unless page.banner == false %}
 		{% include banner.html %}
 	{% endunless %}
 	<div id="content" class="inner">{{ content | expand_urls: root_url }}</div>
-	<footer id="footer">{% include footer.html %}</footer>
+	<footer id="footer" class="inner">{% include footer.html %}</footer>
 	{% include after_footer.html %}
 </body>
 </html>

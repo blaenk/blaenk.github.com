@@ -7,12 +7,10 @@
 			position: absolute;
 			bottom: 0;
 			width: 100%;
-			border-top: 1px solid $color-gray04;
 		}
 	}
 	article{
     border: none;
-		padding: 15px 0 !important;
     margin-bottom: 0 !important;
 		.title{
 			@media screen and (max-width: 600px){

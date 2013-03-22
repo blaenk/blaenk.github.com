@@ -15,7 +15,7 @@ categories:
 
 **Disclaimer**: This post is titled to make it easy for people who are experiencing the same problem to find this post. XMonad does _not_ ignore _all_ bindings.
 
-In my [previous post](/2013/02/12/terminal-customization/) I talked about how I spent a while configuring my system, specifically urxvt and zsh, in preparation for setting up [XMonad](http://xmonad.org). I've finally gotten around to setting up XMonad. One problem in particular stopped me from continuing with the rest of the configuration.
+In my [previous post](/posts/terminal-customization/) I talked about how I spent a while configuring my system, specifically urxvt and zsh, in preparation for setting up [XMonad](http://xmonad.org). I've finally gotten around to setting up XMonad. One problem in particular stopped me from continuing with the rest of the configuration.
 
 ## Media Keys
 

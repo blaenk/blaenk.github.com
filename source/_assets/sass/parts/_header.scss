@@ -2,8 +2,8 @@ $header-height: 30px;
 
 #header{
 	height: $header-height;
-	padding: 30px 0;
-	border-bottom: 1px solid $color-gray04;
+	padding: 25px 0 30px 0;
+	border-bottom: 5px solid #8ccaff;
 	line-height: $header-height;
   @media screen and (max-width: 766px){
     text-align: center;
@@ -70,6 +70,7 @@ $header-height: 30px;
 			>a{
 				padding: 38px 0;
 				margin-top: -38px;
+				font-weight: bold;
 				&:after{
 					content: "\f078";
 					color: $color-gray03;

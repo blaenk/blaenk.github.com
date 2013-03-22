@@ -5,8 +5,14 @@
   text-align: center;
 }
 
+#strip {
+  height: 5px;
+  margin: 0 -20px;
+  background-color: #2A9AF9;
+}
+
 h1.notfound { font-size: 4em; }
-p.notfound { margin-top: 15px; }
+p.notfound { margin: 15px 0; }
 
 .left {
   float: left;
@@ -17,7 +23,10 @@ p.notfound { margin-top: 15px; }
   font-size: 1.3em;
   color: #999;
 
-  #generated { font-size: 0.7em; }
+  #braces {
+    font-size: 0.7em;
+    color: #999;
+  }
 }
 
 .center {
@@ -107,8 +116,19 @@ sup { line-height: 1em; }
 
 article .entry-content > ul,
 article .entry-content > ol {
-  li { margin-top: 10px; }
+  /* li { margin-top: 10px; } */
   margin-left: 0;
+
+  @media screen and (max-width: 600px) {
+    margin-left: 2px;
+  }
+
+  li > p {
+    margin-top: 0;
+    margin-bottom: 10px;
+
+    &:last-child { margin-bottom: 0; }
+  }
 }
 
 .entry-content ul li {
@@ -147,20 +167,25 @@ article .entry-content > ol {
 }
 
 #main-nav > ul > li > a {
-  padding: 34px 0;
+  padding: 36px 0;
 
   &::after { padding-left: 0; }
-  &:hover { border-bottom: 2px solid #258FB8; }
+  &:hover { border-bottom: 5px solid #258FB8; }
 
 	@media screen and (max-width: 766px){
-    padding: 15px 0;
+    padding: 17px 0;
   }
+}
+
+#comment {
+  padding-top: 15px;
+  margin-top: 5px;
+  border-top: 5px solid #8ccaff;
 }
 
 #content {
   article {
     padding: 0 0 15px 0;
-    margin-bottom: 15px;
 
     .entry-content > p {
       font-size: 16px;
@@ -171,10 +196,6 @@ article .entry-content > ol {
 
 .highlight {
   background-color: #ffc;
-}
-
-#generated {
-  color: #999;
 }
 
 .post {
@@ -314,7 +335,15 @@ figure.code {
     }
   }
 
-  h2 a { border-bottom: 1px solid #ddd; }
+  h2 a { border-bottom: 2px solid #8ccaff; }
+}
+
+/*#content {
+  border-bottom: 5px solid #8ccaff;
+}*/
+
+#footer {
+  border-top: 5px solid #ddd;
 }
 
 .desk_search {

@@ -1,11 +1,15 @@
 {% capture date %}{{ post.date }}{% endcapture %}
+{% capture gen_year %}{{ site.time | date: "%Y" }}{% endcapture %}
 {% capture this_year %}{{ date | date: "%Y" }}{% endcapture %}
 {% unless year == this_year %}
 	{% assign year = this_year %}
 	{% unless forloop.first %}
 		</section>
 	{% endunless %}
-	<section class="archives"><h2 class="year">{{ date | date: "%Y" }}</h2>
+	<section class="archives">
+  {% unless gen_year == this_year %}
+    <h2 class="year">{{ this_year }}</h2>
+  {% endunless %}
 {% endunless %}
 <article>
 	<span class="meta">
