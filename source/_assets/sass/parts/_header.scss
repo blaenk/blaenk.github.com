@@ -32,25 +32,6 @@ $header-height: 30px;
       font-weight: 300;
       font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,sans-serif;
       font-size: 30px;
-      a {
-      	padding-top: 22px;
-      	padding-bottom: 28px;
-
-      	@media screen and (max-width: 766px) {
-      		padding-top: 0;
-      		padding-bottom: 0;
-      	}
-
-      	&:hover {
-      		border-top: 5px solid #d01040;
-      		border-bottom: 5px solid #258fb8;
-
-      		@media screen and (max-width: 766px) {
-		  		border-top: none;
-		  		border-bottom: none;
-      		}
-      	}
-      }
     }
     h4{
       color: #666;
