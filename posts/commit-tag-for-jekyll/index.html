@@ -79,13 +79,65 @@
 
 <blockquote><p>libgit2 is a portable, pure C implementation of the Git core methods provided as a re-entrant linkable library with a solid API, allowing you to write native speed custom Git applications in any language which supports C bindings.</p><footer><strong>About</strong> <cite><a href="http://libgit2.github.com/">libgit2 </a></cite></footer></blockquote>
 
-<p>The end result is the <a href="https://github.com/blaenk/blaenk.github.com/blob/source/plugins/commit.rb">commit tag plugin</a> which quite simply lets you insert a link to the latest commit of your site with the following properties:</p>
+<p>The end result is the commit tag plugin which quite simply lets you insert a link to the latest commit of your site with the following properties:</p>
 
-<ol>
+<ul>
   <li>the link text is the short-form, 8-character truncated SHA1 hash to the commit pointed to by HEAD on the default branch, <code>source</code> in my case</li>
   <li>the link title text is the commit message</li>
   <li>the link target is the github page for the commit</li>
-</ol>
+</ul>
+
+<p>The plugin is available in my <a href="https://github.com/blaenk/blaenk.github.com/blob/source/plugins/commit.rb">site’s repository</a>. Here it is in its entirety:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+</pre></td><td class="code"><pre><code class="ruby"><span class="line"><span class="nb">require</span> <span class="s1">&#39;rugged&#39;</span>
+</span><span class="line">
+</span><span class="line"><span class="k">module</span> <span class="nn">Jekyll</span>
+</span><span class="line">  <span class="k">class</span> <span class="nc">Commit</span> <span class="o">&lt;</span> <span class="ss">Liquid</span><span class="p">:</span><span class="ss">:Tag</span>
+</span><span class="line">    <span class="no">MATCHER</span> <span class="o">=</span> <span class="sr">/\A(\S+)\Z/</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+</span><span class="line">      <span class="n">path</span> <span class="o">=</span> <span class="ss">Rugged</span><span class="p">:</span><span class="ss">:Repository</span><span class="o">.</span><span class="n">discover</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+</span><span class="line">      <span class="n">repo</span> <span class="o">=</span> <span class="ss">Rugged</span><span class="p">:</span><span class="ss">:Repository</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">      <span class="n">sha</span> <span class="o">=</span> <span class="n">repo</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">target</span>
+</span><span class="line">      <span class="n">message</span> <span class="o">=</span> <span class="n">repo</span><span class="o">.</span><span class="n">lookup</span><span class="p">(</span><span class="n">sha</span><span class="p">)</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">strip</span>
+</span><span class="line">      <span class="n">markup</span> <span class="o">=</span> <span class="vi">@markup</span><span class="o">.</span><span class="n">strip</span>
+</span><span class="line">
+</span><span class="line">      <span class="k">if</span> <span class="ow">not</span> <span class="n">markup</span><span class="o">.</span><span class="n">empty?</span>
+</span><span class="line">        <span class="n">repo</span> <span class="o">=</span> <span class="n">markup</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="no">MATCHER</span><span class="p">)</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span>
+</span><span class="line">        <span class="s2">&quot;&lt;a href=</span><span class="se">\&quot;</span><span class="s2">https://github.com/</span><span class="si">#{</span><span class="n">repo</span><span class="si">}</span><span class="s2">/commit/</span><span class="si">#{</span><span class="n">sha</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2"> title=</span><span class="se">\&quot;</span><span class="si">#{</span><span class="n">message</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2">&gt;</span><span class="si">#{</span><span class="n">sha</span><span class="o">[</span><span class="mi">0</span><span class="o">.</span><span class="n">.</span><span class="o">.</span><span class="mi">8</span><span class="o">]</span><span class="si">}</span><span class="s2">&lt;/a&gt;&quot;</span>
+</span><span class="line">      <span class="k">else</span>
+</span><span class="line">        <span class="s2">&quot;&lt;span title=</span><span class="se">\&quot;</span><span class="si">#{</span><span class="n">message</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2">&gt;</span><span class="si">#{</span><span class="n">sha</span><span class="o">[</span><span class="mi">0</span><span class="o">.</span><span class="n">.</span><span class="o">.</span><span class="mi">8</span><span class="o">]</span><span class="si">}</span><span class="s2">&lt;/span&gt;&quot;</span>
+</span><span class="line">      <span class="k">end</span>
+</span><span class="line">    <span class="k">end</span>
+</span><span class="line">  <span class="k">end</span>
+</span><span class="line"><span class="k">end</span>
+</span><span class="line">
+</span><span class="line"><span class="ss">Liquid</span><span class="p">:</span><span class="ss">:Template</span><span class="o">.</span><span class="n">register_tag</span><span class="p">(</span><span class="s1">&#39;commit&#39;</span><span class="p">,</span> <span class="ss">Jekyll</span><span class="p">:</span><span class="ss">:Commit</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>The commit tag is simple to use, taking only one parameter which denotes the repository to link to, in my case:</p>
 
@@ -144,7 +196,7 @@
 </section>
 
 </div>
-	<footer id="footer" class="inner">{ <span id="braces"><a href="https://github.com/blaenk/blaenk.github.com/commit/894c07232664a32ac6fa4598bf5a1ec826c50b35" title="post about commit plugin; remove titlecase filtering in blockquote plugin; refine commit plugin">894c0723</a></span> }
+	<footer id="footer" class="inner">{ <span id="braces"><a href="https://github.com/blaenk/blaenk.github.com/commit/93f72fb5f861c1d8d465a3127031647ce861c4dd" title="refine commit-tag post; change code block line-number font and code block line height">93f72fb5</a></span> }
 </footer>
 	
 
