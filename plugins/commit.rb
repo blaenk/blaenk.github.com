@@ -6,12 +6,17 @@ module Jekyll
     def render(context)
       path = Rugged::Repository.discover('.')
       repo = Rugged::Repository.new(path)
-      sha = repo.head.target
-      commit = repo.lookup(sha)
-      message = commit.message.strip
-      repo = @markup.strip.match(MATCHER)[1]
 
-      "<a href=\"https://github.com/#{repo}/commit/#{sha}\" title=\"#{message}\">#{sha[0...8]}</a>"
+      sha = repo.head.target
+      message = repo.lookup(sha).message.strip
+      markup = @markup.strip
+
+      if not markup.empty?
+        repo = markup.match(MATCHER)[1]
+        "<a href=\"https://github.com/#{repo}/commit/#{sha}\" title=\"#{message}\">#{sha[0...8]}</a>"
+      else
+        "<span title=\"#{message}\">#{sha[0...8]}</span>"
+      end
     end
   end
 end

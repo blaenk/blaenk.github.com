@@ -30,14 +30,14 @@ module Jekyll
       if markup =~ FullCiteWithTitle
         @by = $1
         @source = $2 + $3
-        @title = $4.titlecase
+        @title = $4
       elsif markup =~ FullCite
         @by = $1
         @source = $2 + $3
       elsif markup =~ Author
         if $1 =~ /([^,]+),([^,]+)/
           @by = $1
-          @title = $2.titlecase
+          @title = $2
         else
           @by = $1
         end
