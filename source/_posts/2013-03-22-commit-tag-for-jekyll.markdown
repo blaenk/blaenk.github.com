@@ -10,7 +10,7 @@ categories:
 - Ruby
 ---
 
-I've been touching up my site and I got to the footer part of the site where I used to display the last time the site was generated, something like "generated March 22nd, 2013." I decided this was pretty tacky and removed it, but I did want to have something in the footer. Eventually I got the idea to instead put a short SHA1 hash of the latest commit for the site. It would link to the github page for said commit, and on hover of the link it would show the commit message.
+I've been touching up my site and I got to the footer, where I used to display the last time the site was generated, such as "generated March 22nd, 2013." I decided this was pretty tacky and removed it, but I did want to have something in the footer. Eventually I got the idea to instead put a short SHA1 hash of the latest commit for the site. It would link to the github page for said commit, and on hover of the link it would show the commit message.
 
 After having seen previous plugin implementations, it seemed pretty simple enough. I quickly brought up the page for [rugged](https://github.com/libgit2/rugged), [libgit2's](http://libgit2.github.com/) ruby bindings.
 
@@ -63,4 +63,4 @@ This format is similar to [vundle's](https://github.com/gmarik/vundle), a plugin
 
 Of course, this is a very simple plugin and makes many assumptions (i.e. that you're using github), but it's simple enough that you should be able to modify it to your purpose easily.
 
-One thing to be mindful of is that the tag is evaluated at the point in which your site is generated. That is, if you generate your site, _then_ make a commit and deploy, the tag will be evaluated such that it displays the previous commit instead. This is simply the nature of static site generation. All that's required is to generate the site after having made the commits you make. To automate this, I made my `Rakefile`'s `deploy` tag execute the `generate` task. This way is more natural in my opinion, as I'm used to deploying only after commiting my changes.
+One thing to be mindful of is that the tag is evaluated at the point in which your site is generated. That is, if you generate your site, _then_ make a commit and deploy, the tag will be evaluated such that it displays the previous commit instead. This is simply the nature of static site generation. All that's required is to generate the site after having made the commits you make. To automate this, I made my `Rakefile`'s `deploy` task execute the `generate` task. This way is more natural in my opinion, as I'm used to deploying only after commiting my changes.
