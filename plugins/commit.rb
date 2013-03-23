@@ -11,7 +11,7 @@ module Jekyll
       message = commit.message.strip
       repo = @markup.strip.match(MATCHER)[1]
 
-      "<a href=\"https://github.com/#{repo}/commit/#{sha}\" title=\"#{message}\">#{sha}</a>"
+      "<a href=\"https://github.com/#{repo}/commit/#{sha}\" title=\"#{message}\">#{sha[0...8]}</a>"
     end
   end
 end
