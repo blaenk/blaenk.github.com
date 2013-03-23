@@ -7,7 +7,7 @@
 	<meta name="author" content="Jorge Israel Peña">
 
 	
-	<meta name="description" content="I’ve been touching up my site and I got to the footer part of the site where I used to display the last time the site was generated, something like “ &hellip;">
+	<meta name="description" content="I’ve been touching up my site and I got to the footer, where I used to display the last time the site was generated, such as “generated March 22nd, &hellip;">
 	
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
@@ -73,7 +73,7 @@
 	
 	<div id="content" class="inner"><article class="post">
   <h2 class="title"><a href="">Commit Tag for Jekyll</a></h2>
-	<div class="entry-content"><p>I’ve been touching up my site and I got to the footer part of the site where I used to display the last time the site was generated, something like “generated March 22nd, 2013.” I decided this was pretty tacky and removed it, but I did want to have something in the footer. Eventually I got the idea to instead put a short SHA1 hash of the latest commit for the site. It would link to the github page for said commit, and on hover of the link it would show the commit message.</p>
+	<div class="entry-content"><p>I’ve been touching up my site and I got to the footer, where I used to display the last time the site was generated, such as “generated March 22nd, 2013.” I decided this was pretty tacky and removed it, but I did want to have something in the footer. Eventually I got the idea to instead put a short SHA1 hash of the latest commit for the site. It would link to the github page for said commit, and on hover of the link it would show the commit message.</p>
 
 <p>After having seen previous plugin implementations, it seemed pretty simple enough. I quickly brought up the page for <a href="https://github.com/libgit2/rugged">rugged</a>, <a href="http://libgit2.github.com/">libgit2’s</a> ruby bindings.</p>
 
@@ -148,7 +148,7 @@
 
 <p>Of course, this is a very simple plugin and makes many assumptions (i.e. that you’re using github), but it’s simple enough that you should be able to modify it to your purpose easily.</p>
 
-<p>One thing to be mindful of is that the tag is evaluated at the point in which your site is generated. That is, if you generate your site, <em>then</em> make a commit and deploy, the tag will be evaluated such that it displays the previous commit instead. This is simply the nature of static site generation. All that’s required is to generate the site after having made the commits you make. To automate this, I made my <code>Rakefile</code>’s <code>deploy</code> tag execute the <code>generate</code> task. This way is more natural in my opinion, as I’m used to deploying only after commiting my changes.</p>
+<p>One thing to be mindful of is that the tag is evaluated at the point in which your site is generated. That is, if you generate your site, <em>then</em> make a commit and deploy, the tag will be evaluated such that it displays the previous commit instead. This is simply the nature of static site generation. All that’s required is to generate the site after having made the commits you make. To automate this, I made my <code>Rakefile</code>’s <code>deploy</code> task execute the <code>generate</code> task. This way is more natural in my opinion, as I’m used to deploying only after commiting my changes.</p>
 </div>
 
 
@@ -196,7 +196,7 @@
 </section>
 
 </div>
-	<footer id="footer" class="inner">{ <span id="braces"><a href="https://github.com/blaenk/blaenk.github.com/commit/a43681265cf7dba22830c2a741452ae7ef5b8eec" title="add tags to commit-tag post">a4368126</a></span> }
+	<footer id="footer" class="inner">{ <span id="braces"><a href="https://github.com/blaenk/blaenk.github.com/commit/02367cd62450a98a10d440bdfbddec8b487d33ea" title="lessen code padding; fix typos in commit-tag post">02367cd6</a></span> }
 </footer>
 	
 
