@@ -3,11 +3,11 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Jorge Israel Peña</title>
+	<title>Learning ffmpeg - Jorge Israel Peña</title>
 	<meta name="author" content="Jorge Israel Peña">
 
 	
-	<meta name="description" content="Mar 17 » Learning ffmpeg Trying to comprehend the behemoth that is ffmpeg Mar 6 » The Linux Programming Interface: Directories and Links Directories &hellip;">
+	<meta name="description" content="I’ve been trying to understand ffmpeg enough to use for decoding audio in a personal application I’m working on. Documentation and resources to learn &hellip;">
 	
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
@@ -71,169 +71,76 @@
 
 </header>
 	
-	<div id="content" class="inner">
+	<div id="content" class="inner"><article class="post">
+  <h2 class="title"><a href="">Learning ffmpeg</a></h2>
+	<div class="entry-content"><p>I’ve been trying to understand <a href="http://www.ffmpeg.org/">ffmpeg</a> enough to use for decoding audio in a personal application I’m working on. Documentation and resources to learn it are a bit low and inconsistent or usually outdated. Here I try to maintain a list of resources and information I’ve learned about the library.</p>
 
-	
+<p>These notes will be updated as I learn more about ffmpeg.</p>
+
+<h3 id="resources">Resources</h3>
+
+<p>A problem I’ve encountered with ffmpeg is that many articles posted about it or open source found online is already outdated. Many modern applications like <a href="http://mpc-hc.org/">MPC-HC</a> and <a href="http://www.chromium.org/Home">Chromium</a> do seem to use the latest version of the APIs. I also quickly learned that most learning is done through looking at the examples in ffmpeg as well as the ffplay source.</p>
+
+<ul>
+  <li>the updated version of the <a href="http://dranger.com/ffmpeg/">ffmpeg tutorial</a> hosted <a href="https://github.com/chelyaev/ffmpeg-tutorial/blob/master/tutorial03.c#L114">here</a></li>
+  <li>the <a href="https://github.com/FFmpeg/FFmpeg/blob/master/ffplay.c#L2133"><code>ffplay.c</code></a> source</li>
+  <li>the ffmpeg <a href="https://github.com/FFmpeg/FFmpeg/tree/master/doc/examples">examples</a></li>
+  <li>a <a href="http://www.gamedev.net/topic/624876-how-to-read-an-audio-file-with-ffmpeg-in-c/#entry4940299">post</a> on gamedev</li>
+  <li>the <a href="https://github.com/mpc-hc/mpc-hc/blob/master/src/filters/transform/MpaDecFilter/FFAudioDecoder.cpp#L295">mpc-hc</a> source</li>
+  <li>the <a href="http://src.chromium.org/svn/trunk/src/media/filters/audio_file_reader.cc">chromium source</a></li>
+</ul>
+
+<p>One particular thing about decoding audio is that it is generally decoded to a format that was used during the encoding process. This could be PCM Float Planar format for example, where each sample is a float and each channel is stored in a separate buffer. However, when you want to use the audio or play it through speakers, sometimes the format required can differ from the format decoded to. Fortunately ffmpeg has <a href="http://ffmpeg.org/libswresample.html">libswresample</a> which can make these conversions easy. There also exists an abstraction of this using <a href="http://ffmpeg.org/libavfilter.html">libavfilter</a>.</p>
+
+<ul>
+  <li>commit <a href="https://github.com/FFmpeg/FFmpeg/commit/e96175ad7b576ad57b83d399193ef10b2bb016ae"><code>e96175ad</code></a> that adds avfilter support to ffplay</li>
+  <li>libswresample’s <a href="https://github.com/FFmpeg/FFmpeg/blob/master/doc/examples/resampling_audio.c">resampling audio</a> example</li>
+</ul>
+</div>
+
+
+<div class="meta">
+	<div class="date">
 
 
 
-	
-	
-	<section class="archives">
+
+
+
+
+
+
+
+
+
   
 
-<article>
-	<span class="meta">
-		<span class="date">Mar 17 »</span>
-	</span>
-  <div class="post-info">
-    <h2 class="title"><a href="/posts/learning-ffmpeg/">Learning ffmpeg</a></h2>
-    <div class="excerpt">
-      
-      
-        Trying to comprehend the behemoth that is ffmpeg
-      
-    </div>
-  </div>
-</article>
 
 
 
-	
 
-
-
-<article>
-	<span class="meta">
-		<span class="date">Mar  6 »</span>
-	</span>
-  <div class="post-info">
-    <h2 class="title"><a href="/posts/the-linux-programming-interface-directories-and-links/">The Linux Programming Interface: Directories and Links</a></h2>
-    <div class="excerpt">
-      
-      
-        Directories and Links
-      
-    </div>
-  </div>
-</article>
-
-
-
-	
-
-
-
-<article>
-	<span class="meta">
-		<span class="date">Feb 24 »</span>
-	</span>
-  <div class="post-info">
-    <h2 class="title"><a href="/posts/xmonad-ignores-bindings/">XMonad Ignores Bindings</a></h2>
-    <div class="excerpt">
-      
-      
-        Tracking down a bug in XMonad that prevents it from picking up certain key-binds
-      
-    </div>
-  </div>
-</article>
-
-
-
-	
-
-
-
-<article>
-	<span class="meta">
-		<span class="date">Feb 12 »</span>
-	</span>
-  <div class="post-info">
-    <h2 class="title"><a href="/posts/terminal-customization/">Terminal Customization</a></h2>
-    <div class="excerpt">
-      
-      
-        My various urxvt and zsh customizations
-      
-    </div>
-  </div>
-</article>
-
-
-
-	
-
-
-
-<article>
-	<span class="meta">
-		<span class="date">Jan  4 »</span>
-	</span>
-  <div class="post-info">
-    <h2 class="title"><a href="/posts/naive-convolution-in-haskell/">Naive Convolution in Haskell</a></h2>
-    <div class="excerpt">
-      
-      
-        A functional implementation of convolution in Haskell
-      
-    </div>
-  </div>
-</article>
-
-
-
-	
-
-
-
-	
-	
-		</section>
-	
-	<section class="archives">
-  
-    <h2 class="year">2012</h2>
   
 
-<article>
-	<span class="meta">
-		<span class="date">Dec 25 »</span>
-	</span>
-  <div class="post-info">
-    <h2 class="title"><a href="/posts/im-back/">I&#8217;m Back</a></h2>
-    <div class="excerpt">
-      
-      
-        It&#8217;s been a few years, but I&#8217;m back
-      
-    </div>
-  </div>
+<time class="" datetime="2013-03-17T17:40:00-07:00" pubdate data-updated="true">March 17<span>th</span>, 2013</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/categories/notes/'>Notes</a>, <a class='category' href='/categories/ffmpeg/'>ffmpeg</a>
+
+
+</div>
+	
+</div>
+
 </article>
-
-
 
 	
 
 
-
-<article>
-	<span class="meta">
-		<span class="date">Sep 19 »</span>
-	</span>
-  <div class="post-info">
-    <h2 class="title"><a href="/posts/test-post/">Test Post</a></h2>
-    <div class="excerpt">
-      
-      
-        Test the markdown features of kramdown with code blocks and LaTeX embeds
-      
-    </div>
-  </div>
-</article>
-
-
-
+<section id="comment">
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
 
 </div>
 	<footer id="footer" class="inner">{ <span id="braces"><a href="https://github.com/blaenk/blaenk.github.com/commit/02de8d967893444f961b85177fa9e35a33d70e5c" title="created and added commit plugin to display link to latest commit of site; force deploy task to always generate to make sure latest commit is fresh">02de8d967893444f961b85177fa9e35a33d70e5c</a></span> }
@@ -244,7 +151,10 @@
       var disqus_shortname = 'blaenkdenum';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blaenkdenum.com/posts/learning-ffmpeg/';
+        var disqus_url = 'http://blaenkdenum.com/posts/learning-ffmpeg/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

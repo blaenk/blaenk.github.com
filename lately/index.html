@@ -27,9 +27,10 @@
 
 
 <body>
+	<div id="strip"></div>
 	<header id="header" class="inner"><div id="stamp">
   <h1><a href="/">Jorge Israel Peña</a></h1>
-  <h4>AKA Blaenk Denum</h4>
+  <h4>AKA BLAENK DENUM</h4>
 </div>
 <nav id="main-nav">
 	<ul class="main">
@@ -37,7 +38,6 @@
 	<li><a href="/lately">Lately</a></li>
 	<li><a href="/projects">Projects</a></li>
 	<li><a href="/resume">Résumé</a></li>
-	<li><a href="/archives">Archives</a></li>
 	<li><a id="search_btn">Search</a></li>
 </ul>
 
@@ -54,7 +54,6 @@
 	<li><a href="/lately">Lately</a></li>
 	<li><a href="/projects">Projects</a></li>
 	<li><a href="/resume">Résumé</a></li>
-	<li><a href="/archives">Archives</a></li>
 	<li><a id="search_btn">Search</a></li>
 </ul>
 </div>
@@ -90,16 +89,8 @@
 
 <h3 id="currently-working-on">Currently Working On</h3>
 
-<ul class="highlight">
-  <li>An audio player, though it’ll ultimately be used for something else other than general audio playback. I’m decoding audio frames using <a href="http://www.ffmpeg.org/">ffmpeg</a>’s libavcodec, libavformat, libavutil, and libswresample. Playback is currently done using <a href="http://www.freedesktop.org/wiki/Software/PulseAudio">PulseAudio</a> although I intend to switch to a cross-platform library like <a href="http://www.portaudio.com/">PortAudio</a>. It works with any format/container/codec supported by ffmpeg. Source will be up soon.</li>
-</ul>
 <ul>
-  <li>This website. The site’s design is “responsive,” meaning that it automatically changes based on the size of the viewing device’s display. The theme is based on the <a href="http://zespia.tw/Octopress-Theme-Slash/">slash</a> theme for Octopress. Though if you ask me I don’t notice any resemblance.</li>
-  <li>
-    <p>Phoenix is the name of a web interface I created for <a href="https://github.com/rakshasa/rtorrent">rtorrent</a> made with Rails. Admittedly, Rails is probably overkill for this kind of project. I try to balance this by storing most necessary metadata in the torrent objects within rtorrent as Base64 encoded JSON. rtorrent’s API is served using XML-RPC. The interface is developed with a multi-user environment in mind.</p>
-
-    <p>This is the fourth major iteration, in as many years, of such an interface, having started as a heavily modified wTorrent interface. If I’m ever bored in the future, I may rewrite it to be even lighter, using something like <a href="http://www.sinatrarb.com/">Sinatra</a> with Ruby, <a href="http://flask.pocoo.org/">Flask</a> with Python, or <a href="http://snapframework.com/">Snap</a> with Haskell.</p>
-  </li>
+  <li>An audio player, though it’ll ultimately be used for something else other than general audio playback. I’m decoding audio frames using <a href="http://www.ffmpeg.org/">ffmpeg</a>’s libavcodec, libavformat, libavutil, and libswresample. Playback is currently done using <a href="http://www.freedesktop.org/wiki/Software/PulseAudio">PulseAudio</a> although I intend to switch to a cross-platform library like <a href="http://www.portaudio.com/">PortAudio</a>. It works with any format/container/codec supported by ffmpeg. Source will be up soon.</li>
 </ul>
 
 <h3 id="planning-to-work-on">Planning to Work On</h3>
@@ -114,18 +105,12 @@
       </li>
     </ul>
   </li>
-  <li>I’m working on a streaming web video system, and I’d like to do something similar – viewing videos in sync – using the HTML5 media API which has support for <a href="http://www.w3.org/2010/05/video/mediaevents.html">video events</a>. I think this concept of synchronizing events maps directly to the observer pattern which maps to a popular use of <a href="http://nodejs.org/">node.js</a>: websockets. Specifically, I feel that this will be a perfect use of <a href="http://socket.io/">socket.io</a>.</li>
 </ul>
 
 <h3 id="currently-reading">Currently Reading</h3>
 
 <ul>
-  <li><a href="http://amzn.com/0321714113">C++ Primer</a>: <em>Not</em> C++ Primer <strong>Plus</strong>, which is a similarly titled book. I’ve been using this book in conjunction with the 2<sup>nd</sup> edition of <a href="http://amzn.com/0321623215">The C++ Standard Library</a> to get up to speed on C++11. I’m breezing through it thanks to the author’s direct and clear coverage of C++11 concepts. It moves fast because it seems to assume previous programming knowledge, so I wouldn’t recommend this to beginners. It’s great for people who want to refresh on C++11 – or C++ in general for that matter – very quickly.
-    <ul class="highlight">
-      <li><strong>Update</strong>: I completed it. I feel a lot more comfortable with C++ than I had before, and perhaps more importantly, I feel like I’m quite up to speed with the new features introduced in C++11.</li>
-    </ul>
-  </li>
-  <li><a href="http://amzn.com/1593272200">The Linux Programming Inteface</a>: This book is amazing. It concerns the userspace API of Linux. It probably should be named “The POSIX Programming Inteface” because although it focuses on Linux, it’s always very clear about which topics apply to which standards, treating Linux-specific funcitonality more like edge-cases within the POSIX ecosystem. This is perhaps a reasonable approach, considering that Linux is not POSIX compliant. The reverse approach would probably lessen the scope of material of which the majority probably applies to many other systems anyways, not just Linux. It’s one of my favorite books currently on my shelf. I’m barely on the 18<sup>th</sup> chapter – concerning Directories and Links – and I’m barely through a quarter of the book.</li>
+  <li><a href="http://amzn.com/1593272200">The Linux Programming Inteface</a>: This book is amazing. It concerns the userspace API of Linux. It probably should be named “The POSIX Programming Inteface” because although it focuses on Linux, it’s always very clear about which topics apply to which standards, treating Linux-specific funcitonality more like edge-cases within the POSIX ecosystem. This is perhaps a reasonable approach, considering that Linux is not POSIX compliant. The reverse approach would probably lessen the scope of material of which the majority probably applies to many other systems anyways, not just Linux. It’s one of my favorite books currently on my shelf.</li>
   <li><a href="http://amzn.com/032157351X">Algorithms</a>: This beautiful hardcover book is just what I needed for a quick refresher on various algorithms. It masterfully covers various topics such as red-black trees and tries using pretty illustrations and very clear writing. The book uses Java as its didactic language which makes for quick coverage of universal concepts.</li>
   <li><a href="http://amzn.com/1849967202">Algorithm Design Manual</a>: This book is similar to Sedgewick’s (above) but uses C and focuses more on providing a summary overview of various algorithms. The first half covers certain algorithms in-depth, with a seeming bias for graph related algorithms. The second half of the book serves as a sort of reference for various algorithms, with references to popular implementations (e.g. FFT → <a href="http://www.fftw.org/">FFTW</a>).</li>
 </ul>
@@ -134,15 +119,7 @@
 
 <ul>
   <li><a href="https://class.coursera.org/ml-2012-002/lecture/index">Machine Learning</a>: Having completed the edX UC Berkeley <a href="http://edx.org/ai">CS 188</a> class on Artificial Intelligence, I’m now going through the <a href="https://class.coursera.org/ml-2012-002/lecture/index">Machine Learning</a> class by Stanford on coursera. My goal is to apply Machine Learning concepts to Digital Signal Processing, such as for <a href="http://www.cs.usc.edu/research/08-895.pdf">onset detection</a>.</li>
-  <li>
-    <p class="highlight"><a href="https://www.udacity.com/course/cs344">Parallel Programming with GPUs</a>: I’m dedicating myself to the <a href="https://www.udacity.com/course/cs344">Introduction to Parallel Programming</a> class on <a href="https://www.udacity.com">udacity</a>. It teaches <abbr title="General Purpose GPU">GPGPU</abbr> programming using <a href="http://en.wikipedia.org/wiki/CUDA">CUDA</a>. I already had some basic experience with <a href="http://en.wikipedia.org/wiki/DirectCompute">DirectCompute</a> so I wasn’t entirely out of the loop going into the class.</p>
-
-    <p>So far I’ve completed the first week. The production quality is high and the course is taught by very knowledgeable instructors. The assignments seem to be geared towards image processing, making the results of what we learn clearly visible. The first assignment involved writing a CUDA program kernel to run on the GPU which converts a color image to grayscale.</p>
-
-    <p>A problem I encountered was that I don’t have an Nvidia GPU necessary to run CUDA programs. I had to get rid of my previous one in lieu of an ATI card to appease my hackintosh setup as the 400 series seemed to have a problem in Mac OS X Lion. Thankfully the class contains an online editor which allows students to submit the code they’ve edited for compilation and execution on an Amazon AWS server. The results are then displayed in the same page. Furthermore, since we’re working on GPU image processing, the result is displayed alongside a reference result image along with statistics describing the level to which we match the reference image.</p>
-
-    <p>Using this editor can sometimes be a pain, as it makes for slow iteration and oftentimes nondescript error messages. However, it is pretty clever and definitely helps people like myself, who are currently without an Nvidia card, to benefit from the class.</p>
-  </li>
+  <li><a href="https://www.udacity.com/course/cs344">Parallel Programming with GPUs</a>: I’m dedicating myself to the <a href="https://www.udacity.com/course/cs344">Introduction to Parallel Programming</a> class on <a href="https://www.udacity.com">udacity</a>. It teaches <abbr title="General Purpose GPU">GPGPU</abbr> programming using <a href="http://en.wikipedia.org/wiki/CUDA">CUDA</a>.</li>
 </ul>
 
 </div>
@@ -157,30 +134,7 @@
 </section>
 
 </div>
-	<footer id="footer">
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-{ <span id="generated">generated <time class="" datetime="2013-03-06T18:24:46-08:00">March 6<span>th</span>, 2013</time></span> }
+	<footer id="footer" class="inner">{ <span id="braces"><a href="https://github.com/blaenk/blaenk.github.com/commit/02de8d967893444f961b85177fa9e35a33d70e5c" title="created and added commit plugin to display link to latest commit of site; force deploy task to always generate to make sure latest commit is fresh">02de8d967893444f961b85177fa9e35a33d70e5c</a></span> }
 </footer>
 	
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Linux | Jorge Israel Peña]]></title>
   <link href="http://blaenkdenum.com/categories/linux/atom.xml" rel="self"/>
   <link href="http://blaenkdenum.com/"/>
-  <updated>2013-03-06T18:24:46-08:00</updated>
+  <updated>2013-03-22T19:35:03-07:00</updated>
   <id>http://blaenkdenum.com/</id>
   <author>
     <name><![CDATA[Jorge Israel Peña]]></name>
@@ -98,7 +98,7 @@
 
 <p><strong>Disclaimer</strong>: This post is titled to make it easy for people who are experiencing the same problem to find this post. XMonad does <em>not</em> ignore <em>all</em> bindings.</p>
 
-<p>In my <a href="/2013/02/12/terminal-customization/">previous post</a> I talked about how I spent a while configuring my system, specifically urxvt and zsh, in preparation for setting up <a href="http://xmonad.org">XMonad</a>. I’ve finally gotten around to setting up XMonad. One problem in particular stopped me from continuing with the rest of the configuration.</p>
+<p>In my <a href="/posts/terminal-customization/">previous post</a> I talked about how I spent a while configuring my system, specifically urxvt and zsh, in preparation for setting up <a href="http://xmonad.org">XMonad</a>. I’ve finally gotten around to setting up XMonad. One problem in particular stopped me from continuing with the rest of the configuration.</p>
 
 <h2 id="media-keys">Media Keys</h2>
 

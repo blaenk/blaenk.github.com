@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: ffmpeg | Jorge Israel Peña]]></title>
+  <link href="http://blaenkdenum.com/categories/ffmpeg/atom.xml" rel="self"/>
+  <link href="http://blaenkdenum.com/"/>
+  <updated>2013-03-22T19:35:03-07:00</updated>
+  <id>http://blaenkdenum.com/</id>
+  <author>
+    <name><![CDATA[Jorge Israel Peña]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Learning ffmpeg]]></title>
+    <link href="http://blaenkdenum.com/posts/learning-ffmpeg/"/>
+    <updated>2013-03-17T17:40:00-07:00</updated>
+    <id>http://blaenkdenum.com/posts/learning-ffmpeg</id>
+    <content type="html"><![CDATA[<p>I’ve been trying to understand <a href="http://www.ffmpeg.org/">ffmpeg</a> enough to use for decoding audio in a personal application I’m working on. Documentation and resources to learn it are a bit low and inconsistent or usually outdated. Here I try to maintain a list of resources and information I’ve learned about the library.</p>
+
+<p>These notes will be updated as I learn more about ffmpeg.</p>
+
+<h3 id="resources">Resources</h3>
+
+<p>A problem I’ve encountered with ffmpeg is that many articles posted about it or open source found online is already outdated. Many modern applications like <a href="http://mpc-hc.org/">MPC-HC</a> and <a href="http://www.chromium.org/Home">Chromium</a> do seem to use the latest version of the APIs. I also quickly learned that most learning is done through looking at the examples in ffmpeg as well as the ffplay source.</p>
+
+<ul>
+  <li>the updated version of the <a href="http://dranger.com/ffmpeg/">ffmpeg tutorial</a> hosted <a href="https://github.com/chelyaev/ffmpeg-tutorial/blob/master/tutorial03.c#L114">here</a></li>
+  <li>the <a href="https://github.com/FFmpeg/FFmpeg/blob/master/ffplay.c#L2133"><code>ffplay.c</code></a> source</li>
+  <li>the ffmpeg <a href="https://github.com/FFmpeg/FFmpeg/tree/master/doc/examples">examples</a></li>
+  <li>a <a href="http://www.gamedev.net/topic/624876-how-to-read-an-audio-file-with-ffmpeg-in-c/#entry4940299">post</a> on gamedev</li>
+  <li>the <a href="https://github.com/mpc-hc/mpc-hc/blob/master/src/filters/transform/MpaDecFilter/FFAudioDecoder.cpp#L295">mpc-hc</a> source</li>
+  <li>the <a href="http://src.chromium.org/svn/trunk/src/media/filters/audio_file_reader.cc">chromium source</a></li>
+</ul>
+
+<p>One particular thing about decoding audio is that it is generally decoded to a format that was used during the encoding process. This could be PCM Float Planar format for example, where each sample is a float and each channel is stored in a separate buffer. However, when you want to use the audio or play it through speakers, sometimes the format required can differ from the format decoded to. Fortunately ffmpeg has <a href="http://ffmpeg.org/libswresample.html">libswresample</a> which can make these conversions easy. There also exists an abstraction of this using <a href="http://ffmpeg.org/libavfilter.html">libavfilter</a>.</p>
+
+<ul>
+  <li>commit <a href="https://github.com/FFmpeg/FFmpeg/commit/e96175ad7b576ad57b83d399193ef10b2bb016ae"><code>e96175ad</code></a> that adds avfilter support to ffplay</li>
+  <li>libswresample’s <a href="https://github.com/FFmpeg/FFmpeg/blob/master/doc/examples/resampling_audio.c">resampling audio</a> example</li>
+</ul>
+]]></content>
+  </entry>
+  
+</feed>

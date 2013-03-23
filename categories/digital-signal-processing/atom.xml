@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Digital Signal Processing | Jorge Israel Peña]]></title>
   <link href="http://blaenkdenum.com/categories/digital-signal-processing/atom.xml" rel="self"/>
   <link href="http://blaenkdenum.com/"/>
-  <updated>2013-03-06T18:24:46-08:00</updated>
+  <updated>2013-03-22T19:35:03-07:00</updated>
   <id>http://blaenkdenum.com/</id>
   <author>
     <name><![CDATA[Jorge Israel Peña]]></name>
@@ -304,7 +304,7 @@ $ ./conv -o bench.html -r out.csv +RTS -N4
   </tbody>
 </table>
 
-<p>On the other hand, increasing the impulse response length to 1000 and the input signal length to 10,000 maintained a similar performance increase:</p>
+<p>On the other hand, increasing the impulse response length to 1,000 and the input signal length to 10,000 maintained a similar performance increase:</p>
 
 <table>
   <thead>
@@ -377,7 +377,7 @@ $ ./conv -o bench.html -r out.csv +RTS -N4
 
 <p>I worked on this project to learn both Haskell and Digital Signal Processing. The book I used for learning Digital Signal Processing is <a href="http://www.dspguide.com/pdfbook.htm">The Scientist and Engineer’s Guide to Digital Signal Processing</a>. For the longest time – probably the same amount of time I’ve been without a blog – I’ve wanted to learn about Digital Signal Processing, but every book I found assumed some prior DSP knowledge, electronics/circuits knowledge, or hardcore mathematical understanding. This book seems to teach DSP from the perspective of a developer, showing code for algorithms discussed throughout, such as the <a href="http://en.wikipedia.org/wiki/Fast_Fourier_transform">Fast Fourier Transform</a>.</p>
 
-<p>I will probably write a post with more information about the project and what it was like to learn Haskell and DSP, and where I intend to go forward with this. For now I just wanted to push out a real post, unlike the <a href="/2012/09/19/test-post/">test post</a> which I use to test the design and markup of this site.</p>
+<p>I will probably write a post with more information about the project and what it was like to learn Haskell and DSP, and where I intend to go forward with this. For now I just wanted to push out a real post, unlike the <a href="/posts/test-post/">test post</a> which I use to test the design and markup of this site.</p>
 ]]></content>
   </entry>
   

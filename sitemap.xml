@@ -2,52 +2,52 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://blaenkdenum.com/posts/test-post/</loc>
-        <lastmod>2013-02-24T21:47:23-08:00</lastmod>
+        <lastmod>2013-03-22T18:47:40-07:00</lastmod>
     </url>
     <url>
         <loc>http://blaenkdenum.com/posts/im-back/</loc>
-        <lastmod>2013-03-01T23:06:31-08:00</lastmod>
+        <lastmod>2013-03-22T18:47:40-07:00</lastmod>
     </url>
     <url>
         <loc>http://blaenkdenum.com/posts/naive-convolution-in-haskell/</loc>
-        <lastmod>2013-03-01T22:55:38-08:00</lastmod>
+        <lastmod>2013-03-22T18:47:40-07:00</lastmod>
     </url>
     <url>
         <loc>http://blaenkdenum.com/posts/terminal-customization/</loc>
-        <lastmod>2013-02-24T21:47:23-08:00</lastmod>
+        <lastmod>2013-03-22T18:47:40-07:00</lastmod>
     </url>
     <url>
         <loc>http://blaenkdenum.com/posts/xmonad-ignores-bindings/</loc>
-        <lastmod>2013-02-25T00:51:40-08:00</lastmod>
+        <lastmod>2013-03-22T18:47:40-07:00</lastmod>
     </url>
     <url>
         <loc>
             http://blaenkdenum.com/posts/the-linux-programming-interface-directories-and-links/
         </loc>
-        <lastmod>2013-03-06T18:11:17-08:00</lastmod>
+        <lastmod>2013-03-22T18:47:40-07:00</lastmod>
+    </url>
+    <url>
+        <loc>http://blaenkdenum.com/posts/learning-ffmpeg/</loc>
+        <lastmod>2013-03-22T18:47:40-07:00</lastmod>
     </url>
     <url>
         <loc>http://blaenkdenum.com/projects/</loc>
-        <lastmod>2013-02-24T21:47:23-08:00</lastmod>
+        <lastmod>2013-03-22T18:47:40-07:00</lastmod>
     </url>
     <url>
         <loc>http://blaenkdenum.com/404.html</loc>
-        <lastmod>2013-03-02T00:03:01-08:00</lastmod>
+        <lastmod>2013-03-22T18:47:40-07:00</lastmod>
     </url>
     <url>
         <loc>http://blaenkdenum.com/lately/</loc>
-        <lastmod>2013-03-06T18:23:32-08:00</lastmod>
+        <lastmod>2013-03-22T18:47:40-07:00</lastmod>
     </url>
     <url>
         <loc>http://blaenkdenum.com/</loc>
-        <lastmod>2013-03-06T18:11:17-08:00</lastmod>
-    </url>
-    <url>
-        <loc>http://blaenkdenum.com/archives/</loc>
-        <lastmod>2013-03-06T18:11:17-08:00</lastmod>
+        <lastmod>2013-03-22T18:47:40-07:00</lastmod>
     </url>
     <url>
         <loc>http://blaenkdenum.com/about/</loc>
-        <lastmod>2013-02-24T21:47:23-08:00</lastmod>
+        <lastmod>2013-03-22T18:47:40-07:00</lastmod>
     </url>
 </urlset>
