@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Jekyll | Jorge Israel Peña]]></title>
-  <link href="http://blaenkdenum.com/categories/jekyll/atom.xml" rel="self"/>
+  <title><![CDATA[Category: Git | Jorge Israel Peña]]></title>
+  <link href="http://blaenkdenum.com/categories/git/atom.xml" rel="self"/>
   <link href="http://blaenkdenum.com/"/>
   <updated>2013-03-22T20:50:49-07:00</updated>
   <id>http://blaenkdenum.com/</id>
