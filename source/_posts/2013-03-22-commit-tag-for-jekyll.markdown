@@ -16,15 +16,44 @@ After having seen previous plugin implementations, it seemed pretty simple enoug
 libgit2 is a portable, pure C implementation of the Git core methods provided as a re-entrant linkable library with a solid API, allowing you to write native speed custom Git applications in any language which supports C bindings.
 {% endblockquote %}
 
-The end result is the [commit tag plugin](https://github.com/blaenk/blaenk.github.com/blob/source/plugins/commit.rb) which quite simply lets you insert a link to the latest commit of your site with the following properties:
+The end result is the commit tag plugin which quite simply lets you insert a link to the latest commit of your site with the following properties:
 
-1. the link text is the short-form, 8-character truncated SHA1 hash to the commit pointed to by HEAD on the default branch, `source` in my case
-2. the link title text is the commit message
-3. the link target is the github page for the commit
+* the link text is the short-form, 8-character truncated SHA1 hash to the commit pointed to by HEAD on the default branch, `source` in my case
+* the link title text is the commit message
+* the link target is the github page for the commit
+
+The plugin is available in my [site's repository](https://github.com/blaenk/blaenk.github.com/blob/source/plugins/commit.rb). Here it is in its entirety:
+
+``` ruby
+require 'rugged'
+
+module Jekyll
+  class Commit < Liquid::Tag
+    MATCHER = /\A(\S+)\Z/
+    def render(context)
+      path = Rugged::Repository.discover('.')
+      repo = Rugged::Repository.new(path)
+
+      sha = repo.head.target
+      message = repo.lookup(sha).message.strip
+      markup = @markup.strip
+
+      if not markup.empty?
+        repo = markup.match(MATCHER)[1]
+        "<a href=\"https://github.com/#{repo}/commit/#{sha}\" title=\"#{message}\">#{sha[0...8]}</a>"
+      else
+        "<span title=\"#{message}\">#{sha[0...8]}</span>"
+      end
+    end
+  end
+end
+
+Liquid::Template.register_tag('commit', Jekyll::Commit)
+```
 
 The commit tag is simple to use, taking only one parameter which denotes the repository to link to, in my case:
 
-```
+``` plain
 {% raw %}{% commit blaenk/blaenk.github.com %}{% endraw %}
 ```
 
