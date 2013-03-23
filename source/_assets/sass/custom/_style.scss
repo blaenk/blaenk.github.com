@@ -5,6 +5,11 @@
   text-align: center;
 }
 
+.entry-content code {
+  background-color: #EEE;
+  padding: 1px 5px;
+}
+
 #strip {
   height: 5px;
   margin: 0 -20px;
@@ -313,11 +318,6 @@ figure.code {
   margin-top: 10px;
   margin-left: -10px;
   margin-right: -10px;
-}
-
-.entry-content p > code {
-  background-color: #EEE;
-  padding: 1px 5px;
 }
 
 .page h1.title { margin-bottom: 20px; }
