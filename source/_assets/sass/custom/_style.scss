@@ -26,6 +26,11 @@ p.notfound { margin: 15px 0; }
   #braces {
     font-size: 0.7em;
     color: #999;
+    
+    a {
+      color: inherit;
+      &:hover { text-decoration: underline; }
+    }
   }
 }
 

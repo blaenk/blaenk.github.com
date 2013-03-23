@@ -17,6 +17,7 @@ group :development do
   gem 'liquid', '~> 2.3.0'
   gem 'jekyll-asset-pipeline'
   gem 'uglifier'
+  gem 'rugged'
 end
 
 gem 'sinatra', '~> 1.3.2'
