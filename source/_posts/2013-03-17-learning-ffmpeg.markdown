@@ -9,9 +9,6 @@ categories:
 - Notes
 ---
 
-* Table of Contents
-{:toc}
-
 I've been trying to understand [ffmpeg](http://www.ffmpeg.org/) enough to use for decoding audio in a personal application I'm working on. Documentation and resources to learn it are a bit low and inconsistent or usually outdated. Here I try to maintain a list of resources and information I've learned about the library.
 
 These notes will be updated as I learn more about ffmpeg.
