@@ -3,11 +3,11 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>I'm Back - Jorge Israel Peña</title>
+	<title>Commit Tag for Jekyll - Jorge Israel Peña</title>
 	<meta name="author" content="Jorge Israel Peña">
 
 	
-	<meta name="description" content="It’s been a while since I last had a blog. In fact, I think it’s been two, maybe three years now. I previously had a WordPress blog that I updated &hellip;">
+	<meta name="description" content="I’ve been touching up my site and I got to the footer part of the site where I used to display the last time the site was generated, something like “ &hellip;">
 	
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
@@ -72,22 +72,31 @@
 </header>
 	
 	<div id="content" class="inner"><article class="post">
-  <h2 class="title"><a href="">I'm Back</a></h2>
-	<div class="entry-content"><p>It’s been a while since I last had a blog. In fact, I think it’s been two, maybe three years now. I previously had a WordPress blog that I updated regularly. However, the things I was studying on my own at the time consumed me and I considered writing about those things to be a low priority. After all, who want’s to hear what a noob thinks about something he’s barely beginning to learn about? So instead I figured I’d continue reading and studying, and maintaining a blog kind of fell into the backburner.</p>
+  <h2 class="title"><a href="">Commit Tag for Jekyll</a></h2>
+	<div class="entry-content"><p>I’ve been touching up my site and I got to the footer part of the site where I used to display the last time the site was generated, something like “generated March 22nd, 2013.” I decided this was pretty tacky and removed it, but I did want to have something in the footer. Eventually I got the idea to instead put a short SHA1 hash of the latest commit for the site. It would link to the github page for said commit, and on hover of the link it would show the commit message.</p>
 
-<h3 id="blogging">Blogging</h3>
+<p>After having seen previous plugin implementations, it seemed pretty simple enough. I quickly brought up the page for <a href="https://github.com/libgit2/rugged">rugged</a>, <a href="http://libgit2.github.com/">libgit2’s</a> ruby bindings.</p>
 
-<p>For over a year now I had wanted to get back into blogging, at the very least to serve as a sort of journal for what I’ve learned, what I’m working on, etc. I didn’t want to bother maintaining a WordPress blog anymore, so I gave tumblr a shot. I felt that tumblr wasn’t as flexible as I would like and lost interest again. A few months ago I got the urge again to set up a blog, and having heard of static site generators on hacker news, I ended up giving Jekyll/Octopress a try. That’s what I’m running right now and so far it’s working out well. I actually set this up a few months ago, but hadn’t had the time to properly set it up and design myself a theme.</p>
+<blockquote><p>libgit2 is a portable, pure C implementation of the Git core methods provided as a re-entrant linkable library with a solid API, allowing you to write native speed custom Git applications in any language which supports C bindings.</p><footer><strong>About</strong> <cite><a href="http://libgit2.github.com/">libgit2 </a></cite></footer></blockquote>
 
-<h3 id="haskell">Haskell</h3>
+<p>The end result is the <a href="https://github.com/blaenk/blaenk.github.com/blob/source/plugins/commit.rb">commit tag plugin</a> which quite simply lets you insert a link to the latest commit of your site with the following properties:</p>
 
-<p>I’ve done a lot during my absence these past few years. In fact, it’s all a big blur so I don’t know where to begin to talk about it. Most recently, for example, I worked on a <a href="https://github.com/blaenk/pulse-visualizer">music visualizer</a> for Linux’ Pulse Audio in Haskell using OpenGL and FFTW. This was the first program I wrote in Haskell, aside from little programs I would write to learn the language. I learned Haskell primarily using a combination of <a href="http://learnyouahaskell.com/">Learn You a Haskell for Great Good</a> and <a href="http://book.realworldhaskell.org/read/">Real World Haskell</a>. For certain things, such as understanding the concept of laziness in Haskell, I used the <a href="http://en.wikibooks.org/wiki/Haskell/Laziness">Haskell Wikibook</a>. I also had a Professor at school who was familiar with Haskell and DSP as my mentor. Thanks to his previous experience, I was able to learn both things pretty quickly. Whenever I was unsure of my understanding of a given topic, such as Monads, I had him to discuss and refine my understanding with.</p>
+<ol>
+  <li>the link text is the short-form, 8-character truncated SHA1 hash to the commit pointed to by HEAD on the default branch, <code>source</code> in my case</li>
+  <li>the link title text is the commit message</li>
+  <li>the link target is the github page for the commit</li>
+</ol>
 
-<h3 id="digital-signal-processing">Digital Signal Processing</h3>
+<p>The commit tag is simple to use, taking only one parameter which denotes the repository to link to, in my case:</p>
 
-<p>I worked on this project to learn both Haskell and Digital Signal Processing. The book I used for learning Digital Signal Processing is <a href="http://www.dspguide.com/pdfbook.htm">The Scientist and Engineer’s Guide to Digital Signal Processing</a>. For the longest time – probably the same amount of time I’ve been without a blog – I’ve wanted to learn about Digital Signal Processing, but every book I found assumed some prior DSP knowledge, electronics/circuits knowledge, or hardcore mathematical understanding. This book seems to teach DSP from the perspective of a developer, showing code for algorithms discussed throughout, such as the <a href="http://en.wikipedia.org/wiki/Fast_Fourier_transform">Fast Fourier Transform</a>.</p>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">{% commit blaenk/blaenk.github.com %}</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>I will probably write a post with more information about the project and what it was like to learn Haskell and DSP, and where I intend to go forward with this. For now I just wanted to push out a real post, unlike the <a href="/posts/test-post/">test post</a> which I use to test the design and markup of this site.</p>
+<p>This format is similar to <a href="https://github.com/gmarik/vundle">vundle’s</a>, a plugin management plugin for vim. Alternatively, if no parameter is given – i.e. just <code>{% commit %}</code> – then instead of a link it produces a <code>span</code> tag with the short-form hash and commit message as title text.</p>
+
+<p>Of course, this is a very simple plugin and makes many assumptions (i.e. that you’re using github), but it’s simple enough that you should be able to modify it to your purpose easily.</p>
+
+<p>One thing to be mindful of is that the tag is evaluated at the point in which your site is generated. That is, if you generate your site, <em>then</em> make a commit and deploy, the tag will be evaluated such that it displays the previous commit instead. This is simply the nature of static site generation. All that’s required is to generate the site after having made the commits you make. To automate this, I made my <code>Rakefile</code>’s <code>deploy</code> tag execute the <code>generate</code> task. This way is more natural in my opinion, as I’m used to deploying only after commiting my changes.</p>
 </div>
 
 
@@ -113,11 +122,11 @@
 
   
 
-<time class="" datetime="2012-12-25T23:25:00-08:00" pubdate data-updated="true">December 25<span>th</span>, 2012</time></div>
+<time class="" datetime="2013-03-22T19:45:00-07:00" pubdate data-updated="true">March 22<span>nd</span>, 2013</time></div>
 	<div class="tags">
 
 
-	<a class='category' href='/categories/digital-signal-processing/'>Digital Signal Processing</a>, <a class='category' href='/categories/haskell/'>Haskell</a>, <a class='category' href='/categories/octopress/'>Octopress</a>
+	<a class='category' href='/categories/jekyll/'>Jekyll</a>
 
 
 </div>
@@ -144,8 +153,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://blaenkdenum.com/posts/im-back/';
-        var disqus_url = 'http://blaenkdenum.com/posts/im-back/';
+        var disqus_identifier = 'http://blaenkdenum.com/posts/commit-tag-for-jekyll/';
+        var disqus_url = 'http://blaenkdenum.com/posts/commit-tag-for-jekyll/';
         var disqus_script = 'embed.js';
       
     (function () {

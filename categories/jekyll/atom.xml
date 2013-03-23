@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Jekyll | Jorge Israel Peña]]></title>
+  <link href="http://blaenkdenum.com/categories/jekyll/atom.xml" rel="self"/>
+  <link href="http://blaenkdenum.com/"/>
+  <updated>2013-03-22T20:27:09-07:00</updated>
+  <id>http://blaenkdenum.com/</id>
+  <author>
+    <name><![CDATA[Jorge Israel Peña]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Commit Tag for Jekyll]]></title>
+    <link href="http://blaenkdenum.com/posts/commit-tag-for-jekyll/"/>
+    <updated>2013-03-22T19:45:00-07:00</updated>
+    <id>http://blaenkdenum.com/posts/commit-tag-for-jekyll</id>
+    <content type="html"><![CDATA[<p>I’ve been touching up my site and I got to the footer part of the site where I used to display the last time the site was generated, something like “generated March 22nd, 2013.” I decided this was pretty tacky and removed it, but I did want to have something in the footer. Eventually I got the idea to instead put a short SHA1 hash of the latest commit for the site. It would link to the github page for said commit, and on hover of the link it would show the commit message.</p>
+
+<p>After having seen previous plugin implementations, it seemed pretty simple enough. I quickly brought up the page for <a href="https://github.com/libgit2/rugged">rugged</a>, <a href="http://libgit2.github.com/">libgit2’s</a> ruby bindings.</p>
+
+<p><blockquote><p>libgit2 is a portable, pure C implementation of the Git core methods provided as a re-entrant linkable library with a solid API, allowing you to write native speed custom Git applications in any language which supports C bindings.</p><footer><strong>About</strong> <cite><a href='http://libgit2.github.com/'>libgit2 </a></cite></footer></blockquote></p>
+
+<p>The end result is the <a href="https://github.com/blaenk/blaenk.github.com/blob/source/plugins/commit.rb">commit tag plugin</a> which quite simply lets you insert a link to the latest commit of your site with the following properties:</p>
+
+<ol>
+  <li>the link text is the short-form, 8-character truncated SHA1 hash to the commit pointed to by HEAD on the default branch, <code>source</code> in my case</li>
+  <li>the link title text is the commit message</li>
+  <li>the link target is the github page for the commit</li>
+</ol>
+
+<p>The commit tag is simple to use, taking only one parameter which denotes the repository to link to, in my case:</p>
+
+<p><code>
+{% commit blaenk/blaenk.github.com %}
+</code></p>
+
+<p>This format is similar to <a href="https://github.com/gmarik/vundle">vundle’s</a>, a plugin management plugin for vim. Alternatively, if no parameter is given – i.e. just <code>{% commit %}</code> – then instead of a link it produces a <code>span</code> tag with the short-form hash and commit message as title text.</p>
+
+<p>Of course, this is a very simple plugin and makes many assumptions (i.e. that you’re using github), but it’s simple enough that you should be able to modify it to your purpose easily.</p>
+
+<p>One thing to be mindful of is that the tag is evaluated at the point in which your site is generated. That is, if you generate your site, <em>then</em> make a commit and deploy, the tag will be evaluated such that it displays the previous commit instead. This is simply the nature of static site generation. All that’s required is to generate the site after having made the commits you make. To automate this, I made my <code>Rakefile</code>’s <code>deploy</code> tag execute the <code>generate</code> task. This way is more natural in my opinion, as I’m used to deploying only after commiting my changes.</p>
+]]></content>
+  </entry>
+  
+</feed>
