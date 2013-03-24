@@ -1,14 +1,9 @@
-require 'rugged'
-
 module Jekyll
   class Commit < Liquid::Tag
     MATCHER = /\A(\S+)\Z/
     def render(context)
-      path = Rugged::Repository.discover('.')
-      repo = Rugged::Repository.new(path)
-
-      sha = repo.head.target
-      message = repo.lookup(sha).message.strip
+      sha = `git log -1 HEAD --pretty=format:%H`
+      message = `git log -1 HEAD --pretty=format:%s`
       markup = @markup.strip
 
       if not markup.empty?

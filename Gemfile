@@ -5,7 +5,7 @@ group :development do
   gem 'rack', '~> 1.4.1'
   gem 'jekyll', '~> 0.11.2'
   gem 'rdiscount', '~> 1.6.8'
-  gem 'kramdown', '~> 0.13'
+  gem 'kramdown'
   gem 'coderay', '~> 1.0'
   gem 'pygments.rb', '~> 0.3.2'
   gem 'RedCloth', '~> 4.2.9'
@@ -17,7 +17,6 @@ group :development do
   gem 'liquid', '~> 2.3.0'
   gem 'jekyll-asset-pipeline'
   gem 'uglifier'
-  gem 'rugged'
 end
 
 gem 'sinatra', '~> 1.3.2'
