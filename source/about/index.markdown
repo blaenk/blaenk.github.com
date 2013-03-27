@@ -18,7 +18,7 @@ If you'd like to get in touch you can email me at jorgepblank@gmail.com [^1]
 ### Technology ###
 I try to be a [pragmatic programmer](http://en.wikipedia.org/wiki/The_Pragmatic_Programmer). I love to learn different technologies, most recently [Haskell and Digital Signal Processing](/posts/naive-convolution-in-haskell/). I don't do it to be elitist or to jump on the latest bandwagon and be hip, but because I have a genuine interest in gaining different perspectives on software development in order to maintain an open and malleable mind. I think it'll help to prepare me for future technological disruptions.
 
-I don't waste time with being prideful. Instead I always defer to experience, but I ensure a proper understanding instead of [cargo culting](http://en.wikipedia.org/wiki/Cargo_cult_programming).
+While I do take pride in my work, I don't waste time with being prideful. Instead I always defer to experience, but I ensure a proper understanding instead of [cargo culting](http://en.wikipedia.org/wiki/Cargo_cult_programming).
 
 I prefer to use the best tool for the job. For this reason I try to be agnostic when it comes to technologies: I'm open to any operating system, tool, language, and framework. But don't mistake this neutrality for indifference. I simply strive to appreciate the benefits of different technologies. Whenever possible, however, I prefer to use tools at which I'm already adept, such as vim, git, and a POSIX environment.
 
