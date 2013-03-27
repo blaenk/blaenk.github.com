@@ -22,7 +22,7 @@ A problem I've encountered with ffmpeg is that many articles posted about it or 
 * the ffmpeg [examples](https://github.com/FFmpeg/FFmpeg/tree/master/doc/examples)
 * a [post](http://www.gamedev.net/topic/624876-how-to-read-an-audio-file-with-ffmpeg-in-c/#entry4940299) on gamedev
 * the [mpc-hc](https://github.com/mpc-hc/mpc-hc/blob/master/src/filters/transform/MpaDecFilter/FFAudioDecoder.cpp#L295) source
-* the [chromium source](http://src.chromium.org/svn/trunk/src/media/filters/audio_file_reader.cc)
+* the [chromium](http://src.chromium.org/svn/trunk/src/media/filters/audio_file_reader.cc) source
 
 One particular thing about decoding audio is that it is generally decoded to a format that was used during the encoding process. This could be PCM Float Planar format for example, where each sample is a float and each channel is stored in a separate buffer. However, when you want to use the audio or play it through speakers, sometimes the format required can differ from the format decoded to. Fortunately ffmpeg has [libswresample](http://ffmpeg.org/libswresample.html) which can make these conversions easy. There also exists an abstraction of this using [libavfilter](http://ffmpeg.org/libavfilter.html).
 
