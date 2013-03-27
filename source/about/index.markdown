@@ -16,7 +16,7 @@ You can check out what I'm up to [lately](/lately) or find me on [github](http:/
 If you'd like to get in touch you can email me at jorgepblank@gmail.com [^1]
 
 ### Technology ###
-I try to be a [pragmatic programmer](http://en.wikipedia.org/wiki/The_Pragmatic_Programmer). I love to learn different technologies, most recently [Haskell and Digital Signal Processing](http://blaenkdenum.com/2013/01/04/naive-convolution-in-haskell/). I don't do it to be elitist or to jump on the latest bandwagon and be hip, but because I have a genuine interest in gaining different perspectives on software development in order to maintain an open and malleable mind. I think it'll help to prepare me for future technological disruptions.
+I try to be a [pragmatic programmer](http://en.wikipedia.org/wiki/The_Pragmatic_Programmer). I love to learn different technologies, most recently [Haskell and Digital Signal Processing](/posts/naive-convolution-in-haskell/). I don't do it to be elitist or to jump on the latest bandwagon and be hip, but because I have a genuine interest in gaining different perspectives on software development in order to maintain an open and malleable mind. I think it'll help to prepare me for future technological disruptions.
 
 I don't waste time with being prideful. Instead I always defer to experience, but I ensure a proper understanding instead of [cargo culting](http://en.wikipedia.org/wiki/Cargo_cult_programming).
 
