@@ -3,7 +3,7 @@ layout: post
 title: "Learning the ffmpeg Libraries"
 date: 2013-03-17 17:40
 comments: true
-excerpt: Trying to comprehend the behemoth that is ffmpeg
+excerpt: Comprehending the behemoth that is ffmpeg
 categories: 
 - ffmpeg
 - Notes

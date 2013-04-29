@@ -3,7 +3,7 @@ layout: post
 title: "Commit Tag for Jekyll"
 date: 2013-03-22 19:45
 comments: true
-excerpt: The commit tag links to the latest commit for your Jekyll site
+excerpt: Liquid tag that links to the latest commit for your Jekyll site
 categories:
 - Git
 - Jekyll
@@ -14,9 +14,7 @@ I've been touching up my site and I got to the footer, where I used to display t
 
 After having seen previous plugin implementations, it seemed pretty simple enough. I quickly brought up the page for [rugged](https://github.com/libgit2/rugged), [libgit2's](http://libgit2.github.com/) ruby bindings.
 
-{% blockquote About http://libgit2.github.com/ libgit2 %}
-libgit2 is a portable, pure C implementation of the Git core methods provided as a re-entrant linkable library with a solid API, allowing you to write native speed custom Git applications in any language which supports C bindings.
-{% endblockquote %}
+> libgit2 is a portable, pure C implementation of the Git core methods provided as a re-entrant linkable library with a solid API, allowing you to write native speed custom Git applications in any language which supports C bindings.
 
 The end result is the commit tag plugin which quite simply lets you insert a link to the latest commit of your site with the following properties:
 

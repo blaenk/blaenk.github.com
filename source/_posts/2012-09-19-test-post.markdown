@@ -3,7 +3,7 @@ layout: post
 title: "Test Post"
 date: 2012-09-19 02:49
 comments: true
-excerpt: Test the markdown features of kramdown with code blocks and LaTeX embeds
+excerpt: Site design and Markdown test
 categories:
 - Octopress
 - Markdown

@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "The Linux Programming Interface: Directories and Links"
+title: "POSIX Directories and Links"
 date: 2013-03-06 17:40
 comments: true
-excerpt: Directories and Links
+excerpt: Directories and Links in the POSIX standards
 categories: 
 - Linux
 - Notes

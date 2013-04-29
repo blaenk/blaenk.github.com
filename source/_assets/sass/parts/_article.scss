@@ -13,14 +13,18 @@ article{
 		margin-bottom: 5px;
 		a{
 			color: $color-gray01;
-      display: inline-block;
-      width: 100%;
-      &:hover { text-decoration: underline; }
+      		display: inline-block;
+      		width: 100%;
+
+      		span { padding-bottom: 2px; }
+
+	      	&:hover > span {
+			  border-bottom: 2px solid #2A9AF9;
+			}
 		}
 	}
 	.entry-content{
 		line-height: 2;
-		// text-align: justify;
 		a{
 			&:hover{
 				text-decoration: underline;

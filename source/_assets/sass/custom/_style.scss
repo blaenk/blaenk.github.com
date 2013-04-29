@@ -34,7 +34,8 @@ p.notfound { margin: 15px 0; }
     color: #999;
     
     a {
-      color: inherit;
+      @include link-colors($color-gray02, $color-gray01);
+      @include transition(0.3s);
       &:hover { text-decoration: underline; }
     }
   }
@@ -154,7 +155,15 @@ article .entry-content > ol {
 }
 
 #markdown-toc {
-  li { margin-top: 0; }
+  li {
+    margin-top: 0;
+
+    a {
+      display: inline-block;
+      width: 100%;
+    }
+  }
+
   border: 2px solid #8ccaff;
   background-color: #F2F9FF;
   padding: 5px 10px 5px 25px;
@@ -229,7 +238,7 @@ article .entry-content > ol {
       margin-right: 30px;
     }
 
-    a:hover {
+    .entry-content a:hover {
       color: #258FB8;
       text-decoration: underline;
     }
@@ -392,4 +401,9 @@ figure.code {
 
 #main-nav > ul.searching > li > a {
   padding: 34px 0 0 0;
+}
+
+article .entry-content blockquote {
+  padding-top: 0;
+  border-left: 2px solid #8ccaff;
 }

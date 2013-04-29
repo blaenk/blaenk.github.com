@@ -3,7 +3,7 @@ layout: post
 title: "Terminal Customization"
 date: 2013-02-12 04:33
 comments: true
-excerpt: My various urxvt and zsh customizations
+excerpt: Various urxvt and zsh customizations
 categories:
 - urxvt
 - zsh
@@ -110,7 +110,7 @@ If you've been wondering how it is that my commands are highlighted, it's made p
 
 ## Conclusion
 
-I have to say that I love the way my terminal looks and operates now. This has all been in preparation for setting up [Xmonad](http://en.wikipedia.org/wiki/Xmonad), which I intend to take a shot at soon. For the curious, I'm doing all of this on [arch linux](http://www.archlinux.org/), but I didn't say it earlier because nothing in this post depends on this. In fact, none of the content in this post is all that specific to Linux itself even. I'll try to update this post whenever my setup changes, but I think I'm quite comfortable with the way it is -- and will be -- for the foreseeable future.
+I have to say that I love the way my terminal looks and operates now. This has all been in preparation for setting up [xmonad](http://en.wikipedia.org/wiki/xmonad), which I intend to take a shot at soon. For the curious, I'm doing all of this on [arch linux](http://www.archlinux.org/), but I didn't say it earlier because nothing in this post depends on this. In fact, none of the content in this post is all that specific to Linux itself even. I'll try to update this post whenever my setup changes, but I think I'm quite comfortable with the way it is -- and will be -- for the foreseeable future.
 
 In my opinion, the benefit of using such tried and proven, mature tools is that once you take the time to configure them to your liking you can use them without modification for a long time. Barring some imminent, majorly disruptive paradigm shift in software development, I can see myself using many of these tools throughout my career as a software developer.
 

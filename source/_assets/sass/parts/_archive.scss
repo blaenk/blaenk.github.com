@@ -14,19 +14,17 @@
     margin-bottom: 0 !important;
 		.title{
 			@media screen and (max-width: 600px){
-        font-size: 18px;
-      }
+        		font-size: 18px;
+      		}
 			margin-bottom: 0;
-      a{
-        color: #666;
-        display: inline-block;
-        width: 100%;
-        @include transition(color 0.3s);
-        &:hover{
-          color: $color-main;
-          text-decoration: underline;
-        }
-      }
+	      a{
+	        color: #666;
+	        display: inline-block;
+	        width: 100%;
+	        @include transition(color 0.3s);
+
+	        &:hover { color: $color-main; }
+	      }
 		}
     .excerpt {
       margin-top: 5px;

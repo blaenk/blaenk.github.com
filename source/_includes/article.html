@@ -1,11 +1,11 @@
 {% if index %}
 	<h2 class="title">
 		{% if post.external-url %}
-		<a href="{{ post.external-url }}">
+		<a href="{{ post.external-url }}"><span>
 		{% else %}
-		<a href="{{ root_url }}{{ post.url }}">
+		<a href="{{ root_url }}{{ post.url }}"><span>
 		{% endif %}
-		{{ post.title }}</a>
+		{{ post.title }}</span></a>
 	</h2>
 	<div class="entry-content">
     {% capture excerpt %}{{ page.excerpt }}{{ post.excerpt }}{% endcapture %}
@@ -18,7 +18,7 @@
     {% endif %}
 	</div>
 {% else %}
-  <h2 class="title"><a href="{{ root_url }}{{ post.url }}">{{ page.title }}</a></h2>
+  <h2 class="title"><a href="{{ root_url }}{{ post.url }}"><span>{{ page.title }}</span></a></h2>
 	<div class="entry-content">{{ content }}</div>
 {% endif %}
 

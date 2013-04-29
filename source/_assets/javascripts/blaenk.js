@@ -108,4 +108,13 @@ $(function() {
 
 		$(this).html('').prepend('<span class="hash">#</span>').append('<a href="#' + $id + '">' + $text + '</a>');
 	});
+
+	$('.collapse').not(function() {
+		return "#" + $(this).attr('id') == window.location.hash;
+	}).next('.collapsible').hide();
+
+	$('.collapse').click(function(e) {
+		e.preventDefault();
+		$(this).next('.collapsible').slideToggle('fast');
+	});
 });

@@ -4,7 +4,7 @@ title: "Naive Convolution in Haskell"
 date: 2013-01-04 18:21
 updated: 2013-01-17 18:21
 comments: true
-excerpt: A functional implementation of convolution in Haskell
+excerpt: Functional implementation of convolution in Haskell
 categories:
 - Haskell
 - Digital Signal Processing
@@ -23,7 +23,7 @@ An impulse of $$-3$$ at the $$8^{th}$$ sample would be represented as a unit imp
 
 $$-3\delta[n-8] \mapsto -3h[n-8]$$
 
-What this means is that if we know the unit impulse response of a system, we consequently know how the system will react to _any_ impulse. These impulse responses can then be synthesized to form the output signal that would result from running the input signal through the actual system.
+What this means is that if we know the unit impulse response of a system, we consequently know how the system will react to _any_ impulse. These impulse responses can then be synthesized to form the output signal that would result from running the input signal through the actual system. An example of the powerful implications of this method is [convolution reverb](http://en.wikipedia.org/wiki/Convolution_reverb), in which an impulse response of a physical or virtual space is generated and then convolved with any input signal to simulate the effect of reverberation in that space.
 
 In short, the input signal _convolved_ with the unit impulse response results in the output signal. Convolution of input signal $$x[n]$$ with unit impulse $$h[n]$$ to generate output signal $$y[n]$$ is denoted as:
 
@@ -33,7 +33,7 @@ Since convolution allows us to go from input signal $$x[n]$$ to output signal $$
 
 ## Definition
 
-Convolution can be described by the so called _convolution summation_. The convolution summation is pretty simple, and is defined as follows:
+Convolution can be described by the so-called convolution _summation_. The convolution summation is pretty simple, and is defined as follows:
 
 $$y[i] = \sum_{j=0}^{M-1}h[j]x[i-j]$$
 
@@ -268,7 +268,7 @@ Of course, this post concerns a _naive_ implementation of convolution. There are
 *[FFT]: Fast Fourier Transform
 *[AR]: Aspect Ratio
 
-[^compute_shader]: As described in [3D Game Programming with DirectX 11](http://www.d3dcoder.net/d3d11.htm) by Frank D. Luna in Ch 12 page 450 § 12.7
+[^compute_shader]: As described in [3D Game Programming with DirectX 11](http://www.d3dcoder.net/d3d11.htm) by Frank D. Luna in Chapter 12, page 450, § 12.7
 [^motion_blur]: Despite this optimization of Gaussian Blurring, many implementations optimize further. Blurring typically involves rendering the scene to a separate buffer (e.g. Render-to-Texture) at a scaled-down resolution. This speeds up the blurring operation as there are less pixels to operate on. Then the result is rendered to the actual screen. Since the point is to blur, the upscaling is usually hardly noticeable.
 
     Recently I purchased an old game on Steam which I had played circa 2003. This game was developed back when 1280x1024 was a popular resolution, that is 4:3 aspect ratio. I got to a part where the game displayed some sort of blur effect and noticed that the entire screen was completely blurred to the point where I couldn't make anything out. I presume this was not the intended effect. If I had to guess, I imagine they hard-coded a scaled down resolution -- and thus aspect ratio as well -- at which to render the scene for blurring, such that upscaling it to my current 1920x1080 resolution 16:9 AR looked horrible. I imagine newer games take into account aspect ratio and some other factor to scale down the current resolution from.

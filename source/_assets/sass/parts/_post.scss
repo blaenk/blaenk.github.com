@@ -3,9 +3,7 @@
     a{
       color: #666;
       @include transition(color 0.3s);
-      &:hover{
-        color: $color-main;
-      }
+      &:hover { color: $color-main; }
     }
   }
 
@@ -29,6 +27,7 @@
 		a{
 			@include link-colors($color-gray02, $color-gray01);
 			@include transition(0.3s);
+			&:hover { text-decoration: underline; }
 		}
 		.date, .tags, .comments{
 			padding-left: 30px;
