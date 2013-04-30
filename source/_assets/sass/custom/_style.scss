@@ -10,6 +10,10 @@
   padding: 1px 5px;
 }
 
+.MathJax_Display {
+  cursor: default;
+}
+
 #strip {
   height: 5px;
   margin: 0 -20px;
@@ -51,6 +55,7 @@ img.center {
 }
 
 article .entry-content > table {
+  cursor: default;
   margin: 10px auto 0 auto;
   background: #F2F9FF;
   border: 2px solid #8ccaff;
@@ -251,6 +256,7 @@ figure.code {
   border-radius: 0;
   margin: 15px -28px;
   background-color: #F2F9FF;
+  cursor: default;
 
   @media screen and (max-width: 600px) {
     margin-left: 0;
