@@ -217,7 +217,7 @@ Run it with:
 $ ./conv -o bench.html -r out.csv +RTS -N4
 ```
 
-The `-o` parameter specifies an output file for generated [charts and graphs](../../../../assets/html/convolution-criterion.html). The `-r` parameter specifies a comma separated value (CSV) file to output relative statistics which we use to measure performance relative to the reference, non-reduced naive implementation.
+The `-o` parameter specifies an output file for generated [charts and graphs](../../../../static/html/convolution-criterion.html). The `-r` parameter specifies a comma separated value (CSV) file to output relative statistics which we use to measure performance relative to the reference, non-reduced naive implementation.
 
 The `+RTS` parameter is a delimiter which begins parameters to the [runtime system](http://www.haskell.org/ghc/docs/latest/html/users_guide/runtime-control.html). The `-N#` parameter specifies how many cores to utilize. The machine I was using has 6 cores, but I found that using less than that lowered the amount of statistical variance. I imagine this was because the computer was able to continue its own tasks on the other two cores.
 
