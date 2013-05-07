@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ffmpeg | Jorge Israel Peña]]></title>
   <link href="http://blaenkdenum.com/categories/ffmpeg/atom.xml" rel="self"/>
   <link href="http://blaenkdenum.com/"/>
-  <updated>2013-03-22T22:06:29-07:00</updated>
+  <updated>2013-05-06T22:12:07-07:00</updated>
   <id>http://blaenkdenum.com/</id>
   <author>
     <name><![CDATA[Jorge Israel Peña]]></name>
@@ -14,11 +14,11 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Learning ffmpeg]]></title>
-    <link href="http://blaenkdenum.com/posts/learning-ffmpeg/"/>
+    <title type="html"><![CDATA[Learning the ffmpeg Libraries]]></title>
+    <link href="http://blaenkdenum.com/posts/learning-the-ffmpeg-libraries/"/>
     <updated>2013-03-17T17:40:00-07:00</updated>
-    <id>http://blaenkdenum.com/posts/learning-ffmpeg</id>
-    <content type="html"><![CDATA[<p>I’ve been trying to understand <a href="http://www.ffmpeg.org/">ffmpeg</a> enough to use for decoding audio in a personal application I’m working on. Documentation and resources to learn it are a bit low and inconsistent or usually outdated. Here I try to maintain a list of resources and information I’ve learned about the library.</p>
+    <id>http://blaenkdenum.com/posts/learning-the-ffmpeg-libraries</id>
+    <content type="html"><![CDATA[<p>I’ve been trying to understand some of the <a href="http://www.ffmpeg.org/">ffmpeg</a> libraries enough to use for decoding audio in a personal application I’m working on. Documentation and resources to learn it are a bit low and inconsistent or usually outdated. Here I try to maintain a list of resources and information I’ve learned about the library.</p>
 
 <p>These notes will be updated as I learn more about ffmpeg.</p>
 
@@ -32,7 +32,9 @@
   <li>the ffmpeg <a href="https://github.com/FFmpeg/FFmpeg/tree/master/doc/examples">examples</a></li>
   <li>a <a href="http://www.gamedev.net/topic/624876-how-to-read-an-audio-file-with-ffmpeg-in-c/#entry4940299">post</a> on gamedev</li>
   <li>the <a href="https://github.com/mpc-hc/mpc-hc/blob/master/src/filters/transform/MpaDecFilter/FFAudioDecoder.cpp#L295">mpc-hc</a> source</li>
-  <li>the <a href="http://src.chromium.org/svn/trunk/src/media/filters/audio_file_reader.cc">chromium source</a></li>
+  <li>the <a href="http://src.chromium.org/svn/trunk/src/media/filters/audio_file_reader.cc">chromium</a> source</li>
+  <li>C++11 <a href="http://blog.tomaka17.com/2012/03/libavcodeclibavformat-tutorial/">example</a> by tomaka17</li>
+  <li>ffmpeg + libao <a href="http://umanga.wordpress.com/2012/03/22/decode-an-audio-stream-using-libavcodec-and-play-through-libao/">example</a></li>
 </ul>
 
 <p>One particular thing about decoding audio is that it is generally decoded to a format that was used during the encoding process. This could be PCM Float Planar format for example, where each sample is a float and each channel is stored in a separate buffer. However, when you want to use the audio or play it through speakers, sometimes the format required can differ from the format decoded to. Fortunately ffmpeg has <a href="http://ffmpeg.org/libswresample.html">libswresample</a> which can make these conversions easy. There also exists an abstraction of this using <a href="http://ffmpeg.org/libavfilter.html">libavfilter</a>.</p>
@@ -40,6 +42,7 @@
 <ul>
   <li>commit <a href="https://github.com/FFmpeg/FFmpeg/commit/e96175ad7b576ad57b83d399193ef10b2bb016ae"><code>e96175ad</code></a> that adds avfilter support to ffplay</li>
   <li>libswresample’s <a href="https://github.com/FFmpeg/FFmpeg/blob/master/doc/examples/resampling_audio.c">resampling audio</a> example</li>
+  <li>libav’s <a href="http://libav.org/doxygen/master/group__lavr.html#_details">libavresample</a></li>
 </ul>
 ]]></content>
   </entry>

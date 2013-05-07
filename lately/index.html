@@ -7,7 +7,7 @@
 	<meta name="author" content="Jorge Israel Peña">
 
 	
-	<meta name="description" content="Currently Working On Planning to Work On Currently Reading Currently Studying This page lists some things I’ve been up to lately. Comments are &hellip;">
+	<meta name="description" content="Currently Working On Planning to Work On Currently Reading Currently Studying This page lists some of the things I’ve been up to lately, updated &hellip;">
 	
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
@@ -16,11 +16,11 @@
 	<link href="" rel="alternate" title="Jorge Israel Peña" type="application/atom+xml">
 	<link rel="canonical" href="">
 	<link href="/favicon.png" rel="shortcut icon">
-	<link href='/assets/site-182d1574fd7d19504477f66f1499e28f.css' rel='stylesheet' type='text/css' media='screen' />
+	<link href='/assets/site-c3e135e0a62968832eb47fe53d11b2a5.css' rel='stylesheet' type='text/css' media='screen' />
 
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	<!--[if lt IE 9]><script async="true" src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-    <script async='true' src='/assets/site-14f109f94eaaf9e406916b7bf8be360b.js' type='text/javascript'></script>
+    <script async='true' src='/assets/site-98d2b0489c1245d979af5116fcf814b1.js' type='text/javascript'></script>
 
 	
 </head>
@@ -35,9 +35,9 @@
 <nav id="main-nav">
 	<ul class="main">
 	<li><a href="/about">About</a></li>
+	<li><a href="/uses-this">Uses This</a></li>
+	<li><a href="/work">Work</a></li>
 	<li><a href="/lately">Lately</a></li>
-	<li><a href="/projects">Projects</a></li>
-	<li><a href="/resume">Résumé</a></li>
 	<li><a id="search_btn">Search</a></li>
 </ul>
 
@@ -51,9 +51,9 @@
 		<a class="button">Menu</a>
 		<div class="container"><ul class="main">
 	<li><a href="/about">About</a></li>
+	<li><a href="/uses-this">Uses This</a></li>
+	<li><a href="/work">Work</a></li>
 	<li><a href="/lately">Lately</a></li>
-	<li><a href="/projects">Projects</a></li>
-	<li><a href="/resume">Résumé</a></li>
 	<li><a id="search_btn">Search</a></li>
 </ul>
 </div>
@@ -83,9 +83,7 @@
   <li><a href="#currently-studying">Currently Studying</a></li>
 </ul>
 
-<p>This page lists some things I’ve been up to lately. Comments are enabled in case you’d like to comment on anything or have any questions. Updates are highlighted.</p>
-
-<p><em>updated <time class="updated" datetime="2013-03-06T16:44:00-08:00">March 6<span>th</span>, 2013</time></em></p>
+<p>This page lists some of the things I’ve been up to lately, updated <time class="updated" datetime="2013-04-24T19:40:00-07:00">April 24<span>th</span>, 2013</time>.</p>
 
 <h3 id="currently-working-on">Currently Working On</h3>
 
@@ -96,23 +94,22 @@
 <h3 id="planning-to-work-on">Planning to Work On</h3>
 
 <ul>
-  <li>I’m considering adding functionality to <a href="http://mpc-hc.sourceforge.net">MPC-HC</a> which allows one to watch things with others “in sync.” Something like <a href="http://www.synchtube.com/">Synchtube</a>. I’ve yet to assess the feasibility of the project, but I feel it shouldn’t be too difficult because MPC-HC already contains a remote web control system which I believe the authors were smart enough to abstract behind an event system. I figure I should be able to take advantage of this system.
-    <ul>
-      <li>
-        <p><strong>Update</strong>: The devs let me know that a third-party project already exists that supports this functionality with the ability to support multiple players, not just MPC-HC. The project is called <a href="https://github.com/Uriziel/syncplay">syncplay</a>. I’ve tried it with friends multiple times already and it seems to work great!</p>
+  <li>
+    <p>A disruption instagib mod for the now-open source Jedi Academy. This will be the spiritual successor to <a href="/work#the-instagib-project">The Instagib Project</a>, which was an attempt at creating a standalone instagib game. Ultimately I found myself really missing many things from the Jedi Outcast and Jedi Academy games, primarily force powers which were a form of built-in “hacks,” mainly force sight which allowed one to view other players’ glow through walls and dodge shots in “Matrix style,” and force speed which greatly increased someones movement speed (<strong>+</strong> bunny hopping meant insanely fast speeds).</p>
 
-        <p>I did manage to get at least one <a href="https://github.com/mpc-hc/mpc-hc/pull/38">patch</a> into MPC-HC however. The patch fixes seeking when the command to seek is sent from the web interface. I don’t use the webui but I was checking it out when I was assessing methods of implementing the functionailty, since I figured I could leverage the code that interfaces with the webui.</p>
-      </li>
-    </ul>
+    <p>I’m following the development of <a href="https://github.com/Razish/OpenJK">OpenJK</a> which appears to be the canonical distribution of patched and optimized Jedi Outcast/Academy – similar to <a href="http://ioquake3.org/">ioquake3</a> which I used for The Instagib Project. Once the project matures a bit, I’ll begin development of an instagib mod and hopefully try to revive the instagib scene in these games, which have always left me wanting in games ever since it died down many years ago.</p>
   </li>
 </ul>
 
 <h3 id="currently-reading">Currently Reading</h3>
 
 <ul>
-  <li><a href="http://amzn.com/1593272200">The Linux Programming Inteface</a>: This book is amazing. It concerns the userspace API of Linux. It probably should be named “The POSIX Programming Inteface” because although it focuses on Linux, it’s always very clear about which topics apply to which standards, treating Linux-specific funcitonality more like edge-cases within the POSIX ecosystem. This is perhaps a reasonable approach, considering that Linux is not POSIX compliant. The reverse approach would probably lessen the scope of material of which the majority probably applies to many other systems anyways, not just Linux. It’s one of my favorite books currently on my shelf.</li>
-  <li><a href="http://amzn.com/032157351X">Algorithms</a>: This beautiful hardcover book is just what I needed for a quick refresher on various algorithms. It masterfully covers various topics such as red-black trees and tries using pretty illustrations and very clear writing. The book uses Java as its didactic language which makes for quick coverage of universal concepts.</li>
-  <li><a href="http://amzn.com/1849967202">Algorithm Design Manual</a>: This book is similar to Sedgewick’s (above) but uses C and focuses more on providing a summary overview of various algorithms. The first half covers certain algorithms in-depth, with a seeming bias for graph related algorithms. The second half of the book serves as a sort of reference for various algorithms, with references to popular implementations (e.g. FFT → <a href="http://www.fftw.org/">FFTW</a>).</li>
+  <li><a href="http://amzn.com/1593271743">The Art of Debugging with GDB, DDD, and Eclipse</a>: Another great book by No Starch Press, publishers of TLPI (mentioned below). I unfortunately never really spent the time to really understand how to use debuggers, in this case <a href="http://www.gnu.org/software/gdb/">GDB</a>. I knew enough to get by, but it always seemed a little archaic or very complicated, instead opting for so-called “printf debugging,” in which one simply adds a bunch of print statements to find the source of various problems. This, I’ve come to realize, is an exercise in masochism. Really learning the various tools available to one through a debugger is enlightening.</li>
+  <li><a href="http://amzn.com/1593272200">The Linux Programming Inteface</a>: This book is amazing. It concerns the userspace API of Linux. It probably should be named “The POSIX Programming Inteface” because although it focuses on Linux, it’s always very clear about which topics apply to which standards, treating Linux-specific funcitonality more like edge-cases within the POSIX ecosystem. This is perhaps a reasonable approach, considering that Linux is not POSIX compliant. The reverse approach would probably lessen the scope of material of which the majority probably applies to many other systems anyways, not just Linux. It’s one of my favorite books currently on my shelf.
+    <ul>
+      <li>Currently on Chapter 38: Writing Secure Privileged Programs</li>
+    </ul>
+  </li>
 </ul>
 
 <h3 id="currently-studying">Currently Studying</h3>
@@ -134,7 +131,7 @@
 </section>
 
 </div>
-	<footer id="footer" class="inner">{ <span id="braces"><a href="https://github.com/blaenk/blaenk.github.com/commit/02367cd62450a98a10d440bdfbddec8b487d33ea" title="lessen code padding; fix typos in commit-tag post">02367cd6</a></span> }
+	<footer id="footer" class="inner">{ <span id="braces"><a href="https://github.com/blaenk/blaenk.github.com/commit/d4ebd7686a3b313838067f53369e855f7ca95301" title="no need for compass spawn in rakefile">d4ebd768</a></span> }
 </footer>
 	
 

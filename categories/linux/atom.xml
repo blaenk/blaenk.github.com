@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Linux | Jorge Israel Peña]]></title>
+  <title><![CDATA[Category: linux | Jorge Israel Peña]]></title>
   <link href="http://blaenkdenum.com/categories/linux/atom.xml" rel="self"/>
   <link href="http://blaenkdenum.com/"/>
-  <updated>2013-03-22T22:06:29-07:00</updated>
+  <updated>2013-05-06T22:12:07-07:00</updated>
   <id>http://blaenkdenum.com/</id>
   <author>
     <name><![CDATA[Jorge Israel Peña]]></name>
@@ -14,10 +14,10 @@
 
   
   <entry>
-    <title type="html"><![CDATA[The Linux Programming Interface: Directories and Links]]></title>
-    <link href="http://blaenkdenum.com/posts/the-linux-programming-interface-directories-and-links/"/>
+    <title type="html"><![CDATA[POSIX Directories and Links]]></title>
+    <link href="http://blaenkdenum.com/posts/posix-directories-and-links/"/>
     <updated>2013-03-06T17:40:00-08:00</updated>
-    <id>http://blaenkdenum.com/posts/the-linux-programming-interface-directories-and-links</id>
+    <id>http://blaenkdenum.com/posts/posix-directories-and-links</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#directories">Directories</a></li>
   <li><a href="#hard-links">Hard Links</a>    <ul>
@@ -83,7 +83,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[XMonad Ignores Bindings]]></title>
+    <title type="html"><![CDATA[xmonad Ignores Bindings]]></title>
     <link href="http://blaenkdenum.com/posts/xmonad-ignores-bindings/"/>
     <updated>2013-02-24T22:25:00-08:00</updated>
     <id>http://blaenkdenum.com/posts/xmonad-ignores-bindings</id>
@@ -96,9 +96,11 @@
   <li><a href="#bug-report">Bug Report</a></li>
 </ul>
 
-<p><strong>Disclaimer</strong>: This post is titled to make it easy for people who are experiencing the same problem to find this post. XMonad does <em>not</em> ignore <em>all</em> bindings.</p>
+<p><strong>Disclaimer</strong>: This post is titled to make it easy for people who are experiencing the same problem to find this post. xmonad does not ignore <em>all</em> bindings.</p>
 
-<p>In my <a href="/posts/terminal-customization/">previous post</a> I talked about how I spent a while configuring my system, specifically urxvt and zsh, in preparation for setting up <a href="http://xmonad.org">XMonad</a>. I’ve finally gotten around to setting up XMonad. One problem in particular stopped me from continuing with the rest of the configuration.</p>
+<p><strong>Update</strong>: Shortly after posting in the <a href="https://code.google.com/p/xmonad/issues/detail?id=273">issue tracker entry</a> for this issue relating my experience and affirming that the proposed patch fixed the problem, the gracious developers merged the patch into the main tree. This problem should no longer affect anyone!</p>
+
+<p>In my <a href="/posts/terminal-customization/">previous post</a> I talked about how I spent a while configuring my system, specifically urxvt and zsh, in preparation for setting up <a href="http://xmonad.org">xmonad</a>. I’ve finally gotten around to setting up xmonad. One problem in particular stopped me from continuing with the rest of the configuration.</p>
 
 <h2 id="media-keys">Media Keys</h2>
 
@@ -108,11 +110,28 @@
 
 <p>My solution to this problem in Windows and Mac is to bind the bottom right keys to media keys as follows:</p>
 
-<ul>
-  <li>Right Control → Volume Up</li>
-  <li>Menu Key → Volume Down</li>
-  <li>Right Windows Key → Volume Mute</li>
-</ul>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Key</th>
+      <th style="text-align: left">Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Right Control</td>
+      <td style="text-align: left">Volume Up</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Menu</td>
+      <td style="text-align: left">Volume Down</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Right Windows</td>
+      <td style="text-align: left">Volume Mute</td>
+    </tr>
+  </tbody>
+</table>
 
 <h2 id="binding">Binding</h2>
 
@@ -142,7 +161,7 @@ add mod4 = Super_R
 
 <h2 id="the-problem">The Problem</h2>
 
-<p>The problem was that XMonad would only react to the Right Control key (Volume Up). However, <code>xev</code> correctly interpreted the keys as having been bound to the <code>XF86Audio*</code> keys. I was really confused as to why the binds apparently did work at the system level but only one of them worked at the window manager level.</p>
+<p>The problem was that xmonad would only react to the Right Control key (Volume Up). However, <code>xev</code> correctly interpreted the keys as having been bound to the <code>XF86Audio*</code> keys. I was really confused as to why the binds apparently did work at the system level but only one of them worked at the window manager level.</p>
 
 <p>To rule out that it wasn’t something with the system-level (xmodmap) binds, I decided to check if it worked in <a href="http://awesome.naquadah.org/">Awesome</a>:</p>
 
@@ -153,17 +172,17 @@ awful.key({}, “XF86AudioMute”, function () awful.util.spawn(“amixer set Ma
 
 <p>```</p>
 
-<p>Indeed it worked perfectly. So now I had narrowed down the problem to XMonad.</p>
+<p>Indeed it worked perfectly. So now I had narrowed down the problem to xmonad.</p>
 
 <h2 id="bug-hunting">Bug Hunting</h2>
 
-<p>Eventually I decided to stop by <code>#xmonad</code> on freenode. There I found Paul Fertser who spent the next ~6 hours helping me track down what he figured to be a bug in XMonad. I told him that the system-level binds did work, but not in XMonad. I showed him my binds using <code>xmodmap -pke</code>.</p>
+<p>Eventually I decided to stop by <code>#xmonad</code> on freenode. There I found Paul Fertser who spent the next ~6 hours helping me track down what he figured to be a bug in xmonad. I told him that the system-level binds did work, but not in xmonad. I showed him my binds using <code>xmodmap -pke</code>.</p>
 
-<p>He noticed that the <code>XF86Audio*</code> keys were bound twice: once by default by XKB (<code>xmodmap</code>’s more modern replacement) bound to the keycodes I would have if my keyboard had media keys, and bound again to the keys I chose (the bottom right keys). He then hypothesized that XMonad wasn’t grabbing the keys at all due to Xlib limitations. Specifically, the <code>XKeysymToKeycode</code> function only returns one keycode per key, biased towards lower keycodes, presumably due to an increasing iterative search of the keycodes for a match.</p>
+<p>He noticed that the <code>XF86Audio*</code> keys were bound twice: once by default by XKB (<code>xmodmap</code>’s more modern replacement) bound to the keycodes I would have if my keyboard had media keys, and bound again to the keys I chose (the bottom right keys). He then hypothesized that xmonad wasn’t grabbing the keys at all due to Xlib limitations. Specifically, the <code>XKeysymToKeycode</code> function only returns one keycode per key, biased towards lower keycodes, presumably due to an increasing iterative search of the keycodes for a match.</p>
 
-<p>This theory accounted for why the Right Control (Volume Up) bind did work and not the others. What happened was that Right Control’s keycode was lower than the duplicate bind’s keycode. As a result, when XMonad used <code>XKeysymToKeycode</code> it retrieved the correct keycode. The other two binds, however, have higher keycodes than the default-bound ones, and so <code>XKeysymToKeycode</code> returned the first (lower) keycode it found and as a result XMonad never even knew of the other binds’ existence.</p>
+<p>This theory accounted for why the Right Control (Volume Up) bind did work and not the others. What happened was that Right Control’s keycode was lower than the duplicate bind’s keycode. As a result, when xmonad used <code>XKeysymToKeycode</code> it retrieved the correct keycode. The other two binds, however, have higher keycodes than the default-bound ones, and so <code>XKeysymToKeycode</code> returned the first (lower) keycode it found and as a result xmonad never even knew of the other binds’ existence.</p>
 
-<p>To test this theory, Paul had me run <a href="http://en.wikipedia.org/wiki/Ltrace"><code>ltrace</code></a> on XMonad to see which keys XMonad grabbed. The output of this clearly showed that XMonad only grabbed the keys with the lower keycodes.</p>
+<p>To test this theory, Paul had me run <a href="http://en.wikipedia.org/wiki/Ltrace"><code>ltrace</code></a> on xmonad to see which keys xmonad grabbed. The output of this clearly showed that xmonad only grabbed the keys with the lower keycodes.</p>
 
 <h2 id="workaround">Workaround</h2>
 
@@ -203,11 +222,11 @@ xkb_symbols “volume_keys” {
 xkbcomp -I$HOME/.xkb ~/.xkb/keymap/mymap $DISPLAY
 </code></p>
 
-<p>I restarted XMonad with <code>Mod-Shift-Q</code> (so that <code>~/.xinitrc</code> is rerun) and everything now worked perfectly.</p>
+<p>I restarted xmonad with <code>Mod-Shift-Q</code> (so that <code>~/.xinitrc</code> is rerun) and everything now worked perfectly.</p>
 
 <h2 id="bug-report">Bug Report</h2>
 
-<p>Over the course of my transition to XKB, Paul found that there was already <a href="https://code.google.com/p/xmonad/issues/detail?id=273">an issue</a> opened back in 2009 concerning this. The issue report has a patch attached that fixes this, but the patch has yet to be applied to XMonad. Paul suggested I try the patch myself and communicate my results back to the issue report. So I went ahead and got XMonad and XMonadContrib from the darcs repository, ran a simple <code>darcs apply keycode.dpatch</code>, and installed each with a <code>--prefix</code> to prevent clashing with the ones already installed with pacman. Indeed, the patch worked perfectly.</p>
+<p>Over the course of my transition to XKB, Paul found that there was already <a href="https://code.google.com/p/xmonad/issues/detail?id=273">an issue</a> opened back in 2009 concerning this. The issue report has a patch attached that fixes this, but the patch has yet to be applied to xmonad. Paul suggested I try the patch myself and communicate my results back to the issue report. So I went ahead and got xmonad and xmonadContrib from the darcs repository, ran a simple <code>darcs apply keycode.dpatch</code>, and installed each with a <code>--prefix</code> to prevent clashing with the ones already installed with pacman. Indeed, the patch worked perfectly.</p>
 
 ]]></content>
   </entry>

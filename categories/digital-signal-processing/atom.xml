@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Digital Signal Processing | Jorge Israel Peña]]></title>
+  <title><![CDATA[Category: digital signal processing | Jorge Israel Peña]]></title>
   <link href="http://blaenkdenum.com/categories/digital-signal-processing/atom.xml" rel="self"/>
   <link href="http://blaenkdenum.com/"/>
-  <updated>2013-03-22T22:06:29-07:00</updated>
+  <updated>2013-05-06T22:12:07-07:00</updated>
   <id>http://blaenkdenum.com/</id>
   <author>
     <name><![CDATA[Jorge Israel Peña]]></name>
@@ -52,7 +52,7 @@
 
 <script type="math/tex; mode=display">-3\delta[n-8] \mapsto -3h[n-8]</script>
 
-<p>What this means is that if we know the unit impulse response of a system, we consequently know how the system will react to <em>any</em> impulse. These impulse responses can then be synthesized to form the output signal that would result from running the input signal through the actual system.</p>
+<p>What this means is that if we know the unit impulse response of a system, we consequently know how the system will react to <em>any</em> impulse. These impulse responses can then be synthesized to form the output signal that would result from running the input signal through the actual system. An example of the powerful implications of this method is <a href="http://en.wikipedia.org/wiki/Convolution_reverb">convolution reverb</a>, in which an impulse response of a physical or virtual space is generated and then convolved with any input signal to simulate the effect of reverberation in that space.</p>
 
 <p>In short, the input signal <em>convolved</em> with the unit impulse response results in the output signal. Convolution of input signal <script type="math/tex">x[n]</script> with unit impulse <script type="math/tex">h[n]</script> to generate output signal <script type="math/tex">y[n]</script> is denoted as:</p>
 
@@ -62,7 +62,7 @@
 
 <h2 id="definition">Definition</h2>
 
-<p>Convolution can be described by the so called <em>convolution summation</em>. The convolution summation is pretty simple, and is defined as follows:</p>
+<p>Convolution can be described by the so-called convolution <em>summation</em>. The convolution summation is pretty simple, and is defined as follows:</p>
 
 <script type="math/tex; mode=display">y[i] = \sum_{j=0}^{M-1}h[j]x[i-j]</script>
 
@@ -248,7 +248,7 @@ $ ghc --make -O2 -threaded -o conv conv.hs
 $ ./conv -o bench.html -r out.csv +RTS -N4
 </code></p>
 
-<p>The <code>-o</code> parameter specifies an output file for generated <a href="../../../../assets/html/convolution-criterion.html">charts and graphs</a>. The <code>-r</code> parameter specifies a comma separated value (<abbr title="Comma Separated Value">CSV</abbr>) file to output relative statistics which we use to measure performance relative to the reference, non-reduced naive implementation.</p>
+<p>The <code>-o</code> parameter specifies an output file for generated <a href="../../../../static/html/convolution-criterion.html">charts and graphs</a>. The <code>-r</code> parameter specifies a comma separated value (<abbr title="Comma Separated Value">CSV</abbr>) file to output relative statistics which we use to measure performance relative to the reference, non-reduced naive implementation.</p>
 
 <p>The <code>+RTS</code> parameter is a delimiter which begins parameters to the <a href="http://www.haskell.org/ghc/docs/latest/html/users_guide/runtime-control.html">runtime system</a>. The <code>-N#</code> parameter specifies how many cores to utilize. The machine I was using has 6 cores, but I found that using less than that lowered the amount of statistical variance. I imagine this was because the computer was able to continue its own tasks on the other two cores.</p>
 
@@ -346,7 +346,7 @@ $ ./conv -o bench.html -r out.csv +RTS -N4
 <div class="footnotes">
   <ol>
     <li id="fn:compute_shader">
-      <p>As described in <a href="http://www.d3dcoder.net/d3d11.htm">3D Game Programming with DirectX 11</a> by Frank D. Luna in Ch 12 page 450 § 12.7<a href="#fnref:compute_shader" rel="reference">&#8617;</a></p>
+      <p>As described in <a href="http://www.d3dcoder.net/d3d11.htm">3D Game Programming with DirectX 11</a> by Frank D. Luna in Chapter 12, page 450, § 12.7<a href="#fnref:compute_shader" rel="reference">&#8617;</a></p>
     </li>
     <li id="fn:motion_blur">
       <p>Despite this optimization of Gaussian Blurring, many implementations optimize further. Blurring typically involves rendering the scene to a separate buffer (e.g. Render-to-Texture) at a scaled-down resolution. This speeds up the blurring operation as there are less pixels to operate on. Then the result is rendered to the actual screen. Since the point is to blur, the upscaling is usually hardly noticeable.</p>

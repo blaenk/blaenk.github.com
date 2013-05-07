@@ -4,7 +4,7 @@
   <title><![CDATA[Category: zsh | Jorge Israel Peña]]></title>
   <link href="http://blaenkdenum.com/categories/zsh/atom.xml" rel="self"/>
   <link href="http://blaenkdenum.com/"/>
-  <updated>2013-03-22T22:06:29-07:00</updated>
+  <updated>2013-05-06T22:12:07-07:00</updated>
   <id>http://blaenkdenum.com/</id>
   <author>
     <name><![CDATA[Jorge Israel Peña]]></name>
@@ -132,7 +132,7 @@
 
 <h2 id="conclusion">Conclusion</h2>
 
-<p>I have to say that I love the way my terminal looks and operates now. This has all been in preparation for setting up <a href="http://en.wikipedia.org/wiki/Xmonad">Xmonad</a>, which I intend to take a shot at soon. For the curious, I’m doing all of this on <a href="http://www.archlinux.org/">arch linux</a>, but I didn’t say it earlier because nothing in this post depends on this. In fact, none of the content in this post is all that specific to Linux itself even. I’ll try to update this post whenever my setup changes, but I think I’m quite comfortable with the way it is – and will be – for the foreseeable future.</p>
+<p>I have to say that I love the way my terminal looks and operates now. This has all been in preparation for setting up <a href="http://en.wikipedia.org/wiki/xmonad">xmonad</a>, which I intend to take a shot at soon. For the curious, I’m doing all of this on <a href="http://www.archlinux.org/">arch linux</a>, but I didn’t say it earlier because nothing in this post depends on this. In fact, none of the content in this post is all that specific to Linux itself even. I’ll try to update this post whenever my setup changes, but I think I’m quite comfortable with the way it is – and will be – for the foreseeable future.</p>
 
 <p>In my opinion, the benefit of using such tried and proven, mature tools is that once you take the time to configure them to your liking you can use them without modification for a long time. Barring some imminent, majorly disruptive paradigm shift in software development, I can see myself using many of these tools throughout my career as a software developer.</p>
 

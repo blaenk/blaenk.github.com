@@ -1,0 +1,264 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Work - Jorge Israel Peña</title>
+	<meta name="author" content="Jorge Israel Peña">
+
+	
+	<meta name="description" content="This is an aggregation of the different work I’ve done in terms of open source contributions and projects. Contributions rtorrent: Fix unportable &hellip;">
+	
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, target-densitydpi=device-dpi">
+
+	<link href="" rel="alternate" title="Jorge Israel Peña" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href='/assets/site-c3e135e0a62968832eb47fe53d11b2a5.css' rel='stylesheet' type='text/css' media='screen' />
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<!--[if lt IE 9]><script async="true" src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <script async='true' src='/assets/site-98d2b0489c1245d979af5116fcf814b1.js' type='text/javascript'></script>
+
+	
+</head>
+
+
+<body>
+	<div id="strip"></div>
+	<header id="header" class="inner"><div id="stamp">
+  <h1><a href="/">Jorge Israel Peña</a></h1>
+  <h4>AKA BLAENK DENUM</h4>
+</div>
+<nav id="main-nav">
+	<ul class="main">
+	<li><a href="/about">About</a></li>
+	<li><a href="/uses-this">Uses This</a></li>
+	<li><a href="/work">Work</a></li>
+	<li><a href="/lately">Lately</a></li>
+	<li><a id="search_btn">Search</a></li>
+</ul>
+
+	<form class="desk_search" action="http://google.com/search" method="get">
+		<input type="text" name="q" results="0" placeholder="Search... (Click 'Search' to hide)" autocomplete="off" spellcheck="false">
+		<input type="hidden" name="q" value="site:blaenkdenum.com">
+	</form>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	<li><a href="/about">About</a></li>
+	<li><a href="/uses-this">Uses This</a></li>
+	<li><a href="/work">Work</a></li>
+	<li><a href="/lately">Lately</a></li>
+	<li><a id="search_btn">Search</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:blaenkdenum.com">
+			</form>
+		</div>
+	</div>
+</nav>
+
+</header>
+	
+	<div id="content" class="inner"><article class="page">
+    
+    <h1 class="title">Work</h1>
+    
+    <div class="entry-content">
+<p>This is an aggregation of the different work I’ve done in terms of open source contributions and projects.</p>
+
+<h2 id="contributions">Contributions</h2>
+
+<h4 id="rtorrent" class="collapse">rtorrent: Fix unportable signal disposition establishment for Solaris</h4>
+
+<div class="collapsible">
+  <p>The <a href="http://libtorrent.rakshasa.no/">rtorrent</a> project makes use of signals for certain kinds of inter-thread communication. Certain users on <a href="http://en.wikipedia.org/wiki/Solaris_(operating_system)">Solaris</a> reported that <a href="https://github.com/rakshasa/rtorrent/issues/51">rtorrent crashed</a> as soon as signal <code>SIGUSR1</code> was delivered. Being an avid reader of the POSIX standards I was curious and felt that I might know what was wrong, figuring that correctly identifying and solving the problem would be a huge testament to the POSIX standards considering I had never used Solaris.</p>
+
+  <p>Some people in the issue figured that it must be a non-POSIX compliant implementation of <code>pthread_kill()</code> which was preventing the application from sending signals to specific threads. I didn’t think this was the case, as Solaris’ <a href="http://docs.oracle.com/cd/E26502_01/html/E29034/pthread-kill-3c.html">manual page</a> for <code>pthread_kill()</code> claims that it’s implemented as is intended. If it was indeed a non-compliant implementation, I figured someone else would’ve already encountered the issue and there would be some sort of note in the man page. In fact, Solaris is <a href="http://en.wikipedia.org/wiki/POSIX#Fully_POSIX-compliant">fully POSIX-compliant</a> which is more than can be said of Linux, and yet Linux didn’t exhibit this behavior.</p>
+
+  <p>Instead my suspicion was something else entirely. As soon as I recognized that clearly something signal-related was causing crashes on certain platforms in particular, I thought of the one glaring, well-known to be unportable system call: <code>signal()</code>. In fact, the Linux <a href="http://man7.org/linux/man-pages/man2/signal.2.html">man page</a> for <code>signal()</code> says:</p>
+
+  <blockquote>
+    <p>The only portable use of <code>signal()</code> is to set a signal’s disposition to <code>SIG_DFL</code> or <code>SIG_IGN</code>. The semantics when using <code>signal()</code> to establish a signal handler vary across systems (and POSIX.1 explicitly permits this variation); <strong>do not use it for this purpose.</strong></p>
+  </blockquote>
+
+  <p>The emphasis is theirs and goes to show how unpredictable the use of <code>signal()</code> could be. To complicate matters, the first line in the man page’s notes section says:</p>
+
+  <blockquote>
+    <p>The effects of <code>signal()</code> in a multithreaded process are unspecified.</p>
+  </blockquote>
+
+  <p>However, I believed that the problem lay in the possibility that Solaris provided different semantics for <code>signal()</code> from the semantics that Linux provided:</p>
+
+  <blockquote>
+    <p>In the original UNIX systems, when a handler that was established using <code>signal()</code> was invoked by the delivery of a signal, the disposition of the signal would be reset to <code>SIG_DFL</code>, and the system did not block delivery of further instances of the signal. […] This was bad because the signal might be delivered again before the handler had a chance to reestablish itself.  Furthermore, rapid deliveries of the same signal could result in recursive invocations of the handler.</p>
+  </blockquote>
+
+  <p>This behavior is known as <a href="http://en.wikipedia.org/wiki/UNIX_System_V">System V</a> semantics. In other words, when a signal handler is established and then subsequently triggered, the signal disposition is reset to its default disposition, whatever that may be for the signal in question. If the handler isn’t re-established, then a subsequent triggering of that signal will be handled based on the default disposition for that signal.</p>
+
+  <p>There is another behavior which is referred to as <a href="http://en.wikipedia.org/wiki/Berkeley_Software_Distribution">BSD</a> semantics in which:</p>
+
+  <blockquote>
+    <p>the signal disposition is not reset, and further instances of the signal are blocked from being delivered while the handler is executing.  Furthermore, certain blocking system calls are automatically restarted if interrupted by a signal handler.</p>
+  </blockquote>
+
+  <p>The situation on Linux is such that the kernel’s <code>signal()</code> system call provides System V semantics. However, glibc 2 and later expose a wrapper function for <code>signal()</code> which instead delegates its work to the preferred – for portability and flexiblity reasons – system call <a href="http://man7.org/linux/man-pages/man2/sigaction.2.html"><code>sigaction()</code></a>, called in such a way as to provide BSD semantics. This wrapper function is exposed if the <code>_BSD_SOURCE</code> <a href="http://man7.org/linux/man-pages/man7/feature_test_macros.7.html">feature test macro</a> is defined, which it is by default.</p>
+
+  <p>Solaris doesn’t have such a wrapper for <code>signal()</code>, instead exposing its bare, System V semantics system call with <a href="http://docs.oracle.com/cd/E26502_01/html/E29034/signal-3c.html"><code>signal()</code></a>:</p>
+
+  <blockquote>
+    <p><code>void (*signal(int sig, void (*disp)(int)))(int);</code></p>
+
+    <p>If <code>signal()</code> is used, disp is the address of a signal handler, and sig is not <code>SIGILL</code>, <code>SIGTRAP</code>, or <code>SIGPWR</code>, the system first sets the signal’s disposition to <code>SIG_DFL</code> before executing the signal handler.</p>
+  </blockquote>
+
+  <p>This clearly states that the signal disposition is reset to its default disposition before executing the signal handler. Taking a look at the <a href="http://docs.oracle.com/cd/E26502_01/html/E29033/signal.h-3head.html">default signal disposition table</a> for Solaris, we can see that <code>SIGUSR1</code>’s default disposition is to exit the application. Presumably, Solaris users were crashing upon the second delivery of <code>SIGUSR1</code> or any other signal established with <code>signal()</code> who’s default disposition was to exit or abort (core dump).</p>
+
+  <p>My <a href="https://github.com/rakshasa/rtorrent/pull/127">patch</a> simply consisted of switching out calls to <code>signal()</code> for purposes of establishing signal handlers with calls to <code>sigaction()</code>.</p>
+</div>
+
+<h4 id="mpc-hc" class="collapse">MPC-HC: Fix web UI seeking</h4>
+
+<div class="collapsible">
+  <p>I was interested in modifying <a href="http://mpc-hc.org/">MPC-HC</a> to allow people to watch things in sync with each other, i.e. pause when someone pauses, seek when someone seeks, etc. I pulled the source from github and began looking for a good way to implement this functionality. I found the source for the web UI component of MPC-HC, which essentially provides an interface for which a web UI can be developed to control MPC-HC. I figured I could make use of this and began testing it when a friend noticed that the seeking in the existing web UI didn’t work. After finding the relevant code in the MPC-HC source I found that it was a simple problem of failing to URL decode the seek parameter sent from the web UI. I submitted a <a href="https://github.com/mpc-hc/mpc-hc/pull/38">patch</a> which was ultimately merged in and pushed out in <a href="http://mpc-hc.org/changelog/">version 1.6.6</a>.</p>
+</div>
+
+<h2 id="projects">Projects</h2>
+
+<h4 id="pulse-visualizer" class="collapse">Pulse Visualizer: Visualizer for PulseAudio in Haskell</h4>
+
+<div class="collapsible">
+  <p>This was my first Haskell application (aside from exercise solutions to Haskell books). During my final semester of college in 2012, I wanted to do some Independent Study to round out full-time student status. A <a href="http://kevinwortman.com/">professor</a> agreed to mentor me in two different independent studies: <a href="http://en.wikipedia.org/wiki/Digital_signal_processing">digital signal processing</a> and <a href="http://en.wikipedia.org/wiki/Haskell_(programming_language)">Haskell</a>. At first I had intended on treating them separately with the goal of writing a music visualizer for iTunes for the DSP study and perhaps a web application for the Haskell study. My professor suggested I try and merge them to make it easier on myself and that is exactly what I did.</p>
+
+  <p>I had already gotten a barebones iTunes visualizer up and running with C, so I figured I would write some hooks with the <a href="http://en.wikipedia.org/wiki/Foreign_function_interface">foreign function interface</a> to delegate most of the work to Haskell. The way of going about this was pretty messy however, as it involved (at the time, and most likely even now) compiling the Haskell code into dynamic link libraries because the Haskell code had to be compiled with gcc, who’s symbols differed from the ones Visual Studio produced, which I wanted to use to take advantage of DirectX 11 and DirectCompute.</p>
+
+  <p>I managed to get something working, but it felt very messy and quite the abomination: Haskell to DLL with GCC on Windows linked with an iTunes Visualization Plugin DLL produced by MSVC which used DirectX 11. So I decided to instead look around for options to pursue on Linux, where Haskell development felt a lot more natural to me. After looking around for xmms, Banshee, or other bindings – and finding them lacking, I figured I might as well create a visualizer for a more fundamental thing: <a href="http://en.wikipedia.org/wiki/PulseAudio">PulseAudio</a> itself.</p>
+
+  <p>PulseAudio has a concept of sources (e.g. processes) and sinks (e.g. sound cards). Every sink also has a corresponding source known as a monitor, meaning that the audio going to the associated sink can be intercepted and read. I found a <a href="http://hackage.haskell.org/package/pulse-simple">binding for Haskell</a> that seemed sufficient enough which allowed me to monitor all of the audio on the system. I then paired this up with OpenGL to draw a pretty basic “frequency bar” visualization. The major benefit of having written it for PulseAudio itself instead of a particular music player or even as a standalone application is that I could then play the audio anywhere, such as YouTube or Pandora, and watch it visualized in my application.</p>
+
+  <p>Source is available <a href="https://github.com/blaenk/pulse-visualizer">on github</a>.</p>
+</div>
+
+<h4 id="phoenix" class="collapse">Phoenix: Web Interface for rtorrent</h4>
+
+<div class="collapsible">
+  <p>In 2008 I started to used <a href="http://www.wtorrent-project.org/">wTorrent</a> as an interface to <a href="http://libtorrent.rakshasa.no/">rtorrent</a>. I began to modify it more and more to fit my needs (multi-user environment) and I eventually found myself fighting the existing code base. As a result, and to solidify my understanding of Ruby on Rails, I decided to develop an interface from scratch in Ruby on Rails. That interface was pretty heavy and a bit hackish, so I recently rewrote it, again in Ruby on Rails, to be a little bit lighter.</p>
+
+  <p>Even so, it still feels to me that Rails is a bit too heavy for something like this. I was originally developing the latest iteration of this interface with <a href="http://nodejs.org/">node.js</a>, <a href="http://expressjs.com/">express.js</a>, and <a href="http://documentcloud.github.io/backbone/">backbone.js</a> on the front-end. I was taking too long using these frameworks so I ended up going back to Ruby on Rails. I believe this is in part due to the seeming neutrality of these frameworks, which don’t impose upon you a file structure or specific software architecture (such as <a href="http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller">MVC</a>), leaving you to devise these things on your own. As a result I kept getting distracted refining various aspects of the application.</p>
+
+  <p>So I went back to Ruby on Rails for this iteration of the interface. One way in which I compensated for this was avoiding the use of a heavy relational database management system such as <a href="http://www.postgresql.org/">PostgreSQL</a>, instead only using <a href="http://www.sqlite.org/">SQLite</a> for user accounts and other minor things. Torrent metadata is stored as <a href="http://en.wikipedia.org/wiki/Base64">Base64</a>-encoded <a href="http://en.wikipedia.org/wiki/JSON">JSON</a> within torrents using the rtorrent <a href="http://en.wikipedia.org/wiki/XML-RPC">XML-RPC</a> API. This way when torrents are removed, their pertinent data is also removed. It uses Coffeescript and bootstrap on the front-end.</p>
+
+  <p>This interface tends to be a sort of rite of passage for me when learning a language or framework. Perhaps in the future I may rewrite it yet again in something even lighter such as Ruby and <a href="http://www.sinatrarb.com/">Sinatra</a>, Python and <a href="http://flask.pocoo.org/">Flask</a>, or Haskell and <a href="http://www.ittc.ku.edu/csdl/fpg/software/scotty.html">Scotty</a>.</p>
+</div>
+
+<h4 id="wp-recaptcha" class="collapse">WP-reCAPTCHA: Official reCAPTCHA plug-in for WordPress</h4>
+
+<div class="collapsible">
+  <p>Back in 2007 I found out about <a href="http://www.google.com/recaptcha">reCAPTCHA</a>, a project started at <a href="http://en.wikipedia.org/wiki/Carnegie_Mellon_University">Carnegie Mellon University</a> in part by the original creator of the <a href="http://en.wikipedia.org/wiki/CAPTCHA">CAPTCHA</a>. I’d bet by now most people have used and are familiar with reCAPTCHA. CAPTCHAs generally consist of random letters and numbers to test if someone was a human or an automated program (usually with intent to spam). reCAPTCHA’s innovation was to use actual words, words that had failed automatic digitizing when scanning mass amounts of books and using <a href="http://en.wikipedia.org/wiki/Optical_character_recognition">Optical Character Recognition</a> software.</p>
+
+  <p>The consequence of this was that programs couldn’t be written, using computer vision techniques, to simply read the image of the word, since industry-grade Optical Character Recognition software –presumably employing the most bleeding edge and sophisticated computer vision techniques – had already failed to digitize the words. This way, two problems were solved with reCAPTCHA: it was foolproof against automated attacks and circumvention, and users came to realize that by solving reCAPTCHA challenges they were helping to digitize books and thus was not a waste of time as solving randomly generated CAPTCHAs was.</p>
+
+  <p>I also found out about a service they had called <a href="http://en.wikipedia.org/wiki/ReCAPTCHA#Derivative_projects">MailHide</a> in which they would hide part of an email address away from spammers. The full email address could be retrieved by solving a reCAPTCHA challenge, effectively preventing automated programs from harvesting email addresses for the purposes of spamming them.</p>
+
+  <p>That same year (2007) I figured it would be neat to write a plugin for <a href="http://wordpress.org/">WordPress</a> which automatically hid any email address in a WordPress site using the MailHide technique. It gained some attention, and the then lead engineer of reCAPTCHA, Ben Maurer, contacted me via email asking if I’d be interested in volunteering to work on the then official reCAPTCHA WordPress plugin, with MailHide integrated. I accepted and worked on the plugin for a few years over which it has gotten <a href="http://wordpress.org/extend/plugins/wp-recaptcha/stats/">over 400,000 downloads</a>.</p>
+
+  <p>reCAPTCHA was acquired by Google in 2009, and the original team seems to have largely left the project. I stopped using WordPress and as a result development of the plugin halted. The plugin is open source, however, and available <a href="http://github.com/blaenk/wp-recaptcha">on github</a>.</p>
+</div>
+
+<h4 id="the-instagib-project" class="collapse">The Instagib Project: Standalone Instagib game based on Quake 3 engine (id Tech 3)</h4>
+
+<div class="collapsible">
+  <p>For the longest time, my favorite competitive game was a particular kind of instagib mod for the <a href="http://en.wikipedia.org/wiki/Star_Wars_Jedi_Knight_II:_Jedi_Outcast">Jedi Outcast</a> (JO) and <a href="http://en.wikipedia.org/wiki/Star_Wars_Jedi_Knight:_Jedi_Academy">Jedi Academy</a> (JA, the sequel) games called <a href="http://archives.thejediacademy.net/index.php/Disruption">disruption instagib</a>. I mainly played this on Jedi Outcast which was the older one of the two, because the server I preferred to play on in Jedi Academy shut down but one still existed in Jedi Outcast (somehow). Given that this was a pretty niche mod in a pretty old game (considering Jedi Academy had already been released), I wished to somehow make it available to more people.</p>
+
+  <p>Both of these games used the Quake 3 engine (<a href="http://en.wikipedia.org/wiki/Id_Tech_3">id Tech 3</a>), so when the Quake 3 source code was released under the GPL and the source was cleaned up and optimized by the <a href="http://ioquake3.org">ioquake3</a> project, I decided to try to port the mod and the feel of JO/JA into a standalone mod. The reason for wanting to make it into a standalone game was because although instagib mods have been around for a very long time for pretty much any game, they tend to be relegated to just that: mods. As a result, you have a variety of different flavors of instagib, who’s play-style is determined by the game for which it is a mod. This is fine, but it has the effect of fragmenting the instagib community. As a result, there are usually few servers available.</p>
+
+  <p>So in 2006-2007 I decided to develop a standalone Instagib game. The game used art assets from the OpenArena project with custom UI and other assets designed by two of my friends. The game had team-colored rail shots and rail jumping was implemented, aside from traditional instagib mechanics. I had written a custom <a href="http://nsis.sourceforge.net/Main_Page">NSIS</a> installer script to generate an installer binary for Windows. I also had Linux tarballs and Mac OS X application bundles. Aside from this, I had developed a build and deployment system with Python, which allowed people to have the latest versions of binaries and art assets.</p>
+
+  <p>I ultimately abandoned the project as I became distracted by other projects. The source used to be on a self-hosted subversion server back when it was actively developed. I intend to push the source to github in the near future.</p>
+
+  <p>Recently, however – as a result of Disney <a href="http://en.wikipedia.org/wiki/LucasArts#Acquisition_by_Disney_and_closure_of_the_development_arm">shutting down</a> LucasArts – <a href="http://en.wikipedia.org/wiki/Raven_Software">Raven Software</a>, the creators of Jedi Outcast and Jedi Academy, decided to release the source code to both games under the GPL. I look forward to developing a canonical disruption instagib mod again.</p>
+</div>
+
+<h4 id="musicaster" class="collapse">Musicaster: Homemade last.fm</h4>
+
+<div class="collapsible">
+  <p>This was an application I wrote back in 2006-2007 which was a combination of client-side C# and server-side PHP. The application was basically similar to <a href="http://last.fm">last.fm</a>, in which a client-side application scans popular media players for the currently playing song and then transmitted to a server-side endpoint for aggregation. The client-side C# application was written with modularity in mind, so that one would simply implement an interface, generate a DLL, and place it in the same directory as the executable to add support for more players. I added such plugins for iTunes, Windows Media Player, and Winamp. Information about the currently playing song was then sent to an endpoint of the user’s choosing. At the time I also wrote a WordPress plugin which displayed this information in a blog’s description text (usually under the blog title/name).</p>
+
+  <p>After I had done all this, one of the friends I showed it to said, “Oh, so it’s like last.fm?” I had never heard of last.fm before this and the whole time I had thought I had created something quite innovative.</p>
+</div>
+
+<h4 id="mypod" class="collapse">MyPod: iPod music navigator and retriever</h4>
+
+<div class="collapsible">
+  <p>This was my first C# application which I wrote back in 2006-2007. I created it in response to an instance in which I wanted to back-up some of the music I had transferred to my iPod. The application understood the file structure of the iPod back then, which consisted of several nested directories each storing about four audio files with seemingly randomly generated names. MyPod simply walked this file structure and used <a href="http://taglib.github.io/">TagLib</a> to expose the actual file information to the user in a data list. The user then specified which files they wanted to back up and were then transferred to a location and naming template (i.e. artist - title) of their choosing.</p>
+</div>
+</div>
+</article>
+
+	
+
+
+</div>
+	<footer id="footer" class="inner">{ <span id="braces"><a href="https://github.com/blaenk/blaenk.github.com/commit/d4ebd7686a3b313838067f53369e855f7ca95301" title="no need for compass spawn in rakefile">d4ebd768</a></span> }
+</footer>
+	
+
+<script async="true" type="text/javascript">
+      var disqus_shortname = 'blaenkdenum';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script async="true" type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-37339861-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+
+<!--MathJax CDN-->
+<script async="true" type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+    messageStyle: "none",
+    styles: {
+      ".MathJax_Display": {
+        "font-weight": "normal"
+      },
+      ".MathJax": {
+        "font-weight": "normal"
+      }
+    },
+    showMathMenu: false
+  });
+</script>
+
+</body>
+</html>
