@@ -4,10 +4,13 @@ group :development do
   gem 'rake', '~> 0.9.2'
   gem 'rack', '~> 1.4.1'
   gem 'jekyll', '~> 1.0.0'
+  gem 'kramdown'
+  gem 'pygments.rb', '~> 0.4.2'
   gem 'compass', '~> 0.12.1'
   gem 'rubypants', '~> 0.2.0'
   gem 'rb-fsevent', '~> 0.9'
   gem 'stringex', '~> 1.4.0'
+  gem 'liquid', '~> 2.3.0'
   gem 'jekyll-asset-pipeline'
   gem 'uglifier'
 end
