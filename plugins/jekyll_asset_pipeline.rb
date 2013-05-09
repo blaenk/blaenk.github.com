@@ -2,7 +2,7 @@ require 'jekyll_asset_pipeline'
 
 module JekyllAssetPipeline
   class SassConverter < JekyllAssetPipeline::Converter
-  	require 'compass'
+    require 'sass'
 
     def self.filetype
       '.scss'
@@ -11,7 +11,6 @@ module JekyllAssetPipeline
     def convert
       begin
       	paths = ['../_assets/sass/']
-   	    paths << "#{Gem.loaded_specs['compass'].full_gem_path}/frameworks/compass/stylesheets/"
         return Sass::Engine.new(@content, syntax: :scss, load_paths: paths, style: :compressed, images_dir: "source/images", fonts_dir: "source/fonts").render
       rescue StandardError => e
       	puts e.message

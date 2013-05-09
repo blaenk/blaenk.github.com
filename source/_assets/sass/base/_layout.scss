@@ -36,9 +36,6 @@ a{
 .alignright{
 	float: right;
 }
-.clearfix{
-	@include pie-clearfix;
-}
 .inner{
 	width: $max-width;
 	margin: 0 auto;

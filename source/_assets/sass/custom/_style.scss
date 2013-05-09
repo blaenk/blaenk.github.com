@@ -40,9 +40,12 @@ p.notfound { margin: 15px 0; }
     color: #999;
     
     a {
-      @include link-colors($color-gray02, $color-gray01);
-      @include transition(0.3s);
-      &:hover { text-decoration: underline; }
+      color: $color-gray02;
+      transition: color 0.3s;
+      &:hover {
+        text-decoration: underline;
+        color: $color-gray01;
+      }
     }
   }
 }
@@ -241,7 +244,7 @@ article .entry-content > ol {
     width: auto;
 
     .date, .tags, .comments {
-      @include inline-block;
+      display: inline-block;
       margin-right: 30px;
     }
 

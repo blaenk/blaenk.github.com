@@ -21,7 +21,7 @@
 	        color: #666;
 	        display: inline-block;
 	        width: 100%;
-	        @include transition(color 0.3s);
+          transition: color 0.3s;
 
 	        &:hover { color: $color-main; }
 	      }
@@ -41,7 +41,7 @@
 				display: none;
 			}
 			span{
-				@include inline-block;
+        display: inline-block;
 				text-transform: uppercase;
 				&:before{
 					color: $color-gray03;
@@ -52,7 +52,7 @@
 			}
 			a{
 				color: $color-gray02;
-				@include transition(0.3s);
+        transition: color 0.3s;
 				&:hover{
 					color: #258FB8;
 				}
